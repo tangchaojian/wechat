@@ -13,12 +13,15 @@ class _LoadingState extends State<Loading>{
     super.initState();
     Future.delayed(Duration(seconds: 3), (){
         print("倒计时完成，准备跳转...");
+        Navigator.pushNamedAndRemoveUntil(context, "/app", (route) => false);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset("images/loading.jpg");
+    return Container(
+        child: Image.asset("images/loading.jpg"),
+    );
   }
 
 }
