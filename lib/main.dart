@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:wechat/app.dart';
 import 'package:wechat/loading.dart';
 import 'package:wechat/mall/CartListPage.dart';
+import 'package:wechat/mall/GoodsListPage.dart';
 import 'package:wechat/mall/OrderConfirmPage.dart';
 
 import 'model/CartModel.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
           '/app': (BuildContext context) => new App(),
           '/cart': (BuildContext context) => new CartListPage(),
           '/orderConfirm': (BuildContext context) => new OrderConfirmPage(),
+          '/goodsList': (BuildContext context) => new GoodsListPage(),
         },
         home: Loading(),
       ),
