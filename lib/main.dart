@@ -5,11 +5,14 @@ import 'package:wechat/loading.dart';
 import 'package:wechat/mall/CartListPage.dart';
 import 'package:wechat/mall/GoodsListPage.dart';
 import 'package:wechat/mall/OrderConfirmPage.dart';
+import 'package:wechat/net/http_helper.dart';
 
+import 'mall/GoodsListPage2.dart';
 import 'model/CartModel.dart';
 
 //程序入口
 void main() {
+  HttpHelper.init();
   runApp(MyApp());
 }
 
@@ -29,6 +32,7 @@ class MyApp extends StatelessWidget {
           '/cart': (BuildContext context) => new CartListPage(),
           '/orderConfirm': (BuildContext context) => new OrderConfirmPage(),
           '/goodsList': (BuildContext context) => new GoodsListPage(),
+          '/goodsList2': (BuildContext context) => new GoodsListPage2(),
         },
         home: Loading(),
       ),

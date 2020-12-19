@@ -43,6 +43,22 @@ class _NewsPage extends State<NewsPage> {
                   },
                 ),
               ),
+
+              Padding(padding: EdgeInsets.only(top: 20),
+                child: FlatButton(
+                  textColor: Colors.white,
+                  color: Colors.blue,
+                  highlightColor: Colors.blueAccent,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                  child: Text("EASY_REFRESH", style: TextStyle(fontSize: 14),),
+                  onPressed: (){
+                    // Navigator.push(context, MaterialPageRoute(builder: (BuildContext context){
+                    //   return CartListPage();
+                    // }));
+                    Navigator.pushNamed(context, "/goodsList2");
+                  },
+                ),
+              ),
             ],
           ),
         ),
