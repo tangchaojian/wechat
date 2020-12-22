@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:wechat/entity/GoodsEntity.dart';
+import 'dart:convert' as convert;
+
+import 'package:wechat/utils/log.dart';
 
 class GoodsListPage extends StatefulWidget {
   @override
@@ -69,6 +72,7 @@ class _GoodsListPage extends State<GoodsListPage> {
   }
 
   void request() async{
+
     Response response = await dio.get("https://looyu.vip/goods/open-app/goods/queryList", queryParameters: {"pageNum":page, "pageSize":limit});
     int code = response.data["code"];
     if(code == 200) {

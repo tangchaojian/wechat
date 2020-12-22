@@ -1,16 +1,19 @@
+
 /// goodsName : "P30"
 
-class GoodsEntity {
+class GoodsEntity{
   String goodsName;
 
-  static GoodsEntity fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-    GoodsEntity goodsEntityBean = GoodsEntity();
-    goodsEntityBean.goodsName = map['goodsName'];
-    return goodsEntityBean;
+  GoodsEntity({this.goodsName}) : super();
+
+  GoodsEntity.fromJson(json){
+    this.goodsName = json['goodsName'];
   }
 
-  Map toJson() => {
-    "goodsName": goodsName,
-  };
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> data = new Map<String, dynamic>();
+    data['goodsName'] = this.goodsName;
+    return data;
+  }
+
 }

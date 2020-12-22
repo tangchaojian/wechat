@@ -1,12 +1,9 @@
+import 'package:wechat/net/http_status.dart';
 
-typedef Success<T> = Function(int code, String msg, T data);//成功回调
-typedef Fail = Function(int code, String msg);//失败回调
-typedef Complete<T> = Function(int code, String msg, T data);//完成回调
+typedef OnCallback<T> = Function(HttpStatus status, int code, String message, {T data});//回调
 
 class HttpCallback<T> {
-  Success<T> success;
-  Fail fail;
-  Complete<T> complete;
+  OnCallback<T> onCallback;
 
-  HttpCallback ({Success this.success, Fail this.fail, Complete this.complete});
+  HttpCallback({OnCallback<T> this.onCallback});
 }

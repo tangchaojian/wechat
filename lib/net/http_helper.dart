@@ -1,10 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:cookie_jar/cookie_jar.dart';
-import 'package:wechat/entity/ListInfoEntity.dart';
+import 'package:wechat/entity/GoodsEntity.dart';
 import 'package:wechat/entity/ResponseEntity.dart';
+import 'package:wechat/entity/goods_list_data_entity.dart';
 import 'package:wechat/net/http_callback.dart';
 import 'package:wechat/net/http_constants.dart';
+import 'package:wechat/net/http_status.dart';
+import 'package:wechat/utils/json_helper.dart';
 
 import 'http_log_interceptor.dart';
 
@@ -46,16 +49,36 @@ class HttpHelper {
   }
 
   static void get<T>(String url, {params, HttpCallback<T> callback}) async{
+
+    int code = -1;
+    String message = "";
+    T data;
+
     if(_instance == null || _instance.dio == null)return;
     try {
       _instance.dio.options.method = "GET";
       Response response = await _instance.dio.request(url, queryParameters: params);
-      ResponseEntity<ListInfoEntity> responseEntity = ResponseEntity.fromMap(response.data);
-      print();
-
+      ResponseEntity<T> result = ResponseEntity.fromJson(response.data);
+      if(callback != null && result != null) {
+        code = result.code;
+        message = "success";
+        data = result.data;
+        callback.onCallback(HttpStatus.SUCCESS, code, message, data: data);
+        return;
+      }
     }on DioError catch (e) {
       /// 打印请求失败相关信息
       print('请求出错：' + e.toString());
+      code = -1;
+      message = e.message;
+      data = null;
+      if(callback != null) {
+        callback.onCallback(HttpStatus.FAIL, code, message);
+      }
+    }finally {
+      if(callback != null) {
+        callback.onCallback(HttpStatus.COMPLETE, code, message, data: data);
+      }
     }
   }
 

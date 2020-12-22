@@ -1,4 +1,3 @@
-import 'package:wechat/entity/ListInfoEntity.dart';
 import 'package:wechat/utils/json_helper.dart';
 
 class ResponseEntity<T> {
@@ -19,11 +18,12 @@ class ResponseEntity<T> {
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = new Map<String, dynamic>();
+    data['code'] = this.code;
+    data['status'] = this.status;
+
     if (this.data != null) {
       data['data'] = this.data;
     }
-    data['code'] = this.code;
-    data['status'] = this.status;
     return data;
   }
 }

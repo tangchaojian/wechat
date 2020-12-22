@@ -6,7 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:wechat/entity/GoodsEntity.dart';
+import 'package:wechat/entity/ResponseEntity.dart';
+import 'package:wechat/entity/goods_list_data_entity.dart';
+import 'package:wechat/net/http_callback.dart';
 import 'package:wechat/net/http_helper.dart';
+import 'package:wechat/net/http_status.dart';
+import 'dart:convert' as convert;
+
+import 'package:wechat/utils/log.dart';
 
 class GoodsListPage2 extends StatefulWidget {
   @override
@@ -27,7 +34,17 @@ class _GoodsListPage2 extends State<GoodsListPage2> {
     // TODO: implement initState
     super.initState();
     // refresh();
-    HttpHelper.get("https://looyu.vip/goods/open-app/goods/queryList", params: {"pageNum":page, "pageSize":3});
+    // HttpHelper.get("https://looyu.vip/goods/open-app/goods/queryList", params: {"pageNum":page, "pageSize":3});
+
+    // String jsonStr = "{\"code\":1, \"msg\":\"\", \"data\":{\"goodsName\":\"华为P30 Pro手机【保价15天】智能手机 天空之境 8G+512G 全网通\"}}";
+    // String jsonStr = "{\"code\":1, \"msg\":\"\", \"data\":[{\"goodsName\":\"华为P30 Pro手机【保价15天】智能手机 天空之境 8G+512G 全网通\"},{\"goodsName\":\"南极人NanJiren 被子 春秋冬单人加厚被芯150*200cm 5斤学生空调盖被褥四季被子\"}]}";
+    // var json = convert.jsonDecode(jsonStr);
+
+    // ResponseEntity<GoodsEntity> response = ResponseEntity.fromJson(json);
+    // Log.i("TAG", "goodsName->" + response.data.goodsName);
+
+    // ResponseEntity<List<GoodsEntity>> response = ResponseEntity.fromJson(json);
+    // Log.i("TAG", "goodsName->" + response.data[1].goodsName);
   }
 
   @override
@@ -97,48 +114,38 @@ class _GoodsListPage2 extends State<GoodsListPage2> {
   }
 
   void request() async{
-    Response response = await dio.get("https://looyu.vip/goods/open-app/goods/queryList", queryParameters: {"pageNum":page, "pageSize":limit});
-    int code = response.data["code"];
-    List<GoodsEntity> _list = List();
+    HttpHelper.get("https://looyu.vip/goods/open-app/goods/queryList", params: {"pageNum":page, "pageSize":limit}, callback: HttpCallback<GoodsListDataEntity>(
+      onCallback: (status, code, message, {data}) {
+        if(status == HttpStatus.SUCCESS) {
+          if(page == 1) {
+            list.clear();
+          }
+          List<GoodsEntity> array = data.list;
+          setState(() {
+            this.list.addAll(array);
+          });
+        }else if(status == HttpStatus.FAIL) {
 
-    if(code == 200) {
-      var data = response.data["data"];
-      if(data != null) {
+        }else if(status == HttpStatus.COMPLETE) {
+          List<GoodsEntity> array = data.list ?? List();
+          if(page == 1) {
+            if(array.length < limit) {
+              _controller.finishLoad(noMore: true);
+            }else {
+              setState(() {
+                hasMore = true;
+              });
+              _controller.finishLoad(noMore: false);
+            }
 
-        if(page == 1) {
-          list.clear();
+            _controller.resetLoadState();
+          }else {
+            if (array.length < limit) {
+              _controller.finishLoad(noMore: true);
+            }
+          }
         }
-
-        List array = data["list"];
-        array.forEach((entity) {
-          GoodsEntity item = new GoodsEntity();
-          item.goodsName = entity["goodsName"];
-          _list.add(item);
-        });
       }
-    }
-
-    setState(() {
-      this.list.addAll(_list);
-    });
-
-    if(page == 1) {
-      if(_list.length < limit) {
-        _controller.finishLoad(noMore: true);
-      }else {
-        setState(() {
-          hasMore = true;
-        });
-        _controller.finishLoad(noMore: false);
-      }
-
-      _controller.resetLoadState();
-    }else {
-      if(_list.length < limit) {
-        _controller.finishLoad(noMore: true);
-      }
-    }
-
-
+    ));
   }
 }
