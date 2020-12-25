@@ -1,0 +1,49 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/mProgressBar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:indeterminateBehavior="repeat"
+            android:indeterminateDrawable="@drawable/anim_loading"
+            android:indeterminateDuration="200"
+            android:indeterminateOnly="true" />
+
+        <com.tcj.sunshine.ui.imageview.UIZoomImageView
+            android:id="@+id/mZoomImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.tcj.sunshine.player.VideoPlayer
+            android:id="@+id/mVideoPlayer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        
+        <FrameLayout
+            android:id="@+id/mPlayView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@mipmap/icon_video_player_play_circle" />
+        </FrameLayout>
+
+    </FrameLayout>
+
+
+</FrameLayout>

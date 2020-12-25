@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.tcj.sunshine.ui.viewgroup.UIShapeLinearLayout
+        android:id="@+id/mCropListView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:shape_normal_color="#000000"
+        app:shape_radius="3dp">
+
+        <FrameLayout
+            android:id="@+id/mLayoutOpenRotate"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/icon_rotate_white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="50dp"
+                android:gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:text="开"/>
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#4F4F4F"/>
+
+        <FrameLayout
+            android:id="@+id/mLayoutCloseRotate"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/icon_forbid_rotate_white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="50dp"
+                android:gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:text="关"/>
+        </FrameLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#4F4F4F"/>
+        <FrameLayout
+            android:id="@+id/mLayoutResetRotate"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/icon_reset_white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="50dp"
+                android:gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:text="重置"/>
+        </FrameLayout>
+
+    </com.tcj.sunshine.ui.viewgroup.UIShapeLinearLayout>
+</FrameLayout>

@@ -1,0 +1,76 @@
+<com.tcj.sunshine.ui.viewgroup.SquareFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.tcj.sunshine.ui.viewgroup.UICropFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        app:crop_radius="5dp">
+
+        <ImageView
+            android:id="@+id/mDraweeView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@mipmap/icon_alum_defualt_photo"
+            android:scaleType="centerCrop"
+            tools:background="@mipmap/icon_alum_defualt_photo" />
+    </com.tcj.sunshine.ui.viewgroup.UICropFrameLayout>
+
+    <ImageView
+        android:id="@+id/mIvPlayer"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:src="@mipmap/icon_album_play_video" />
+
+
+    <com.tcj.sunshine.ui.textview.UIShapeTextView
+        android:id="@+id/mTvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="2dp"
+        android:padding="2dp"
+        android:text="15:20"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        app:shape_normal_color="#80000000"
+        app:shape_radius="3dp" />
+
+
+    <com.tcj.sunshine.ui.viewgroup.TouchFrameLayout
+        android:id="@+id/mCheckLayout"
+        android:layout_width="29dp"
+        android:layout_height="29dp"
+        android:layout_gravity="right|top"
+        android:paddingTop="2dp"
+        android:paddingRight="2dp">
+
+        <CheckBox
+            android:id="@+id/mCheckBox"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="top|right"
+            android:background="@drawable/selected_checkbox_white_green_number"
+            android:button="@null"
+            android:checked="false" />
+
+        <TextView
+            android:id="@+id/mTvNumber"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="top|right"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:visibility="gone" />
+
+    </com.tcj.sunshine.ui.viewgroup.TouchFrameLayout>
+</com.tcj.sunshine.ui.viewgroup.SquareFrameLayout>

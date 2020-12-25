@@ -1,0 +1,41 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mClickView"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/boxing_colorPrimaryDark">
+    
+    <ImageView
+        android:id="@+id/mIvImage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"/>
+
+    <TextView
+        android:id="@+id/mTvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="65dp"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        tools:text="图片和视频"/>
+
+    <ImageView
+        android:id="@+id/mIvSelected"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="right|center_vertical"
+        android:src="@mipmap/icon_album_menu_ok"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="65dp"
+        android:layout_marginRight="10dp"
+        android:background="#CC4F4F4F"/>
+</FrameLayout>

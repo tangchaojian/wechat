@@ -36,8 +36,6 @@ dependencies:
   json_serializable: ^3.5.1
   build_runner: ^1.10.11
   flutter_easyrefresh: ^2.1.7
-  flutter_wechat_plugin:
-    path: ../flutter_wechat_plugin/
 
 dev_dependencies:
   flutter_test:

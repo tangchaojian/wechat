@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/mStatusView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize">
+
+            <com.tcj.sunshine.ui.viewgroup.UIShapeFrameLayout
+                android:id="@+id/mBackView"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                app:shape_normal_color="#212121"
+                app:shape_pressed_color="#000000"
+                app:shape_unable_color="#212121">
+
+                <ImageView
+                    android:id="@+id/mIvBack"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/icon_tool_bar_left_arrow_white"/>
+
+            </com.tcj.sunshine.ui.viewgroup.UIShapeFrameLayout>
+
+            <TextView
+                android:id="@+id/mTvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:text="标题"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+
+</merge>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/mToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:elevation="2dp"
+        app:theme="@style/Boxing.ToolbarTheme">
+
+        <com.tcj.sunshine.ui.viewgroup.UIShapeLinearLayout
+            android:id="@+id/mMenuView"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:shape_normal_color="#4B4B4B"
+            android:paddingLeft="15dp"
+            android:paddingRight="5dp"
+            app:shape_radius="15dp">
+            <TextView
+                android:id="@+id/mTvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical"
+                android:textColor="@color/white"
+                android:text="默认相册"/>
+
+            <ImageView
+                android:id="@+id/mIvArrow"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/icon_album_menu_down" />
+
+        </com.tcj.sunshine.ui.viewgroup.UIShapeLinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <FrameLayout
+        android:id="@+id/mLayoutFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/mToolbar"/>
+</RelativeLayout>

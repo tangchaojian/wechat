@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tcj.sunshine.crop">
+
+    <application>
+        <activity
+            android:name=".CropActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Crop.AppTheme.NoActionBar">
+        </activity>
+    </application>
+
+</manifest>

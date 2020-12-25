@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.tcj.sunshine.ui.viewgroup.UIShapeLinearLayout
+        android:id="@+id/mLoadView"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:shape_normal_color="@color/black_70_percent"
+        app:shape_radius="5dp">
+
+        <ImageView
+            android:id="@+id/mIvAnim"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginTop="13dp"
+            android:src="@drawable/anim_video_player_loading" />
+
+        <TextView
+            android:id="@+id/mTvMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="视频加载中"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+    </com.tcj.sunshine.ui.viewgroup.UIShapeLinearLayout>
+</merge>

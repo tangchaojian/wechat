@@ -1,0 +1,42 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mClickView"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    
+    <com.tcj.sunshine.ui.viewgroup.UIShapeLinearLayout
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        app:shape_normal_color="@color/boxing_colorPrimaryDark"
+        app:shape_radius="5dp">
+
+        <ProgressBar
+            android:id="@+id/mProgressBar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:indeterminateBehavior="repeat"
+            android:indeterminateDrawable="@drawable/anim_loading_progressbar"
+            android:indeterminateDuration="300"
+            android:indeterminateOnly="true" />
+
+
+        <TextView
+            android:id="@+id/mTvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:text="请稍后..."/>
+
+
+    </com.tcj.sunshine.ui.viewgroup.UIShapeLinearLayout>
+
+</FrameLayout>

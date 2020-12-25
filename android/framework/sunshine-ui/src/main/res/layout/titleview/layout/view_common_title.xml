@@ -1,0 +1,85 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/mTitleBackView"
+        android:layout_width="match_parent"
+        android:layout_height="48dp" />
+
+    <RelativeLayout
+        android:id="@+id/mTitleBarView"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom">
+
+        <!-- 标题 -->
+        <TextView
+            android:id="@+id/mTvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="#1A1A1A"
+            android:textSize="22sp"
+            tools:text="sunshine" />
+
+        <!-- 左边按钮 -->
+
+        <FrameLayout
+            android:id="@+id/mLayoutLeft"
+            android:layout_width="44dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:id="@+id/mIvLeft"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@mipmap/icon_title_bar_left_arrow"/>
+        </FrameLayout>
+
+        <!-- 右边按钮 -->
+
+        <FrameLayout
+            android:id="@+id/mLayoutRight"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <ImageView
+                android:id="@+id/mIvRight"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
+
+
+            <TextView
+                android:id="@+id/mTvRight"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:maxLines="1"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                tools:text="完成"
+                android:textColor="#333333"
+                android:textSize="16sp" />
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>

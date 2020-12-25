@@ -1,0 +1,151 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+
+    <com.tcj.sunshine.ui.textview.UIShapeTextView
+        android:id="@+id/mTvDays1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        app:shape_normal_color="#000000"
+        app:shape_radius="3dp"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <com.tcj.sunshine.ui.textview.UIShapeTextView
+        android:id="@+id/mTvDays2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:layout_marginLeft="2dp"
+        app:shape_normal_color="#000000"
+        app:shape_radius="3dp"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/mTvDays3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+        android:text="天"
+        android:textColor="#333333"
+        android:textSize="16sp" />
+
+    <com.tcj.sunshine.ui.textview.UIShapeTextView
+        android:id="@+id/mTvHours1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:shape_normal_color="#000000"
+        app:shape_radius="3dp"
+        android:text="0"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+    <com.tcj.sunshine.ui.textview.UIShapeTextView
+        android:id="@+id/mTvHours2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:shape_normal_color="#000000"
+        app:shape_radius="3dp"
+        android:text="0"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:layout_marginLeft="2dp"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/mTvHours3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textColor="#333333"
+        android:text=":"
+        android:textSize="16sp" />
+
+    <com.tcj.sunshine.ui.textview.UIShapeTextView
+        android:id="@+id/mTvMinutes1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:shape_normal_color="#000000"
+        app:shape_radius="3dp"
+        android:text="0"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <com.tcj.sunshine.ui.textview.UIShapeTextView
+        android:id="@+id/mTvMinutes2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:shape_normal_color="#000000"
+        app:shape_radius="3dp"
+        android:text="0"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:layout_marginLeft="2dp"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/mTvMinutes3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textColor="#333333"
+        android:text=":"
+        android:textSize="16sp" />
+
+    <com.tcj.sunshine.ui.textview.UIShapeTextView
+        android:id="@+id/mTvSeconds1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:shape_normal_color="#000000"
+        app:shape_radius="3dp"
+        android:text="0"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <com.tcj.sunshine.ui.textview.UIShapeTextView
+        android:id="@+id/mTvSeconds2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:shape_normal_color="#000000"
+        app:shape_radius="3dp"
+        android:text="0"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:layout_marginLeft="2dp"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</LinearLayout>

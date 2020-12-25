@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <com.tcj.sunshine.ui.UIToolbar
+        android:id="@+id/mToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        app:toolbar_back_icon_src="@mipmap/icon_tool_bar_left_arrow_white"
+        app:toolbar_title="图片预览">
+
+        <com.tcj.sunshine.ui.viewgroup.TouchFrameLayout
+            android:id="@+id/mCheckLayout"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical|right">
+
+            <CheckBox
+                android:id="@+id/mCheckBox"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:background="@drawable/selected_checkbox_white_green_number2"
+                android:button="@null" />
+
+            <TextView
+                android:id="@+id/mTvNumber"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:visibility="gone" />
+
+        </com.tcj.sunshine.ui.viewgroup.TouchFrameLayout>
+
+    </com.tcj.sunshine.ui.UIToolbar>
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/mViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/mToolBar"
+        android:layout_above="@+id/mBottomView">
+    </androidx.viewpager.widget.ViewPager>
+
+    <FrameLayout
+        android:id="@+id/mBottomView"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:overScrollMode="never"
+            android:background="@color/black"
+            android:layout_marginRight="90dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+        <com.tcj.sunshine.ui.button.UIShapeButton
+            android:id="@+id/mBtnFinish"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="65dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="10dp"
+            android:padding="0dp"
+            android:textSize="14sp"
+            android:text="完成"
+            android:enabled="false"
+            android:gravity="center"
+            app:shape_normal_color="#19AD15"
+            app:shape_pressed_color="#1DCB18"
+            app:shape_unable_color="#991DCB18"
+            app:shape_normal_text_color="#FFFFFF"
+            app:shape_pressed_text_color="#FFFFFF"
+            app:shape_unable_text_color="#999999"
+            app:shape_radius="3dp"/>
+
+    </FrameLayout>
+
+
+</RelativeLayout>

@@ -1,4 +1,23 @@
 include ':app'
+include ':framework:sunshine-album'
+include ':framework:sunshine-base'
+include ':framework:sunshine-crop'
+include ':framework:sunshine-lib'
+include ':framework:sunshine-net'
+include ':framework:sunshine-player'
+include ':framework:sunshine-tools'
+include ':framework:sunshine-ui'
+
+//阿里云短视频
+include ':short_video:AlivcMedia'
+include ':short_video:AliyunCrop:crop'
+include ':short_video:AliyunEditor'
+include ':short_video:AliyunFileDownLoader'
+include ':short_video:AliyunRecorder:record'
+include ':short_video:AliyunResample'
+include ':short_video:AliyunSVideoBase'
+include ':short_video:AliyunSvideoMusic'
+include ':short_video:AliyunVideoCommon'
 
 def localPropertiesFile = new File(rootProject.projectDir, "local.properties")
 def properties = new Properties()

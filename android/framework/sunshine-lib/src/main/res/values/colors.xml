@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 背景颜色 -->
+    <color name="back_color">#F5F5F5</color>
+    <!-- 白色 -->
+    <color name="white">#FFFFFF</color>
+
+    <!-- 黑色 -->
+    <color name="black">#000000</color>
+
+    <!-- 50%黑色 -->
+    <color name="black_10_percent">#1A000000</color>
+
+    <color name="black_20_percent">#33000000</color>
+
+    <color name="black_30_percent">#1A000000</color>
+
+    <color name="black_40_percent">#4D000000</color>
+
+    <color name="black_50_percent">#80000000</color>
+
+    <!-- 60%黑色 -->
+    <color name="black_60_percent">#99000000</color>
+
+    <!-- 70%黑色 -->
+    <color name="black_70_percent">#B3000000</color>
+
+    <!-- 75%黑色 -->
+    <color name="black_75_percent">#BF000000</color>
+
+    <!-- 80%黑色 -->
+    <color name="black_80_percent">#CC000000</color>
+
+    <!-- 85%黑色 -->
+    <color name="black_85_percent">#D9000000</color>
+
+    <!-- 90%黑色 -->
+    <color name="black_90_percent">#E6000000</color>
+
+    <!-- 95%黑色 -->
+    <color name="black_95_percent">#F2000000</color>
+
+    <!-- 透明 -->
+    <color name="transparent">#00000000</color>
+</resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+    
+    <ImageView
+        android:id="@+id/mIvAnim"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginRight="5dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/mMiddleLine"
+        android:src="@mipmap/icon_ui_refresh_loading"/>
+
+    <View
+        android:id="@+id/mMiddleLine"
+        android:layout_width="1px"
+        android:layout_height="1px"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/mTvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/mMiddleLine"
+        android:layout_centerVertical="true"
+        android:textColor="#666666"
+        android:textSize="12sp"
+        android:text="下拉刷新"/>
+
+</RelativeLayout>

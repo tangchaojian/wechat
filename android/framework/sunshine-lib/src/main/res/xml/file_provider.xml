@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <paths>
+        <!-- Context.getFilesDir() + "/path/" -->
+        <files-path name="files" path="/data/user/0/com.tcj.sunshine.app/files"/>
+        <!-- Context.getCacheDir() + "/path/" -->
+        <cache-path name="cache" path="/data/user/0/com.tcj.sunshine.app/cache"/>
+        <cache-path name="internal_boxing" path="/data/user/0/com.tcj.sunshine.app/" />
+        <!-- Context.getExternalFilesDir(null) + "/path/" -->
+        <external-files-path name="external_files_path" path="sunshine/"/>
+        <!-- Context.getExternalCacheDir() + "/path/" -->
+        <external-cache-path name="external_cache" path="sunshine/" />
+        <!-- Environment.getExternalStorageDirectory() + "/path/" -->
+        <external-path name="external_path" path="sunshine/"/>
+        <!-- Environment.getExternalStorageDirectory() + "/path/" -->
+        <external-path name="files_root" path="Android/data/com.tcj.sunshine.app/"/>
+        <!-- path设置为'.'时代表整个存储卡 Environment.getExternalStorageDirectory() + "/path/"   -->
+        <external-path name="external_storage_root" path="."/>
+        <external-path name="external_boxing" path="DCIM/bili/boxing" />
+        <root-path name="root" path="." />
+        <files-path name="files" path="." />
+        <external-path name="external" path="." />
+        <external-cache-path name="external_cache" path="." />
+        <external-files-path name="external_file" path="." />
+
+    </paths>
+</resources>

@@ -1,0 +1,37 @@
+ext {
+
+    externalDexmakerDx = 'com.crittercism.dexmaker:dexmaker-dx:1.4'
+    externalDexmakerMockito = 'com.crittercism.dexmaker:dexmaker-mockito:1.4'
+
+    //Application Layer
+    externalAliyunOSS = 'com.aliyun.dpa:oss-android-sdk:+'
+    externalPagerSlidingTabStrip = 'com.astuetz:pagerslidingtabstrip:1.0.1'
+    externalEasyPermissions = 'pub.devrel:easypermissions:0.2.1'
+    externalOrmLiteAndroid = 'com.j256.ormlite:ormlite-android:4.48'
+    externalSimpleZXing = 'com.acker:simplezxing:1.5'
+    externalPicasso = 'com.squareup.picasso:picasso:2.5.2'
+    externalLeakcanary = 'com.squareup.leakcanary:leakcanary-android:1.6.1'
+
+    externalCrashReporter = 'com.taobao.android:crashreporter:3.0.4.1@aar'
+    externalUtdid = 'com.taobao.android:utdid4all:1.1.5@jar'
+    externalTbest  = 'com.taobao.android:tbrest:1.0.0.23@aar'
+
+    //SDK Layer
+    externalJSR305 = 'com.google.code.findbugs:jsr305:3.0.0'
+    externalMqtt = 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.0'
+    externalHttpCore = 'org.apache.httpcomponents:httpcore:4.4.1'
+    externalFaceUnity = 'com.faceunity:nama:6.0.0-lite'
+    externalAliyunRace = 'com.aliyun.race:AliyunRace:1.2.0'
+
+    //Aliyun SDK
+    externalAliyunVodUpload = 'com.aliyun.video.android:upload:1.6.1'
+    externalAlivcConan = 'com.alivc.conan:AlivcConan:1.0.3'
+
+    externalAlivcFFmpeg =  'com.aliyun.video.android:AlivcFFmpeg:2.0.0'
+    externalAlivcCore = 'com.aliyun.video.android:core:1.2.2'
+    externalSvideopro = 'com.aliyun.video.android:svideopro:3.17.1'
+    externalSvideostandard = 'com.aliyun.video.android:svideostandard:3.17.1'
+    externalSvideosnap = 'com.aliyun.video.android:svideosnap:3.17.1'
+    externalPlayerFull = 'com.aliyun.sdk.android:AliyunPlayer:4.7.3-full'
+    externalPlayerPart = 'com.aliyun.sdk.android:AliyunPlayer:4.7.3-part'
+}

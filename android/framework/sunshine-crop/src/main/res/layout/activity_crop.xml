@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CC000000"
+    android:orientation="vertical">
+
+    <com.tcj.sunshine.ui.UIToolbar
+        android:id="@+id/mToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/abc_action_bar_default_height_material"
+        app:toolbar_title="裁剪图片"
+        app:toolbar_title_color="#FFFFFF"
+        app:toolbar_back_icon_src="@mipmap/icon_title_close"
+        tools:background="#212121">
+
+        <com.tcj.sunshine.ui.button.UIShapeButton
+            android:id="@+id/mBtnFinish"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="完成"
+            android:textSize="14sp"
+            app:shape_normal_color="#19AD15"
+            app:shape_normal_text_color="#FFFFFF"
+            app:shape_pressed_color="#1DCB18"
+            app:shape_pressed_text_color="#FFFFFF"
+            app:shape_radius="3dp"
+            app:shape_unable_color="#991DCB18"
+            app:shape_unable_text_color="#999999" />
+
+    </com.tcj.sunshine.ui.UIToolbar>
+
+
+    <com.tcj.sunshine.crop.view.CropView
+        android:id="@+id/mCropView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/mToolView"
+        android:layout_below="@+id/mToolBar"
+        android:alpha="0" />
+
+
+    <LinearLayout
+        android:id="@+id/mToolView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="#212121"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/mLayoutCrop"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/mIvCrop"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/icon_crop_white" />
+
+
+            <TextView
+                android:id="@+id/mTvCrop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="9:16"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mLayoutScale"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/mIvScale"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/icon_scale_white" />
+
+
+            <TextView
+                android:id="@+id/mTvScale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="缩放开"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mLayoutRotate"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/mIvRotate"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/icon_forbid_rotate_white" />
+
+
+            <TextView
+                android:id="@+id/mTvRotate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="旋转关"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

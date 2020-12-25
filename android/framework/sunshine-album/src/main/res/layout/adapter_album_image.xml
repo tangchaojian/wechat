@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="87dp"
+        android:layout_height="87dp"
+        android:layout_gravity="center">
+
+
+        <ImageView
+            android:id="@+id/mDraweeView"
+            android:layout_width="77dp"
+            android:layout_height="77dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/icon_alum_defualt_photo"
+            android:scaleType="centerCrop" />
+
+        <com.tcj.sunshine.ui.viewgroup.TouchFrameLayout
+            android:id="@+id/mCloseLayout"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="top|right">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="top|right"
+                android:background="@mipmap/icon_album_image_close_red"/>
+
+        </com.tcj.sunshine.ui.viewgroup.TouchFrameLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

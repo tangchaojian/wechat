@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/mBottomView"/>
+
+    <FrameLayout
+        android:id="@+id/mBottomView"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#2D2D2D"
+        android:layout_alignParentBottom="true">
+
+        <com.tcj.sunshine.ui.textview.UIShapeTextView
+            android:id="@+id/mTvPreview"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:enabled="false"
+            android:text="预览"
+            android:textSize="13sp"
+            app:shape_normal_text_color="#FFFFFF"
+            app:shape_pressed_text_color="#FFFFFF"
+            app:shape_unable_text_color="#999999"/>
+
+        <com.tcj.sunshine.ui.button.UIShapeButton
+            android:id="@+id/mBtnFinish"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="65dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="10dp"
+            android:padding="0dp"
+            android:textSize="14sp"
+            android:text="完成"
+            android:enabled="false"
+            android:gravity="center"
+            app:shape_normal_color="#19AD15"
+            app:shape_pressed_color="#1DCB18"
+            app:shape_unable_color="#991DCB18"
+            app:shape_normal_text_color="#FFFFFF"
+            app:shape_pressed_text_color="#FFFFFF"
+            app:shape_unable_text_color="#999999"
+            app:shape_radius="3dp"/>
+
+    </FrameLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/mMenuClickView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80212121"
+        android:visibility="gone">
+
+        <com.tcj.sunshine.ui.viewgroup.UICropRelativeLayout
+            android:id="@+id/mMenuContentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            app:crop_shape="rectangle"
+            app:crop_left_bottom_radius="10dp"
+            app:crop_right_bottom_radius="10dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mMenuRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.tcj.sunshine.ui.viewgroup.UICropRelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

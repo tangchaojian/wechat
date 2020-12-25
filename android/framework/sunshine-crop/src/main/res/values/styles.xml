@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Crop.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#000000</item>
+        <item name="colorPrimaryDark">#212121</item>
+        <item name="colorAccent">#19AD15</item>
+    </style>
+
+    <!-- BoxingActivity Theme-->
+    <style name="Crop.AppTheme.NoActionBar" parent="Crop.AppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:fitsSystemWindows">false</item>
+    </style>
+
+</resources>

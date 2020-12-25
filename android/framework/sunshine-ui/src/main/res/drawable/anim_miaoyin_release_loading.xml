@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+
+    <item
+        android:drawable="@mipmap/img_release_1"
+        android:duration="45" />
+    <item
+        android:drawable="@mipmap/img_release_2"
+        android:duration="45" />
+    <item
+        android:drawable="@mipmap/img_release_3"
+        android:duration="45" />
+    <item
+        android:drawable="@mipmap/img_release_4"
+        android:duration="45" />
+    <item
+        android:drawable="@mipmap/img_release_5"
+        android:duration="45" />
+
+
+</animation-list>

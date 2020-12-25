@@ -26,31 +26,99 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdkVersion 29
-
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
-
-    lintOptions {
-        disable 'InvalidPackage'
-    }
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.wechat.wechat"
-        minSdkVersion 16
-        targetSdkVersion 29
+        applicationId rootProject.ext.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
+    }
+
+    signingConfigs {
+        debug {
+//            storeFile file(rootProject.ext.configs.storeFile)
+//            storePassword rootProject.ext.configs.storePassword
+//            keyAlias rootProject.ext.configs.keyAlias
+//            keyPassword rootProject.ext.configs.keyPassword
+//            v1SigningEnabled true
+//            v2SigningEnabled true
+        }
+
+        release {
+//            storeFile file(rootProject.ext.configs.storeFile)
+//            storePassword rootProject.ext.configs.storePassword
+//            keyAlias rootProject.ext.configs.keyAlias
+//            keyPassword rootProject.ext.configs.keyPassword
+//            v1SigningEnabled true
+//            v2SigningEnabled true
+
+        }
     }
 
     buildTypes {
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+
+        debug {
+            ndk { abiFilters "armeabi-v7a", "arm64-v8a" }
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
+
         }
+
+        release {
+            ndk { abiFilters "armeabi-v7a" }// 其他忽略
+            //Zipalign优化
+            zipAlignEnabled true
+            //签名
+            signingConfig signingConfigs.release
+            //混淆
+            minifyEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    sourceSets {
+        main {
+            main.java.srcDirs += 'src/main/kotlin'
+            jni.srcDirs = []//设置禁止gradle生成Android.mk
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    dexOptions {
+        preDexLibraries = true
+    }
+
+    //这个是解决lint报错的代码
+    lintOptions {
+        abortOnError false
+        // 防止在发布的时候出现因MissingTranslation导致 FailBuilded!
+        disable 'InvalidPackage'
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+
+    dexOptions {
+        javaMaxHeapSize "6g"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -60,4 +128,21 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api project(':framework:sunshine-album')
+    api project(':framework:sunshine-base')
+    api project(':framework:sunshine-crop')
+    api project(':framework:sunshine-net')
+    api project(':framework:sunshine-player')
+    api project(':framework:sunshine-tools')
+    api project(':framework:sunshine-ui')
+
+    api project(':short_video:AlivcMedia')
+    api project(':short_video:AliyunCrop:crop')
+    api project(':short_video:AliyunEditor')
+    api project(':short_video:AliyunFileDownLoader')
+    api project(':short_video:AliyunRecorder:record')
+    api project(':short_video:AliyunResample')
+    api project(':short_video:AliyunSVideoBase')
+    api project(':short_video:AliyunSvideoMusic')
+    api project(':short_video:AliyunVideoCommon')
 }

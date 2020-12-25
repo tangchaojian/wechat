@@ -1,0 +1,29 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        consumerProguardFiles 'lib-proguard-rules.pro'
+    }
+    lintOptions {
+        warning 'InvalidPackage'
+    }
+
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar','*.aar'], dir: 'libs')
+    api project(':short_video:AliyunVideoCommon')
+    implementation project(':short_video:AliyunSVideoBase')
+    implementation project(":short_video:AliyunSvideoMusic")
+    implementation project(':short_video:AliyunFileDownLoader')
+    implementation project(':short_video:AlivcMedia')
+
+    implementation externalFaceUnity
+    implementation externalAliyunRace
+}

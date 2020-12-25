@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:id="@+id/mHandlerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_20_percent"
+        tools:background="@color/black">
+
+        <LinearLayout
+            android:id="@+id/mTitleView"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <FrameLayout
+                android:id="@+id/mLayoutBack"
+                android:layout_width="44dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true">
+
+                <ImageView
+                    android:id="@+id/mIvBack"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/icon_title_bar_left_arrow_white" />
+            </FrameLayout>
+
+            <com.tcj.sunshine.ui.textview.MarqueeTextView
+                android:id="@+id/mTvTitle"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:freezesText="true"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                tools:text="视频标题" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/mLayoutHandle"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/mIvHandle"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@mipmap/icon_video_player_pause" />
+
+        </FrameLayout>
+
+
+        <TextView
+            android:id="@+id/mTvNotice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mLayoutHandle"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:visibility="gone"
+            tools:text="重播"
+            tools:visibility="visible" />
+
+        <RelativeLayout
+            android:id="@+id/mBottomToolsView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:id="@+id/mTvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="00:20 / 01:46"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+
+            <com.tcj.sunshine.player.VideoSeekBar
+                android:id="@+id/mSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_toLeftOf="@+id/mLayoutWindow"
+                android:layout_toRightOf="@+id/mTvTime"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/shape_video_player_seekbar_progress"
+                android:thumb="@drawable/shape_video_player_seekbar_circle_thumb" />
+
+            <FrameLayout
+                android:id="@+id/mLayoutWindow"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true">
+
+                <ImageView
+                    android:id="@+id/mIvWindow"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/icon_video_player_max_window" />
+            </FrameLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</merge>

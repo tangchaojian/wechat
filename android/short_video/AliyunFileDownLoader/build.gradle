@@ -1,0 +1,23 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+    }
+    lintOptions {
+        warning 'InvalidPackage'
+    }
+}
+
+dependencies {
+    api 'com.liulishuo.filedownloader:library:1.4.1'
+    api project(':short_video:AliyunVideoCommon')
+    implementation project(':short_video:AliyunSVideoBase')
+    implementation group: 'org.apache.ant', name: 'ant', version: '1.7.1'
+
+}

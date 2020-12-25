@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+
+    <item
+        android:drawable="@mipmap/img_refreshing_1"
+        android:duration="45" />
+    <item
+        android:drawable="@mipmap/img_refreshing_2"
+        android:duration="45" />
+    <item
+        android:drawable="@mipmap/img_refreshing_3"
+        android:duration="45" />
+    <item
+        android:drawable="@mipmap/img_refreshing_4"
+        android:duration="45" />
+    <item
+        android:drawable="@mipmap/img_refreshing_4"
+        android:duration="45" />
+    <item
+        android:drawable="@mipmap/img_refreshing_5"
+        android:duration="45" />
+    <item
+        android:drawable="@mipmap/img_refreshing_6"
+        android:duration="45" />
+    <item
+        android:drawable="@mipmap/img_refreshing_7"
+        android:duration="45" />
+    <item
+        android:drawable="@mipmap/img_refreshing_8"
+        android:duration="45" />
+    <item
+        android:drawable="@mipmap/img_refreshing_9"
+        android:duration="45" />
+    <item
+        android:drawable="@mipmap/img_refreshing_10"
+        android:duration="45" />
+
+    <item
+        android:drawable="@mipmap/img_refreshing_11"
+        android:duration="45" />
+
+    <item
+        android:drawable="@mipmap/img_refreshing_12"
+        android:duration="45" />
+</animation-list>

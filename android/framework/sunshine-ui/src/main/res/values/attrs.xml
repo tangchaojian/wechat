@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--<attr name="srlStyle" format="reference"/>&lt;!&ndash;样式&ndash;&gt;-->
+
+    <attr name="srlDrawableSize" format="dimension" /><!--图片尺寸-->
+    <attr name="srlDrawableArrowSize" format="dimension" /><!--箭头图片尺寸-->
+    <attr name="srlDrawableProgressSize" format="dimension" /><!--箭头图片尺寸-->
+    <attr name="srlDrawableMarginRight" format="dimension" /><!--图片和文字的间距-->
+    <attr name="srlTextSizeTitle" format="dimension" /><!--标题字体-->
+    <attr name="srlTextSizeTime" format="dimension" /><!--时间字体-->
+    <attr name="srlFinishDuration" format="integer" /><!--完成时停留时间-->
+    <attr name="srlPrimaryColor" format="color" /><!--主要颜色-->
+    <attr name="srlAccentColor" format="color" /><!--强调颜色-->
+    <attr name="srlDrawableArrow" format="reference" /><!--箭头图片-->
+    <attr name="srlDrawableProgress" format="reference" /><!--转动图片-->
+    <attr name="srlEnableHorizontalDrag" format="boolean" /><!--支持水平拖动-->
+
+    <attr name="srlTextPulling" format="string" />
+    <attr name="srlTextLoading" format="string" />
+    <attr name="srlTextRelease" format="string" />
+    <attr name="srlTextFinish" format="string" />
+    <attr name="srlTextFailed" format="string" />
+    <attr name="srlTextUpdate" format="string" />
+    <attr name="srlTextSecondary" format="string" />
+    <attr name="srlTextRefreshing" format="string" />
+
+    <!--<attr name="srlTextPulling" format="string" />-->
+    <!--<attr name="srlTextRelease" format="string" />-->
+    <!--<attr name="srlTextLoading" format="string" />-->
+    <!--<attr name="srlTextRefreshing" format="string" />-->
+    <!--<attr name="srlTextFinish" format="string" />-->
+    <!--<attr name="srlTextFailed" format="string" />-->
+    <attr name="srlTextNothing" format="string" />
+
+    <attr name="srlClassicsSpinnerStyle" format="enum">
+        <enum name="Translate" value="0" /><!--平行移动-->
+        <enum name="Scale" value="1" /><!--拉伸形变-->
+        <enum name="FixedBehind" value="2" /><!--固定在背后-->
+    </attr>
+
+    <attr name="layout_srlSpinnerStyle" format="enum">
+        <enum name="Translate" value="0" /><!--平行移动-->
+        <enum name="Scale" value="1" /><!--拉伸形变-->
+        <enum name="FixedBehind" value="2" /><!--固定在背后-->
+        <enum name="FixedFront" value="3" /><!--固定在前面-->
+        <enum name="MatchLayout" value="4" /><!--填满布局-->
+    </attr>
+
+    <declare-styleable name="SmartRefreshLayout">
+        <attr name="android:clipChildren" />
+        <attr name="android:clipToPadding" />
+        <attr name="srlPrimaryColor" />
+        <attr name="srlAccentColor" />
+        <attr name="srlReboundDuration" format="integer" />
+        <attr name="srlHeaderHeight" format="dimension" />
+        <attr name="srlFooterHeight" format="dimension" />
+        <attr name="srlHeaderInsetStart" format="dimension" />
+        <attr name="srlFooterInsetStart" format="dimension" />
+        <attr name="srlDragRate" format="float" />
+        <attr name="srlHeaderMaxDragRate" format="float" />
+        <attr name="srlFooterMaxDragRate" format="float" />
+        <attr name="srlHeaderTriggerRate" format="float" />
+        <attr name="srlFooterTriggerRate" format="float" />
+        <attr name="srlEnableRefresh" format="boolean" />
+        <attr name="srlEnableLoadMore" format="boolean" />
+        <attr name="srlEnableHeaderTranslationContent" format="boolean" />
+        <attr name="srlEnableFooterTranslationContent" format="boolean" />
+        <attr name="srlHeaderTranslationViewId" format="reference" />
+        <attr name="srlFooterTranslationViewId" format="reference" />
+        <attr name="srlEnablePreviewInEditMode" format="boolean" />
+        <attr name="srlEnableAutoLoadMore" format="boolean" />
+        <attr name="srlEnableOverScrollBounce" format="boolean" />
+        <attr name="srlEnablePureScrollMode" format="boolean" />
+        <attr name="srlEnableNestedScrolling" format="boolean" />
+        <attr name="srlEnableScrollContentWhenLoaded" format="boolean" />
+        <attr name="srlEnableScrollContentWhenRefreshed" format="boolean" />
+        <attr name="srlEnableLoadMoreWhenContentNotFull" format="boolean" />
+        <attr name="srlEnableFooterFollowWhenLoadFinished" format="boolean" />
+        <attr name="srlEnableFooterFollowWhenNoMoreData" format="boolean" />
+        <attr name="srlEnableClipHeaderWhenFixedBehind" format="boolean" />
+        <attr name="srlEnableClipFooterWhenFixedBehind" format="boolean" />
+        <attr name="srlEnableOverScrollDrag" format="boolean" />
+        <attr name="srlDisableContentWhenRefresh" format="boolean" />
+        <attr name="srlDisableContentWhenLoading" format="boolean" />
+        <attr name="srlFixedHeaderViewId" format="reference" />
+        <attr name="srlFixedFooterViewId" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="SmartRefreshLayout_Layout">
+        <attr name="layout_srlSpinnerStyle" />
+        <attr name="layout_srlBackgroundColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="BezierRadarHeader">
+        <attr name="srlPrimaryColor" />
+        <attr name="srlAccentColor" />
+        <attr name="srlEnableHorizontalDrag" />
+    </declare-styleable>
+
+    <declare-styleable name="BallPulseFooter">
+        <attr name="srlClassicsSpinnerStyle" />
+        <attr name="srlAnimatingColor" format="color" />
+        <attr name="srlNormalColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="ClassicsHeader">
+        <attr name="srlClassicsSpinnerStyle" />
+        <attr name="srlPrimaryColor" />
+        <attr name="srlAccentColor" />
+        <attr name="srlFinishDuration" />
+        <attr name="srlDrawableArrow" />
+        <attr name="srlDrawableProgress" />
+        <attr name="srlDrawableMarginRight" />
+        <attr name="srlDrawableSize" />
+        <attr name="srlDrawableArrowSize" />
+        <attr name="srlDrawableProgressSize" />
+        <attr name="srlTextSizeTitle" />
+        <attr name="srlTextSizeTime" />
+        <attr name="srlTextTimeMarginTop" format="dimension" />
+        <attr name="srlEnableLastTime" format="boolean" />
+
+        <attr name="srlTextPulling" />
+        <attr name="srlTextLoading" />
+        <attr name="srlTextRelease" />
+        <attr name="srlTextFinish" />
+        <attr name="srlTextFailed" />
+        <attr name="srlTextUpdate" />
+        <attr name="srlTextSecondary" />
+        <attr name="srlTextRefreshing" />
+
+    </declare-styleable>
+
+    <declare-styleable name="ClassicsFooter">
+        <attr name="srlClassicsSpinnerStyle" />
+        <attr name="srlPrimaryColor" />
+        <attr name="srlAccentColor" />
+        <attr name="srlFinishDuration" />
+        <attr name="srlTextSizeTitle" />
+        <attr name="srlDrawableArrow" />
+        <attr name="srlDrawableProgress" />
+        <attr name="srlDrawableMarginRight" />
+        <attr name="srlDrawableSize" />
+        <attr name="srlDrawableArrowSize" />
+        <attr name="srlDrawableProgressSize" />
+
+        <attr name="srlTextPulling" />
+        <attr name="srlTextRelease" />
+        <attr name="srlTextLoading" />
+        <attr name="srlTextRefreshing" />
+        <attr name="srlTextFinish" />
+        <attr name="srlTextFailed" />
+        <attr name="srlTextNothing" />
+
+    </declare-styleable>
+
+    <declare-styleable name="TwoLevelHeader">
+        <attr name="srlMaxRage" format="float" />
+        <attr name="srlFloorRage" format="float" />
+        <attr name="srlRefreshRage" format="float" />
+        <attr name="srlFloorDuration" format="integer" />
+        <attr name="srlEnableTwoLevel" format="boolean" />
+        <attr name="srlEnablePullToCloseTwoLevel" format="boolean" />
+    </declare-styleable>
+
+    <!--<style name="SmartRefreshStyle">-->
+    <!--<item name="srlPrimaryColor">#11bbff</item>-->
+    <!--<item name="srlReboundDuration" format="integer"/>-->
+    <!--<item name="srlHeaderHeight" format="dimension"/>-->
+    <!--<item name="srlFooterHeight" format="dimension"/>-->
+    <!--<item name="srlHeaderInsetStart" format="dimension"/>-->
+    <!--<item name="srlFooterInsetStart" format="dimension"/>-->
+    <!--<item name="srlDragRate" format="float"/>-->
+    <!--<item name="srlHeaderMaxDragRate" format="float"/>-->
+    <!--<item name="srlFooterMaxDragRate" format="float"/>-->
+    <!--<item name="srlHeaderTriggerRate" format="float"/>-->
+    <!--<item name="srlFooterTriggerRate" format="float"/>-->
+    <!--<item name="srlEnableRefresh" format="boolean"/>-->
+    <!--<item name="srlEnableLoadMore" format="boolean"/>-->
+    <!--<item name="srlEnableHeaderTranslationContent" format="boolean"/>-->
+    <!--<item name="srlEnableFooterTranslationContent" format="boolean"/>-->
+    <!--<item name="srlHeaderTranslationViewId" format="reference"/>-->
+    <!--<item name="srlFooterTranslationViewId" format="reference"/>-->
+    <!--<item name="srlEnablePreviewInEditMode" format="boolean"/>-->
+    <!--<item name="srlEnableAutoLoadMore" format="boolean"/>-->
+    <!--<item name="srlEnableOverScrollBounce" format="boolean"/>-->
+    <!--<item name="srlEnablePureScrollMode" format="boolean"/>-->
+    <!--<item name="srlEnableNestedScrolling" format="boolean"/>-->
+    <!--<item name="srlEnableScrollContentWhenLoaded" format="boolean"/>-->
+    <!--<item name="srlEnableScrollContentWhenRefreshed" format="boolean"/>-->
+    <!--<item name="srlEnableLoadMoreWhenContentNotFull" format="boolean"/>-->
+    <!--<item name="srlEnableFooterFollowWhenLoadFinished" format="boolean"/>-->
+    <!--<item name="srlEnableFooterFollowWhenNoMoreData" format="boolean"/>-->
+    <!--<item name="srlEnableClipHeaderWhenFixedBehind" format="boolean"/>-->
+    <!--<item name="srlEnableClipFooterWhenFixedBehind" format="boolean"/>-->
+    <!--<item name="srlEnableOverScrollDrag" format="boolean"/>-->
+    <!--<item name="srlDisableContentWhenRefresh" format="boolean"/>-->
+    <!--<item name="srlDisableContentWhenLoading" format="boolean"/>-->
+    <!--<item name="srlFixedHeaderViewId" format="reference"/>-->
+    <!--<item name="srlFixedFooterViewId" format="reference"/>-->
+    <!--</style>-->
+
+
+    <declare-styleable name="TitleViewStyle">
+        <attr name="title_text" format="string" />
+        <attr name="title_background" format="color" />
+        <attr name="title_font_color" format="color" />
+        <attr name="left_img_src" format="reference" />
+        <attr name="right_mode" format="enum">
+            <enum name="none" value="0" />
+            <enum name="image" value="1" />
+            <enum name="text" value="2" />
+        </attr>
+        <attr name="right_img_src" format="reference" />
+        <attr name="right_text_src" format="reference|string" />
+    </declare-styleable>
+
+    <declare-styleable name="UIToolBarStyle">
+        <attr name="toolbar_title" format="string" />
+        <attr name="toolbar_background" format="color" />
+        <attr name="toolbar_title_color" format="color" />
+        <attr name="toolbar_back_icon_src" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="RatioViewStyle">
+        <attr name="ratio_width" format="integer" />
+        <attr name="ratio_height" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="MDashLineViewStyle">
+        <attr name="dash_line_color" format="reference|color"></attr>
+        <attr name="dash_line_gap" format="reference|dimension"></attr>
+        <attr name="dash_line_width" format="reference|dimension"></attr>
+        <attr name="dash_line_orientation">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="MSlashLineViewStyle">
+        <attr name="slash_left_line_color" format="reference|color"></attr>
+        <attr name="slash_right_line_color" format="reference|color"></attr>
+        <attr name="slash_line_color" format="reference|color"></attr>
+        <attr name="slash_line_width" format="reference|dimension"></attr>
+        <attr name="slash_line_type">
+            <enum name="leftTop_to_rightBottom" value="0" />
+            <enum name="rightTop_to_leftBottom" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="WrapwordLayout">
+        <!--标签之间左右距离-->
+        <attr name="horizontalSpacing" format="reference|dimension" />
+        <!--标签行距-->
+        <attr name="verticalSpacing" format="reference|dimension" />
+
+        <attr name="max_row" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="TimeView">
+        <attr name="time_content_view" format="reference"></attr>
+        <attr name="time_show_day" format="reference|boolean"></attr>
+        <attr name="time_status_none_color" format="reference|color"></attr>
+        <attr name="is_padded" format="boolean"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="EvaluationLevelViewStyle">
+        <attr name="star_normal_img_src" format="reference|color"></attr>
+        <attr name="star_selected_img_src" format="reference|color"></attr>
+        <attr name="star_width" format="reference|dimension"></attr>
+        <attr name="star_height" format="reference|dimension"></attr>
+        <attr name="star_gap" format="reference|dimension"></attr>
+        <attr name="star_num" format="integer"></attr>
+        <attr name="star_level" format="integer"></attr>
+        <attr name="star_enable_click" format="boolean"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="ShapeViewStyle">
+        <attr name="shape_normal_color" format="reference|color"></attr>
+        <attr name="shape_pressed_color" format="reference|color"></attr>
+        <attr name="shape_unable_color" format="reference|color"></attr>
+        <attr name="shape_checked_color" format="reference|color"></attr>
+        <attr name="shape_normal_line_color" format="reference|color"></attr>
+        <attr name="shape_pressed_line_color" format="reference|color"></attr>
+        <attr name="shape_unable_line_color" format="reference|color"></attr>
+        <attr name="shape_checked_line_color" format="reference|color"></attr>
+        <attr name="shape_normal_text_color" format="reference|color"></attr>
+        <attr name="shape_pressed_text_color" format="reference|color"></attr>
+        <attr name="shape_unable_text_color" format="reference|color"></attr>
+        <attr name="shape_checked_text_color" format="reference|color"></attr>
+        <attr name="shape_radius" format="reference|dimension"></attr>
+        <attr name="shape_left_top_radius" format="reference|dimension"></attr>
+        <attr name="shape_left_bottom_radius" format="reference|dimension"></attr>
+        <attr name="shape_right_top_radius" format="reference|dimension"></attr>
+        <attr name="shape_right_bottom_radius" format="reference|dimension"></attr>
+        <attr name="shape_show_border" format="boolean"></attr>
+        <attr name="shape_line_width" format="reference|dimension"></attr>
+        <attr name="shape" format="enum">
+            <enum name="line" value="1" />
+            <enum name="oval" value="2" />
+            <enum name="rectangle" value="3" />
+            <enum name="ring" value="4" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="CropViewStyle">
+        <attr name="crop_radius" format="reference|dimension"></attr>
+        <attr name="crop_left_top_radius" format="reference|dimension"></attr>
+        <attr name="crop_left_bottom_radius" format="reference|dimension"></attr>
+        <attr name="crop_right_top_radius" format="reference|dimension"></attr>
+        <attr name="crop_right_bottom_radius" format="reference|dimension"></attr>
+        <attr name="crop_show_border" format="boolean"></attr>
+        <attr name="crop_border_width" format="reference|dimension"></attr>
+        <attr name="crop_border_color" format="reference|color"></attr>
+        <attr name="crop_shape" format="enum">
+            <enum name="rectangle" value="1" />
+            <enum name="oval" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="ProgressBar">
+
+        <!-- 进度条基本属性 -->
+        <attr name="progressbar_current_progress" format="integer"></attr><!-- 进度条当前进度-->
+        <attr name="progressbar_max_progress" format="integer"></attr><!-- 进度条最大进度-->
+        <attr name="progressbar_back_color" format="reference|color"></attr><!-- 进度条背景色-->
+        <attr name="progressbar_before_color" format="reference|color"></attr><!-- 进度条前景色-->
+        <attr name="progressbar_round" format="reference|dimension"></attr><!-- 进度条圆角的值 -->
+
+        <!-- 进度条边框 -->
+        <attr name="progressbar_line_color" format="reference|color"></attr><!-- 进度条边框颜色 -->
+        <attr name="progressbar_outside_border_width" format="reference|dimension"></attr><!-- 进度条边框宽度 -->
+
+        <attr name="progressbar_progress_is_round" format="boolean"></attr><!-- 进度是否圆角 -->
+        <attr name="progressbar_is_show_progress" format="boolean"></attr><!-- 是否显示进度值 -->
+        <attr name="progressbar_text_size" format="reference|dimension"></attr><!-- 进度条显示进度的文本字体大小 -->
+        <attr name="progressbar_text_color" format="reference|color"></attr><!-- 进度条显示进度的文本字体颜色 -->
+        <attr name="progressbar_over_text_color" format="reference|color"></attr><!-- 进度条显示进度的文本与进度重叠时字体颜色 -->
+    </declare-styleable>
+
+    <declare-styleable name="ExpandTextViewStyle">
+        <attr name="expand_textview_width" format="reference|dimension"></attr>
+        <attr name="expand_textview_maxLines" format="reference|integer"></attr>
+        <attr name="expand_textview_expand_text" format="reference|string"></attr>
+        <attr name="expand_textview_collapse_text" format="reference|string"></attr>
+        <attr name="expand_textview_end_text_color" format="reference|color"></attr>
+        <attr name="expand_textview_is_expand" format="reference|boolean"></attr><!-- 是否一开始展开 -->
+    </declare-styleable>
+
+    <declare-styleable name="CalendarView">
+
+        <attr name="calendar_padding" format="dimension" /><!--日历内部左右padding-->
+
+        <attr name="week_background" format="color" /><!--周背景-->
+        <attr name="week_line_background" format="color" /><!--线条颜色-->
+        <attr name="week_text_color" format="color" /><!--周栏字体颜色-->
+        <attr name="week_text_size" format="dimension" /><!--周栏字体大小-->
+        <attr name="week_line_margin" format="dimension" /><!--线条margin-->
+
+        <attr name="month_view" format="string" /><!--完全自定义月视图-->
+        <attr name="week_view" format="string" /> <!--完全自定义周视图-->
+        <attr name="year_view" format="string" /> <!--完全自定义年视图-->
+        <attr name="week_bar_height" format="dimension" /> <!--星期栏的高度-->
+        <attr name="week_bar_view" format="string" /> <!--如果需要的话使用自定义星期栏-->
+
+        <attr name="scheme_text" format="string" />
+        <attr name="day_text_size" format="dimension" />
+        <attr name="lunar_text_size" format="dimension" />
+        <attr name="calendar_height" format="dimension" />
+        <attr name="calendar_match_parent" format="boolean" /> <!-- 全屏日历 -->
+        <attr name="scheme_text_color" format="color" />
+        <attr name="scheme_month_text_color" format="color" />
+        <attr name="scheme_lunar_text_color" format="color" />
+        <attr name="scheme_theme_color" format="color" />
+
+        <attr name="selected_theme_color" format="color" />
+        <attr name="selected_text_color" format="color" />
+        <attr name="selected_lunar_text_color" format="color" />
+
+        <attr name="current_day_text_color" format="color" />
+        <attr name="current_day_lunar_text_color" format="color" />
+        <attr name="current_month_text_color" format="color" />
+        <attr name="other_month_text_color" format="color" />
+        <attr name="current_month_lunar_text_color" format="color" />
+        <attr name="other_month_lunar_text_color" format="color" />
+
+
+        <!-- 年视图相关 -->
+        <attr name="year_view_month_text_size" format="dimension" />
+        <attr name="year_view_day_text_size" format="dimension" />
+        <attr name="year_view_month_text_color" format="color" />
+        <attr name="year_view_current_day_text_color" format="color" />
+        <attr name="year_view_day_text_color" format="color" />
+        <attr name="year_view_select_text_color" format="color" />
+        <attr name="year_view_scheme_color" format="color" />
+        <attr name="year_view_background" format="color" />
+        <attr name="year_view_month_height" format="dimension" />
+        <attr name="year_view_week_height" format="dimension" />
+        <attr name="year_view_week_text_size" format="dimension" />
+        <attr name="year_view_week_text_color" format="color" />
+        <attr name="year_view_padding" format="dimension" />
+        <attr name="year_view_month_margin_top" format="dimension" />
+        <attr name="year_view_month_margin_bottom" format="dimension" />
+
+        <!--日期范围-->
+        <attr name="min_year" format="integer" />
+        <attr name="max_year" format="integer" />
+        <attr name="min_year_month" format="integer" />
+        <attr name="max_year_month" format="integer" />
+        <attr name="min_year_day" format="integer" />
+        <attr name="max_year_day" format="integer" />
+
+
+        <!--月视图是否可滚动-->
+        <attr name="month_view_scrollable" format="boolean" />
+        <!--周视图是否可滚动-->
+        <attr name="week_view_scrollable" format="boolean" />
+        <!--年视图是否可滚动-->
+        <attr name="year_view_scrollable" format="boolean" />
+
+        <!-- 月份显示模式 -->
+        <attr name="month_view_show_mode">
+            <enum name="mode_all" value="0" />
+            <enum name="mode_only_current" value="1" />
+            <enum name="mode_fix" value="2" />
+        </attr>
+
+        <!-- 自定义周起始 -->
+        <attr name="week_start_with">
+            <enum name="sun" value="1" />
+            <enum name="mon" value="2" />
+            <enum name="sat" value="7" />
+        </attr>
+
+        <!-- 自定义选择模式 -->
+        <attr name="select_mode">
+            <enum name="default_mode" value="0" />
+            <enum name="single_mode" value="1" />
+            <enum name="range_mode" value="2" />
+            <enum name="multi_mode" value="3" />
+        </attr>
+
+        <!-- when select_mode = multi_mode -->
+        <attr name="max_multi_select_size" format="integer" />
+
+        <!-- when select_mode = range_mode -->
+        <attr name="min_select_range" format="integer" />
+        <attr name="max_select_range" format="integer" />
+
+        <!-- auto select day -->
+        <attr name="month_view_auto_select_day">
+            <enum name="first_day_of_month" value="0" />
+            <enum name="last_select_day" value="1" />
+            <enum name="last_select_day_ignore_current" value="2" />
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="UICalendarLayout">
+        <attr name="default_status">
+            <enum name="expand" value="0" />
+            <enum name="shrink" value="1" />
+        </attr>
+
+
+        <!-- 手势模式 -->
+        <attr name="gesture_mode">
+            <enum name="default_mode" value="0" />
+            <!--<enum name="only_calendar" value="1" />-->
+            <enum name="disabled" value="2" />
+        </attr>
+
+        <attr name="calendar_show_mode">
+            <enum name="both_month_week_view" value="0" />
+            <enum name="only_week_view" value="1" />
+            <enum name="only_month_view" value="2" />
+        </attr>
+        <attr name="calendar_content_view_id" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="CircleProgressBar">
+        <attr name="circle_progress_bar_width" format="dimension" />
+        <attr name="circle_progress_bar_color" format="color" />
+        <attr name="circle_progress_bar_current" format="integer" />
+        <attr name="circle_progress_bar_total" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundImageViewStyle">
+        <attr name="round_radius" format="reference|dimension"></attr>
+        <attr name="round_left_top_radius" format="reference|dimension"></attr>
+        <attr name="round_left_bottom_radius" format="reference|dimension"></attr>
+        <attr name="round_right_top_radius" format="reference|dimension"></attr>
+        <attr name="round_right_bottom_radius" format="reference|dimension"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="ArcDownViewStyle">
+        <attr name="arc_down_background" format="reference|color"></attr>
+        <attr name="arc_down_height" format="reference|dimension"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="UITabLayoutStyle">
+        <attr name="tab_normal_text_color" format="reference|color"></attr>
+        <attr name="tab_selected_text_color" format="reference|color"></attr>
+        <attr name="tab_normal_text_size" format="reference|dimension"></attr>
+        <attr name="tab_selected_text_size" format="reference|dimension"></attr>
+        <attr name="tab_is_center" format="boolean"></attr>
+        <attr name="tab_is_fixed_width" format="boolean"></attr>
+        <attr name="tab_item_width" format="reference|dimension"></attr>
+        <attr name="tab_indicator_icon" format="reference"></attr>
+        <attr name="tab_indicator_icon_color" format="reference|color"></attr>
+        <attr name="tab_view" format="reference"></attr>
+        <attr name="tab_item_view" format="reference"></attr>
+    </declare-styleable>
+
+    <string name="font_resize_standard">标准</string>
+    <declare-styleable name="FontResizeView">
+        <attr name="minSize" format="reference|dimension" /> <!--最小size-->
+        <attr name="maxSize" format="reference|dimension" /> <!--最大size-->
+        <attr name="totalGrade" format="integer" />   <!--可调整的等级、即总的等级-->
+        <attr name="standardGrade" format="integer" />  <!--标准等级-->
+
+        <attr name="leftText" format="reference|string" />  <!--左边文本，默认为 'A'-->
+        <attr name="middleText" format="reference|string" />  <!--中间文本，默认为 '标准'-->
+        <attr name="rightText" format="reference|string" />  <!--右边文本，默认为 'A'-->
+        <attr name="leftTextColor" format="reference|color" />  <!--左边文本颜色，默认为全黑-->
+        <attr name="middleTextColor" format="reference|color" />  <!--中间文本颜色，默认为全黑-->
+        <attr name="rightTextColor" format="reference|color" />  <!--右边文本颜色，默认为全黑-->
+
+        <attr name="sliderRadius" format="reference|dimension" />  <!--滑块半径-->
+        <attr name="sliderColor" format="reference|color" />  <!--滑块颜色-->
+        <attr name="sliderShadowColor" format="reference|color" />  <!--滑块边缘阴影颜色-->
+
+        <attr name="lineColor" format="reference|color" />  <!--线条颜色-->
+        <attr name="lineStrokeWidth" format="reference|dimension" />  <!--线条宽度，即粗细程度-->
+        <attr name="horizontalLineLength" format="reference|dimension" />  <!--横向线条长度-->
+        <attr name="verticalLineLength" format="reference|dimension" />  <!--纵向线条长度-->
+    </declare-styleable>
+
+</resources>

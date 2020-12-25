@@ -1,0 +1,110 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+        buildConfigField "String", "FILE_PROVIDER_NAME", "\"${rootProject.ext.configs.fileProviderName}\""
+        buildConfigField "Integer", "SCREEN_WIDTH_DP", "360"
+
+        manifestPlaceholders = [
+                PROVIDER_NAME: rootProject.ext.configs.fileProviderName
+        ]
+
+        ndk { abiFilters "armeabi-v7a"}// 其他忽略
+
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    buildTypes {
+        release {
+            buildConfigField "boolean", "LOCKED", "false"
+            buildConfigField("boolean", "HTTP_URL_RELEASE", "${HTTP_URL_RELEASE}")
+            buildConfigField("boolean", "IS_SHOW_LOG", "${IS_SHOW_LOG}")
+            minifyEnabled false
+        }
+
+        debug {
+            buildConfigField "boolean", "LOCKED", "true"
+            buildConfigField("boolean", "HTTP_URL_RELEASE", "${HTTP_URL_RELEASE}")
+            buildConfigField("boolean", "IS_SHOW_LOG", "${IS_SHOW_LOG}")
+            minifyEnabled false
+        }
+    }
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    //=======================Android SDK===========================
+    //androidx
+    api rootProject.ext.androidx["appcompat"]
+    api rootProject.ext.androidx["annotation"]
+    api rootProject.ext.androidx["constraint"]
+    api rootProject.ext.androidx["multidex"]
+    api rootProject.ext.androidx["recyclerview"]
+    api rootProject.ext.androidx["material"]
+    api rootProject.ext.androidx["exifinterface"]
+    api rootProject.ext.androidx["transition"]
+    //=======================框架retrofit2 + okhttp3 + rxjava + dragger3 + MVP=============================
+    //retrofit2 + okhttp3 + dragger3 框架依赖库
+    api rootProject.ext.framework["retrofit2"]
+    api rootProject.ext.framework["converter_scalars"]
+    api rootProject.ext.framework["converter_gson"]
+    api rootProject.ext.framework["adapter_rxjava2"]
+    //rxjava2
+    api rootProject.ext.framework["rxjava2"]
+    api rootProject.ext.framework["rxandroid"]
+    api rootProject.ext.framework["rxbinding2"]
+    api rootProject.ext.framework["rxlifecycle2"]
+    api rootProject.ext.framework["rxlifecomponents"]
+    //dagger
+    api rootProject.ext.framework["dagger"]
+    api rootProject.ext.framework["dagger_android"]
+    api rootProject.ext.framework["dagger_support"]
+    //========================第三方依赖================================
+    api rootProject.ext.dependencies["zxing"]
+    //二维码/条形码识别
+    api rootProject.ext.dependencies["glide"]
+    //图片加载
+    annotationProcessor rootProject.ext.dependencies["glide_compiler"]
+
+    //轮播图
+    api rootProject.ext.dependencies["banner"]
+    api rootProject.ext.dependencies["convenientbanner"]
+    //ijk播放器
+    api rootProject.ext.dependencies["ijkplayer_java"]
+    //ijk播放器-直播
+    api rootProject.ext.dependencies["ijkplayer_exo"]
+    //eventbus
+    api rootProject.ext.dependencies["eventbus"]
+    //butterknife
+    api rootProject.ext.dependencies["butterknife"]
+    annotationProcessor rootProject.ext.dependencies["butterknife_compiler"]
+
+
+    //implementation 'com.blankj:utilcode:1.23.7'
+    //    implementation 'me.jessyan:autosize:0.9.1'
+
+}

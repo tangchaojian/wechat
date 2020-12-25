@@ -1,0 +1,84 @@
+ext {
+
+    applicationId = "com.wechat.wechat"
+
+    android = [
+            compileSdkVersion: 29,
+            buildToolsVersion: "29.0.2",
+            minSdkVersion    : 19,
+            targetSdkVersion : 29,
+    ]
+
+    configs = [
+            apkName         : "miaoyin.apk",
+            fileProviderName: "${applicationId}.file.provider",
+            storeFile       : "miaoyin_keys",
+            storePassword   : "123456",
+            keyAlias        : "miaoyin",
+            keyPassword     : "123456",
+    ]
+
+    dependVersion = [
+            retrofit2_version   : "2.6.2",
+            rxjava2_version     : "2.1.1",
+            rxbinding2_version  : "2.2.0",
+            rxlifecycle_version : "2.2.2",
+            dagger_version      : "2.25.2",
+            appcompat_version   : "1.1.0",
+            constraint_version  : "1.1.3",
+            multidex_version    : "2.0.0",
+            recyclerview_version: "1.0.0",
+            nim_version         : "8.0.0"
+    ]
+
+    androidx = [
+            appcompat     : "androidx.appcompat:appcompat:$dependVersion.appcompat_version",
+            legacy_support: "androidx.legacy:legacy-support-v4:$dependVersion.recyclerview_version",
+            annotation    : "androidx.annotation:annotation:$dependVersion.appcompat_version",
+            constraint    : "androidx.constraintlayout:constraintlayout:$dependVersion.constraint_version",
+            multidex      : "androidx.multidex:multidex:$dependVersion.multidex_version",
+            recyclerview  : "androidx.recyclerview:recyclerview:$dependVersion.recyclerview_version",
+            exifinterface : "androidx.exifinterface:exifinterface:$dependVersion.appcompat_version",
+            transition    : "androidx.transition:transition:$dependVersion.appcompat_version",
+            material      : "com.google.android.material:material:1.2.0-alpha01",
+    ]
+
+    //框架
+    framework = [
+            retrofit2        : "com.squareup.retrofit2:retrofit:$dependVersion.retrofit2_version",
+            converter_scalars: "com.squareup.retrofit2:converter-scalars:$dependVersion.retrofit2_version",
+            converter_gson   : "com.squareup.retrofit2:converter-gson:$dependVersion.retrofit2_version",
+            adapter_rxjava2  : "com.squareup.retrofit2:adapter-rxjava2:$dependVersion.retrofit2_version",
+
+            //rxjava2
+            rxjava2          : "io.reactivex.rxjava2:rxjava:$dependVersion.rxjava2_version",
+            rxandroid        : "io.reactivex.rxjava2:rxandroid:$dependVersion.rxjava2_version",
+            rxbinding2       : "com.jakewharton.rxbinding2:rxbinding:$dependVersion.rxbinding2_version",
+            rxlifecycle2     : "com.trello.rxlifecycle2:rxlifecycle:$dependVersion.rxlifecycle_version",
+            rxlifecomponents : "com.trello.rxlifecycle2:rxlifecycle-components:$dependVersion.rxlifecycle_version",
+
+            //dagger
+            dagger           : "com.google.dagger:dagger:$dependVersion.dagger_version",
+            dagger_android   : "com.google.dagger:dagger-android:$dependVersion.dagger_version",
+            dagger_support   : "com.google.dagger:dagger-android-support:$dependVersion.dagger_version",
+            dagger_compiler  : "com.google.dagger:dagger-compiler:$dependVersion.dagger_version",
+            dagger_processor : "com.google.dagger:dagger-android-processor:$dependVersion.dagger_version",
+    ]
+
+    //第三方库
+    dependencies = [
+            zxing               : "com.google.zxing:core:3.3.0",
+            glide               : "com.github.bumptech.glide:glide:4.10.0",
+            glide_compiler      : "com.github.bumptech.glide:compiler:4.10.0",
+            banner              : "com.youth.banner:banner:2.1.0",       //轮播图控件
+            convenientbanner    : "com.bigkoo:convenientbanner:2.0.5",
+            ijkplayer_java      : "tv.danmaku.ijk.media:ijkplayer-java:0.8.8",    //ijk 视频播放器
+            ijkplayer_exo       : "tv.danmaku.ijk.media:ijkplayer-exo:0.8.8",     //ijk 视频直播
+            eventbus            : "org.greenrobot:eventbus:3.1.1",    //eventbus
+            greendao            : "org.greenrobot:greendao:3.2.2",    //geendao
+            butterknife         : "com.jakewharton:butterknife:10.2.1",   //butterknife
+            butterknife_compiler: "com.jakewharton:butterknife-compiler:10.2.1"
+
+    ]
+
+}
