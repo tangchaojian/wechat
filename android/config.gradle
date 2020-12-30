@@ -1,6 +1,6 @@
 ext {
 
-    applicationId = "com.wechat.wechat"
+    applicationId = "com.readchen.fx.rtmpdemo"
 
     android = [
             compileSdkVersion: 29,

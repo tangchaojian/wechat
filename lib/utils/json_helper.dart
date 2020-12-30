@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:wechat/entity/GoodsEntity.dart';
+import 'package:wechat/entity/goods_list_data_entity.dart';
 import 'package:wechat/utils/log.dart';
 
 class JsonHelper {
@@ -20,8 +21,9 @@ class JsonHelper {
   static T parseArray<T>(json) {
     String type = T.toString();
     List data = json as List;
-
+    Log.i("TAG", "$type");
     if(type == "List<GoodsEntity>") {
+      Log.i("TAG", "data.length->${data.length}");
       List<GoodsEntity> list = List();
       list = addChildItem(data, list);
       return list as T;
@@ -31,7 +33,9 @@ class JsonHelper {
 
   static T parseObject<T>(json){
     String type = T.toString();
-    if(type == "GoodsEntity") {
+    if(type == "GoodsListDataEntity") {
+      return GoodsListDataEntity.fromJson(json) as T;
+    }else if(type == "GoodsEntity") {
       return GoodsEntity.fromJson(json) as T;
     }
     return null;

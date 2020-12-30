@@ -19,6 +19,13 @@ include ':short_video:AliyunSVideoBase'
 include ':short_video:AliyunSvideoMusic'
 include ':short_video:AliyunVideoCommon'
 
+include ':tencent_short_video:lib_tccommon'
+include ':tencent_short_video:lib_tcsuperplayer'
+include ':tencent_short_video:lib_tcvideoediter'
+include ':tencent_short_video:lib_tcvideojoiner'
+include ':tencent_short_video:lib_tcvideorecord'
+
+
 def localPropertiesFile = new File(rootProject.projectDir, "local.properties")
 def properties = new Properties()
 

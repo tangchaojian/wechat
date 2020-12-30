@@ -36,6 +36,8 @@ dependencies:
   json_serializable: ^3.5.1
   build_runner: ^1.10.11
   flutter_easyrefresh: ^2.1.7
+  umeng_sdk:
+    path: ./umeng_sdk/
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +66,7 @@ flutter:
      - images/ic_nav_profile_normal.png
      - images/ic_nav_profile_actived.png
      - images/ic_cart.png
+     - images/img_dlrb.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

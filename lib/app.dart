@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:umeng_sdk/umeng_sdk.dart';
 import 'package:wechat/community/CommunityPage.dart';
 import 'package:wechat/find/FindPage.dart';
 import 'package:wechat/news/NewsPage.dart';

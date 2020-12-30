@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:umeng_sdk/umeng_sdk.dart';
 
 class Loading extends StatefulWidget {
 
@@ -22,6 +23,11 @@ class _LoadingState extends State<Loading>{
     return Container(
         child: Image.asset("images/loading.jpg"),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
 }

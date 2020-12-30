@@ -14,6 +14,7 @@ import 'package:wechat/net/http_status.dart';
 import 'dart:convert' as convert;
 
 import 'package:wechat/utils/log.dart';
+import 'package:wechat/utils/screen_utils.dart';
 
 class GoodsListPage2 extends StatefulWidget {
   @override
@@ -21,19 +22,19 @@ class GoodsListPage2 extends StatefulWidget {
 }
 
 class _GoodsListPage2 extends State<GoodsListPage2> {
-
   List<GoodsEntity> list = new List();
   var dio = Dio();
   int page = 1;
   int limit = 20;
   bool hasMore = false;
+  double itemWidth = 0;
   var _controller = EasyRefreshController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // refresh();
+    refresh();
     // HttpHelper.get("https://looyu.vip/goods/open-app/goods/queryList", params: {"pageNum":page, "pageSize":3});
 
     // String jsonStr = "{\"code\":1, \"msg\":\"\", \"data\":{\"goodsName\":\"华为P30 Pro手机【保价15天】智能手机 天空之境 8G+512G 全网通\"}}";
@@ -49,6 +50,9 @@ class _GoodsListPage2 extends State<GoodsListPage2> {
 
   @override
   Widget build(BuildContext context) {
+    this.itemWidth = (ScreenUtils.getScreen(context)[0] - 3 * 10.0) / 2.0;
+    print("宽->$itemWidth");
+
     return Scaffold(
       appBar: AppBar(
         title: Text("商品列表"),
@@ -82,70 +86,93 @@ class _GoodsListPage2 extends State<GoodsListPage2> {
             // ),
             SliverGrid(
                 delegate: SliverChildBuilderDelegate(
-                        (BuildContext context, int index) {
-                      return Container(
-                        color: Colors.primaries[(index % 18)],
-                      );
-                    },
-                    childCount: list.length
-                ),
+                    (BuildContext context, int index) {
+                  return Material(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          left: 0,
+                          right: 0,
+                          child: Container(
+                            width: itemWidth,
+                            height: itemWidth,
+                            decoration: ShapeDecoration(
+                              image: DecorationImage(image: NetworkImage(list[index].goodsImageUrl), fit: BoxFit.cover),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(5), topRight: Radius.circular(5))),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: itemWidth + 10,
+                          left: 10,
+                          right: 10,
+                          child: Text(
+                              "${list[index].goodsName}",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }, childCount: list.length),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
-                  childAspectRatio: 3/4,
-                )
-            )
+                  childAspectRatio: 3 / 4,
+                ))
           ],
         ),
       ),
     );
   }
 
-  Future<void> refresh() async{
+  Future<void> refresh() async {
     page = 1;
     _controller.finishLoad(noMore: true);
     request();
   }
 
-  Future<void> loadMore() async{
+  Future<void> loadMore() async {
     page++;
     request();
   }
 
-  void request() async{
-    HttpHelper.get("https://looyu.vip/goods/open-app/goods/queryList", params: {"pageNum":page, "pageSize":limit}, callback: HttpCallback<GoodsListDataEntity>(
-      onCallback: (status, code, message, {data}) {
-        if(status == HttpStatus.SUCCESS) {
-          if(page == 1) {
-            list.clear();
+  void request() async {
+    HttpHelper.get("https://looyu.vip/goods/open-app/goods/queryList",
+        params: {"pageNum": page, "pageSize": limit}, callback:
+            HttpCallback<GoodsListDataEntity>(
+                onCallback: (status, code, message, {data}) {
+      if (status == HttpStatus.SUCCESS) {
+        if (page == 1) {
+          list.clear();
+        }
+        List<GoodsEntity> array = data.list;
+        setState(() {
+          this.list.addAll(array);
+        });
+      } else if (status == HttpStatus.FAIL) {
+      } else if (status == HttpStatus.COMPLETE) {
+        List<GoodsEntity> array = data.list == null ? List() : data.list;
+        if (page == 1) {
+          if (array.length < limit) {
+            _controller.finishLoad(noMore: true);
+          } else {
+            setState(() {
+              hasMore = true;
+            });
+            _controller.finishLoad(noMore: false);
           }
-          List<GoodsEntity> array = data.list;
-          setState(() {
-            this.list.addAll(array);
-          });
-        }else if(status == HttpStatus.FAIL) {
 
-        }else if(status == HttpStatus.COMPLETE) {
-          List<GoodsEntity> array = data.list ?? List();
-          if(page == 1) {
-            if(array.length < limit) {
-              _controller.finishLoad(noMore: true);
-            }else {
-              setState(() {
-                hasMore = true;
-              });
-              _controller.finishLoad(noMore: false);
-            }
-
-            _controller.resetLoadState();
-          }else {
-            if (array.length < limit) {
-              _controller.finishLoad(noMore: true);
-            }
+          _controller.resetLoadState();
+        } else {
+          if (array.length < limit) {
+            _controller.finishLoad(noMore: true);
           }
         }
       }
-    ));
+    }));
   }
 }

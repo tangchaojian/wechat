@@ -1,17 +1,21 @@
 package com.wechat.wechat
 
-import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-import android.os.Bundle
+import android.content.Intent
 import android.util.Log
 import com.aliyun.svideo.recorder.activity.AlivcSvideoRecordActivity
 import com.aliyun.svideo.recorder.bean.AlivcRecordInputParam
 import com.aliyun.svideosdk.common.struct.common.VideoQuality
 import com.aliyun.svideosdk.common.struct.encoder.VideoCodecs
+import com.readchen.fx.rtmpdemo.R
 import com.tcj.sunshine.boxing.Boxing
 import com.tcj.sunshine.boxing.model.config.BoxingConfig
 import com.tcj.sunshine.tools.PermissionUtils
 import com.tcj.sunshine.tools.PermissionUtils.PermissionsCallback
 import com.tcj.sunshine.view.activity.BoxingActivity
+import com.tencent.liteav.demo.common.utils.TCConstants
+import com.tencent.liteav.demo.videorecord.TCVideoRecordActivity
+import com.tencent.rtmp.TXLiveConstants
+import com.tencent.ugc.TXRecordCommon
 import io.flutter.app.FlutterActivity
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -59,16 +63,31 @@ class FlutterToAndroidPlugins : MethodChannel.MethodCallHandler {
                         }
                     })
                 }
-            }else if(call.method == "startRecord") {
+            }else if(call.method == "startAliyunRecord") {
                 if(PermissionUtils.hasPermission(arrayOf(PermissionUtils.PERMISSION_CAMERA, PermissionUtils.PERMISSION_WRITE_EXTERNAL_STORAGE))) {
-                    startRecord()
+                    startAliyunRecord()
                     result.success("ok");
                 }else {
                     PermissionUtils.checkSelfPermission(activity, arrayOf(PermissionUtils.PERMISSION_CAMERA, PermissionUtils.PERMISSION_WRITE_EXTERNAL_STORAGE), 101, PermissionsCallback {
                         requestCode, permissions, grantResults ->
 
                         if(requestCode == 101 && permissions.size == grantResults.size) {
-                            startRecord()
+                            startAliyunRecord()
+                            result.success("ok");
+                        }
+                    })
+                }
+
+            }else if(call.method == "startTencentRecord") {
+                if(PermissionUtils.hasPermission(arrayOf(PermissionUtils.PERMISSION_CAMERA, PermissionUtils.PERMISSION_WRITE_EXTERNAL_STORAGE))) {
+                    startTencentRecord()
+                    result.success("ok");
+                }else {
+                    PermissionUtils.checkSelfPermission(activity, arrayOf(PermissionUtils.PERMISSION_CAMERA, PermissionUtils.PERMISSION_WRITE_EXTERNAL_STORAGE), 101, PermissionsCallback {
+                        requestCode, permissions, grantResults ->
+
+                        if(requestCode == 101 && permissions.size == grantResults.size) {
+                            startTencentRecord()
                             result.success("ok");
                         }
                     })
@@ -88,7 +107,7 @@ class FlutterToAndroidPlugins : MethodChannel.MethodCallHandler {
         Boxing.of(config).withIntent(activity, BoxingActivity::class.java).start(activity, 1000)
     }
 
-    fun startRecord(){
+    fun startAliyunRecord(){
         var recordInputParam: AlivcRecordInputParam = AlivcRecordInputParam.Builder()
                 .setResolutionMode(AlivcRecordInputParam.RESOLUTION_720P)
                 .setRatioMode(AlivcRecordInputParam.RATIO_MODE_3_4)
@@ -101,4 +120,23 @@ class FlutterToAndroidPlugins : MethodChannel.MethodCallHandler {
 
         AlivcSvideoRecordActivity.startRecord(activity, recordInputParam);
     }
+
+    fun startTencentRecord(){
+        var intent = Intent()
+        intent.setClass(activity, TCVideoRecordActivity::class.java)
+        intent.putExtra(TCConstants.RECORD_CONFIG_MIN_DURATION, 5 * 1000)
+        intent.putExtra(TCConstants.RECORD_CONFIG_MAX_DURATION, 60 * 1000)
+        intent.putExtra(TCConstants.RECORD_CONFIG_ASPECT_RATIO, TXRecordCommon.VIDEO_ASPECT_RATIO_9_16)
+
+        // 自定义设置
+        intent.putExtra(TCConstants.RECORD_CONFIG_RESOLUTION, TXRecordCommon.VIDEO_RESOLUTION_720_1280)
+
+        intent.putExtra(TCConstants.RECORD_CONFIG_HOME_ORIENTATION, TXLiveConstants.VIDEO_ANGLE_HOME_DOWN) // 竖屏录制
+
+        intent.putExtra(TCConstants.RECORD_CONFIG_TOUCH_FOCUS, false)
+        intent.putExtra(TCConstants.RECORD_CONFIG_NEED_EDITER, true)
+        activity.startActivity(intent)
+    }
+
+
 }

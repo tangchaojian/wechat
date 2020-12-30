@@ -37,6 +37,7 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
+        ndk { abiFilters "armeabi-v7a" }// 其他忽略
     }
 
     signingConfigs {
@@ -63,7 +64,6 @@ android {
     buildTypes {
 
         debug {
-            ndk { abiFilters "armeabi-v7a", "arm64-v8a" }
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
@@ -71,7 +71,6 @@ android {
         }
 
         release {
-            ndk { abiFilters "armeabi-v7a" }// 其他忽略
             //Zipalign优化
             zipAlignEnabled true
             //签名
@@ -127,7 +126,11 @@ flutter {
 }
 
 dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api(name: 'LiteAVSDK_UGC', ext: 'aar')
+    api(name: 'lib_tcsuperplayer', ext: 'aar')
+
     api project(':framework:sunshine-album')
     api project(':framework:sunshine-base')
     api project(':framework:sunshine-crop')
@@ -145,4 +148,9 @@ dependencies {
     api project(':short_video:AliyunSVideoBase')
     api project(':short_video:AliyunSvideoMusic')
     api project(':short_video:AliyunVideoCommon')
+
+    api project(':tencent_short_video:lib_tccommon')
+    api project(':tencent_short_video:lib_tcvideoediter')
+    api project(':tencent_short_video:lib_tcvideojoiner')
+    api project(':tencent_short_video:lib_tcvideorecord')
 }

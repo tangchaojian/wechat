@@ -10,9 +10,15 @@ class InteractNative {
     return result;
   }
 
-  //开始录制视频
-  static Future<String> startRecord() async{
-    final String result = await _channel.invokeMethod("startRecord");
+  //阿里云SDK,开始录制视频
+  static Future<String> startAliyunRecord() async{
+    final String result = await _channel.invokeMethod("startAliyunRecord");
+    return result;
+  }
+
+  //腾讯云SDK,开始录制视频
+  static Future<String> startTencentRecord() async{
+    final String result = await _channel.invokeMethod("startTencentRecord");
     return result;
   }
 }

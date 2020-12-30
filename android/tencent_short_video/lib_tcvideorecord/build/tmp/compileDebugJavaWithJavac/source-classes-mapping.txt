@@ -1,0 +1,76 @@
+com/tencent/liteav/demo/videorecord/RecordDef.java
+ com.tencent.liteav.demo.videorecord.RecordDef
+ com.tencent.liteav.demo.videorecord.RecordDef$OnItemClickListener
+com/tencent/liteav/demo/videorecord/TCBGMRecordAdapter.java
+ com.tencent.liteav.demo.videorecord.TCBGMRecordAdapter
+ com.tencent.liteav.demo.videorecord.TCBGMRecordAdapter$LinearMusicViewHolder
+ com.tencent.liteav.demo.videorecord.TCBGMRecordAdapter$OnItemClickListener
+com/tencent/liteav/demo/videorecord/TCVideoRecordActivity.java
+ com.tencent.liteav.demo.videorecord.TCVideoRecordActivity
+ com.tencent.liteav.demo.videorecord.TCVideoRecordActivity$1
+ com.tencent.liteav.demo.videorecord.TCVideoRecordActivity$10
+ com.tencent.liteav.demo.videorecord.TCVideoRecordActivity$11
+ com.tencent.liteav.demo.videorecord.TCVideoRecordActivity$2
+ com.tencent.liteav.demo.videorecord.TCVideoRecordActivity$3
+ com.tencent.liteav.demo.videorecord.TCVideoRecordActivity$4
+ com.tencent.liteav.demo.videorecord.TCVideoRecordActivity$5
+ com.tencent.liteav.demo.videorecord.TCVideoRecordActivity$6
+ com.tencent.liteav.demo.videorecord.TCVideoRecordActivity$7
+ com.tencent.liteav.demo.videorecord.TCVideoRecordActivity$8
+ com.tencent.liteav.demo.videorecord.TCVideoRecordActivity$9
+ com.tencent.liteav.demo.videorecord.TCVideoRecordActivity$ScreenOrientationListener
+com/tencent/liteav/demo/videorecord/view/RecordProgressView.java
+ com.tencent.liteav.demo.videorecord.view.RecordProgressView
+ com.tencent.liteav.demo.videorecord.view.RecordProgressView$1
+ com.tencent.liteav.demo.videorecord.view.RecordProgressView$ClipInfo
+com/tencent/liteav/demo/videorecord/view/TCMusicSelectView.java
+ com.tencent.liteav.demo.videorecord.view.TCMusicSelectView
+com/tencent/liteav/demo/videorecord/TCBGMRecordManager.java
+ com.tencent.liteav.demo.videorecord.TCBGMRecordManager
+com/tencent/liteav/demo/videorecord/TCVideoSettingActivity.java
+ com.tencent.liteav.demo.videorecord.TCVideoSettingActivity
+ com.tencent.liteav.demo.videorecord.TCVideoSettingActivity$1
+ com.tencent.liteav.demo.videorecord.TCVideoSettingActivity$2
+ com.tencent.liteav.demo.videorecord.TCVideoSettingActivity$3
+ com.tencent.liteav.demo.videorecord.TCVideoSettingActivity$4
+ com.tencent.liteav.demo.videorecord.TCVideoSettingActivity$5
+ com.tencent.liteav.demo.videorecord.TCVideoSettingActivity$6
+com/tencent/liteav/demo/videorecord/view/ComposeRecordBtn.java
+ com.tencent.liteav.demo.videorecord.view.ComposeRecordBtn
+com/tencent/liteav/demo/videorecord/view/MusicListView.java
+ com.tencent.liteav.demo.videorecord.view.MusicListAdapter
+ com.tencent.liteav.demo.videorecord.view.MusicListView
+ com.tencent.liteav.demo.videorecord.view.MusicListView$ViewHolder
+com/tencent/liteav/demo/videorecord/BuildConfig.java
+ com.tencent.liteav.demo.videorecord.BuildConfig
+com/tencent/liteav/demo/videorecord/view/TCAudioControl.java
+ com.tencent.liteav.demo.videorecord.view.TCAudioControl
+ com.tencent.liteav.demo.videorecord.view.TCAudioControl$1
+ com.tencent.liteav.demo.videorecord.view.TCAudioControl$2
+ com.tencent.liteav.demo.videorecord.view.TCAudioControl$3
+ com.tencent.liteav.demo.videorecord.view.TCAudioControl$AudioListener
+ com.tencent.liteav.demo.videorecord.view.TCAudioControl$MediaEntity
+ com.tencent.liteav.demo.videorecord.view.TCAudioControl$MusicScanner
+com/tencent/liteav/demo/videorecord/TCVideoRecordSmartActivity.java
+ com.tencent.liteav.demo.videorecord.TCVideoRecordSmartActivity
+ com.tencent.liteav.demo.videorecord.TCVideoRecordSmartActivity$1
+ com.tencent.liteav.demo.videorecord.TCVideoRecordSmartActivity$2
+ com.tencent.liteav.demo.videorecord.TCVideoRecordSmartActivity$3
+ com.tencent.liteav.demo.videorecord.TCVideoRecordSmartActivity$4
+ com.tencent.liteav.demo.videorecord.TCVideoRecordSmartActivity$5
+ com.tencent.liteav.demo.videorecord.TCVideoRecordSmartActivity$6
+ com.tencent.liteav.demo.videorecord.TCVideoRecordSmartActivity$7
+ com.tencent.liteav.demo.videorecord.TCVideoRecordSmartActivity$8
+ com.tencent.liteav.demo.videorecord.TCVideoRecordSmartActivity$9
+com/tencent/liteav/demo/videorecord/TCBGMRecordChooseLayout.java
+ com.tencent.liteav.demo.videorecord.TCBGMRecordChooseLayout
+ com.tencent.liteav.demo.videorecord.TCBGMRecordChooseLayout$1
+ com.tencent.liteav.demo.videorecord.TCBGMRecordChooseLayout$2
+ com.tencent.liteav.demo.videorecord.TCBGMRecordChooseLayout$2$1
+com/tencent/liteav/demo/videorecord/TCBGMRecordView.java
+ com.tencent.liteav.demo.videorecord.TCBGMRecordView
+ com.tencent.liteav.demo.videorecord.TCBGMRecordView$1
+ com.tencent.liteav.demo.videorecord.TCBGMRecordView$2
+ com.tencent.liteav.demo.videorecord.TCBGMRecordView$3
+ com.tencent.liteav.demo.videorecord.TCBGMRecordView$4
+ com.tencent.liteav.demo.videorecord.TCBGMRecordView$IBGMRecordSelectListener

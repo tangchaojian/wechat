@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:umeng_sdk/umeng_sdk.dart';
 import 'package:wechat/mall/CartListPage.dart';
 import 'package:wechat/native/interact_native.dart';
 import 'package:wechat/utils/log.dart';
@@ -69,7 +70,6 @@ class _NewsPage extends State<NewsPage> {
                   Navigator.pushNamed(context, "/cart");
                 },
               ),
-
               Padding(padding: EdgeInsets.only(top: 20),
                 child: FlatButton(
                   textColor: Colors.white,
@@ -122,14 +122,44 @@ class _NewsPage extends State<NewsPage> {
                   color: Colors.blue,
                   highlightColor: Colors.blueAccent,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                  child: Text("开始录制视频", style: TextStyle(fontSize: 14),),
+                  child: Text("阿里云视频录制", style: TextStyle(fontSize: 14),),
                   onPressed: () {
-                    InteractNative.startRecord();
+                    InteractNative.startAliyunRecord();
                     // Log.i("TAG", "相册调用结果$result");
                   },
                 ),
               ),
 
+              Padding(padding: EdgeInsets.only(top: 20),
+                child: FlatButton(
+                  textColor: Colors.white,
+                  color: Colors.blue,
+                  highlightColor: Colors.blueAccent,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                  child: Text("腾讯云视频录制", style: TextStyle(fontSize: 14),),
+                  onPressed: () {
+                    InteractNative.startTencentRecord();
+                    // Log.i("TAG", "相册调用结果$result");
+                  },
+                ),
+              ),
+
+              Padding(padding: EdgeInsets.only(top: 20),
+                child: FlatButton(
+                  textColor: Colors.white,
+                  color: Colors.blue,
+                  highlightColor: Colors.blueAccent,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                  child: Text("友盟统计", style: TextStyle(fontSize: 14),),
+                  onPressed: () {
+                    UmengSdk.onEvent('bool', {'name':'tcj', 'age':18, 'male':true});
+                    // Log.i("TAG", "相册调用结果$result");
+                  },
+                ),
+              ),
+
+              Padding(padding: EdgeInsets.only(top: 20),
+              ),
             ],
           ),
         ),

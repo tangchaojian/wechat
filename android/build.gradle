@@ -24,9 +24,15 @@ allprojects {
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://dl.bintray.com/umsdk/release' }
         maven { url 'http://4thline.org/m2' }
-        flatDir { dirs 'src/main/libs' }
+
         google()
         jcenter()
+
+        flatDir {
+            dirs 'libs'
+            dirs 'src/main/libs'
+            dirs project(':app').file('libs')
+        }
     }
 }
 

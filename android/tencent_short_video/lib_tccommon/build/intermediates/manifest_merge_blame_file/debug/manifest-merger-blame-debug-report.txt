@@ -1,0 +1,80 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.tencent.liteav.demo.common"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="19"
+8-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:7:5-67
+11-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:7:22-64
+12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+12-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:8:5-79
+12-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:8:22-76
+13    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+13-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:9:5-76
+13-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:9:22-73
+14    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+14-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:10:5-75
+14-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:10:22-72
+15    <uses-permission android:name="android.permission.CALL_PHONE" />
+15-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:11:5-69
+15-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:11:22-66
+16    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+16-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:12:5-81
+16-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:12:22-78
+17    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+17-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:13:5-80
+17-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:13:22-77
+18    <uses-permission android:name="android.permission.READ_LOGS" />
+18-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:14:5-68
+18-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:14:22-65
+19    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+19-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:15:5-71
+19-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:15:22-68
+20    <uses-permission android:name="android.permission.CAMERA" />
+20-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:16:5-65
+20-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:16:22-62
+21    <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT" />
+21-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:17:5-79
+21-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:17:22-76
+22    <uses-permission android:name="android.permission.CAPTURE_VIDEO_OUTPUT" />
+22-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:18:5-79
+22-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:18:22-76
+23    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+23-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:19:5-80
+23-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:19:22-77
+24    <uses-permission android:name="android.permission.BLUETOOTH" />
+24-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:20:5-68
+24-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:20:22-65
+25    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+25-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:21:5-78
+25-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:21:22-75
+26
+27    <uses-feature android:name="android.hardware.camera" />
+27-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:23:5-60
+27-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:23:19-57
+28    <uses-feature android:name="android.hardware.camera.autofocus" />
+28-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:24:5-70
+28-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:24:19-67
+29
+30    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+30-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:26:5-79
+30-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:26:22-76
+31    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+31-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:27:5-73
+31-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:27:22-70
+32
+33    <application>
+33-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:29:5-31:19
+34        <activity android:name="com.tencent.liteav.demo.ugccommon.TCVideoJoinChooseActivity" />
+34-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:30:9-96
+34-->F:\developer\android\workspace\TencentLiteAV\tencent_short_video\lib_tccommon\src\main\AndroidManifest.xml:30:19-93
+35    </application>
+36
+37</manifest>
