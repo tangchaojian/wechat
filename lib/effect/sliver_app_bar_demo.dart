@@ -1,88 +1,64 @@
 import 'package:flutter/material.dart';
 
 class UISliverAppBarDemo extends StatefulWidget {
-
   @override
-  _UISliverAppBarDemo createState()=> _UISliverAppBarDemo();
+  _UISliverAppBarDemo createState() => _UISliverAppBarDemo();
 }
 
 class _UISliverAppBarDemo extends State<UISliverAppBarDemo> {
-
   @override
   Widget build(BuildContext context) {
+    var meida = MediaQuery.of(context);
+    print('media.padding->${meida.padding}');
 
-    return NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverOverlapAbsorber(
-              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-              sliver: SliverAppBar(
-                leading: new IconButton(
-                    icon: Icon(Icons.arrow_back),
-                    onPressed: ()=> {
+    return Scaffold(
+      body: SafeArea(
+        child:CustomScrollView(
+          scrollDirection: Axis.vertical,
+          slivers: [
+            SliverAppBar(
+              leading: new IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () => {
+                  Navigator.pop(context)
+                },
+              ),
+              title: Text("标题"),
+              centerTitle: false,
+              pinned: true,
+              floating: false,
+              snap: false,
+              primary: false,
+              expandedHeight: 230.0,
+              actions: [
+                IconButton(icon: Icon(Icons.add), onPressed: ()=> {
 
-                    },
-                ),
-                title: Text("标题"),
-                centerTitle: false,
-                pinned: false,
-                floating: false,
-                snap: false,
-                primary: false,
-                expandedHeight: 230.0,
-                elevation: 10,
-                //是否显示阴影，直接取值innerBoxIsScrolled，展开不显示阴影，合并后会显示
-                forceElevated: innerBoxIsScrolled,
+                }),
+                IconButton(icon: Icon(Icons.more_horiz), onPressed: ()=>{
 
-                actions: [
-
-                  IconButton(
-                      icon: Icon(Icons.add),
-                      onPressed: null
-                  ),
-
-                  IconButton(
-                      icon: Icon(Icons.more_horiz),
-                      onPressed: null
-                  ),
-                ],
-
-                flexibleSpace: FlexibleSpaceBar(
-                  background: Image.asset("images/img_dlrb"),
-                ),
-
+                }),
+              ],
+              flexibleSpace: FlexibleSpaceBar(
+                background: Image.asset("images/img_dlrb.jpg", fit: BoxFit.cover,),
               ),
             ),
-          ];
-        },
-        body: SafeArea(
-          top: false,
-          bottom: false,
-          child: Builder(
-            builder: (BuildContext context){
-              return CustomScrollView(
-                slivers: [
-                  SliverOverlapInjector(
-                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-                  ),
-                  SliverPadding(
-                      padding: EdgeInsets.all(10.0),
-                      sliver: SliverFixedExtentList(
-                        itemExtent: 50.0,
-                        delegate: SliverChildBuilderDelegate(
-                            (context, index) {
-                              return ListTile(
-                                title: Text('ITEM $index'),
-                              );
-                            }
-                        ),
-                      ),
-                  ),
-                ],
-              );
-            },
-          ),
+            SliverPadding(
+              padding: EdgeInsets.all(10.0),
+              sliver: SliverFixedExtentList(
+                itemExtent: 50.0,
+                delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                    return ListTile(
+                      title: Text('ITEM $index'),
+                    );
+                  },
+                  childCount: 30,
+                ),
+              ),
+            ),
+          ],
         ),
+      ),
     );
   }
 }

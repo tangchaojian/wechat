@@ -8,13 +8,11 @@ import 'package:wechat/native/interact_native.dart';
 import 'package:wechat/utils/log.dart';
 
 class NewsPage extends StatefulWidget {
-
   @override
   _NewsPage createState() => _NewsPage();
 }
 
 class _NewsPage extends State<NewsPage> {
-
   // static const EventChannel _channel = const EventChannel('flutter_wechat_plugin_native_to_flutter');
   // StreamSubscription _streamSubscription;
   //
@@ -50,10 +48,12 @@ class _NewsPage extends State<NewsPage> {
   //   }
   // }
 
-
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Container(
+        padding: EdgeInsets.only(top: 30, bottom: 60),
         child: Center(
           child: Column(
             children: [
@@ -61,23 +61,32 @@ class _NewsPage extends State<NewsPage> {
                 textColor: Colors.white,
                 color: Colors.blue,
                 highlightColor: Colors.blueAccent,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                child: Text("跳转购物车", style: TextStyle(fontSize: 14),),
-                onPressed: (){
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5)),
+                child: Text(
+                  "跳转购物车",
+                  style: TextStyle(fontSize: 14),
+                ),
+                onPressed: () {
                   // Navigator.push(context, MaterialPageRoute(builder: (BuildContext context){
                   //   return CartListPage();
                   // }));
                   Navigator.pushNamed(context, "/cart");
                 },
               ),
-              Padding(padding: EdgeInsets.only(top: 20),
+              Padding(
+                padding: EdgeInsets.only(top: 20),
                 child: FlatButton(
                   textColor: Colors.white,
                   color: Colors.blue,
                   highlightColor: Colors.blueAccent,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                  child: Text("跳转商品列表", style: TextStyle(fontSize: 14),),
-                  onPressed: (){
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Text(
+                    "跳转商品列表",
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  onPressed: () {
                     // Navigator.push(context, MaterialPageRoute(builder: (BuildContext context){
                     //   return CartListPage();
                     // }));
@@ -85,15 +94,19 @@ class _NewsPage extends State<NewsPage> {
                   },
                 ),
               ),
-
-              Padding(padding: EdgeInsets.only(top: 20),
+              Padding(
+                padding: EdgeInsets.only(top: 20),
                 child: FlatButton(
                   textColor: Colors.white,
                   color: Colors.blue,
                   highlightColor: Colors.blueAccent,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                  child: Text("EASY_REFRESH", style: TextStyle(fontSize: 14),),
-                  onPressed: (){
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Text(
+                    "EASY_REFRESH",
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  onPressed: () {
                     // Navigator.push(context, MaterialPageRoute(builder: (BuildContext context){
                     //   return CartListPage();
                     // }));
@@ -101,68 +114,117 @@ class _NewsPage extends State<NewsPage> {
                   },
                 ),
               ),
-
-              Padding(padding: EdgeInsets.only(top: 20),
+              Padding(
+                padding: EdgeInsets.only(top: 20),
                 child: FlatButton(
                   textColor: Colors.white,
                   color: Colors.blue,
                   highlightColor: Colors.blueAccent,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                  child: Text("相册调用", style: TextStyle(fontSize: 14),),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Text(
+                    "相册调用",
+                    style: TextStyle(fontSize: 14),
+                  ),
                   onPressed: () {
                     InteractNative.openAlbum(6);
                     // Log.i("TAG", "相册调用结果$result");
                   },
                 ),
               ),
-
-              Padding(padding: EdgeInsets.only(top: 20),
+              Padding(
+                padding: EdgeInsets.only(top: 20),
                 child: FlatButton(
                   textColor: Colors.white,
                   color: Colors.blue,
                   highlightColor: Colors.blueAccent,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                  child: Text("阿里云视频录制", style: TextStyle(fontSize: 14),),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Text(
+                    "阿里云视频录制",
+                    style: TextStyle(fontSize: 14),
+                  ),
                   onPressed: () {
                     InteractNative.startAliyunRecord();
                     // Log.i("TAG", "相册调用结果$result");
                   },
                 ),
               ),
-
-              Padding(padding: EdgeInsets.only(top: 20),
+              Padding(
+                padding: EdgeInsets.only(top: 20),
                 child: FlatButton(
                   textColor: Colors.white,
                   color: Colors.blue,
                   highlightColor: Colors.blueAccent,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                  child: Text("腾讯云视频录制", style: TextStyle(fontSize: 14),),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Text(
+                    "腾讯云视频录制",
+                    style: TextStyle(fontSize: 14),
+                  ),
                   onPressed: () {
                     InteractNative.startTencentRecord();
                     // Log.i("TAG", "相册调用结果$result");
                   },
                 ),
               ),
-
-              Padding(padding: EdgeInsets.only(top: 20),
+              Padding(
+                padding: EdgeInsets.only(top: 20),
                 child: FlatButton(
                   textColor: Colors.white,
                   color: Colors.blue,
                   highlightColor: Colors.blueAccent,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                  child: Text("友盟统计", style: TextStyle(fontSize: 14),),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Text(
+                    "友盟统计",
+                    style: TextStyle(fontSize: 14),
+                  ),
                   onPressed: () {
-                    UmengSdk.onEvent('bool', {'name':'tcj', 'age':18, 'male':true});
+                    UmengSdk.onEvent(
+                        'bool', {'name': 'tcj', 'age': 18, 'male': true});
                     // Log.i("TAG", "相册调用结果$result");
                   },
                 ),
               ),
-
-              Padding(padding: EdgeInsets.only(top: 20),
+              Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: FlatButton(
+                  textColor: Colors.white,
+                  color: Colors.blue,
+                  highlightColor: Colors.blueAccent,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Text(
+                    "SliverAppBar",
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/sliverAppBarDemo");
+                  },
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: FlatButton(
+                  textColor: Colors.white,
+                  color: Colors.blue,
+                  highlightColor: Colors.blueAccent,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Text(
+                    "TabBarView",
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/tabBarViewDemo");
+                  },
+                ),
               ),
             ],
           ),
         ),
+      ),
     );
   }
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:umeng_sdk/umeng_sdk.dart';
 import 'package:wechat/app.dart';
+import 'package:wechat/effect/sliver_app_bar_demo.dart';
+import 'package:wechat/effect/tab_bar_demo.dart';
 import 'package:wechat/loading.dart';
 import 'package:wechat/mall/CartListPage.dart';
 import 'package:wechat/mall/GoodsListPage.dart';
@@ -35,6 +37,8 @@ class MyApp extends StatelessWidget {
           '/orderConfirm': (BuildContext context) => new OrderConfirmPage(),
           '/goodsList': (BuildContext context) => new GoodsListPage(),
           '/goodsList2': (BuildContext context) => new GoodsListPage2(),
+          '/sliverAppBarDemo': (BuildContext context) => new UISliverAppBarDemo(),
+          '/tabBarViewDemo': (BuildContext context) => new UITabBarViewDemo(),
         },
         home: Loading(),
       ),
