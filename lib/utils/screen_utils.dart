@@ -9,4 +9,8 @@ class ScreenUtils {
 
     return [width, heith];
   }
+
+  static double getStatusBarHeight(BuildContext context) {
+    return MediaQuery.of(context).padding.top;
+  }
 }

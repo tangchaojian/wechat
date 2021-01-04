@@ -67,6 +67,19 @@ flutter:
      - images/ic_nav_profile_actived.png
      - images/ic_cart.png
      - images/img_dlrb.jpg
+     - images/img_menu_cart.png
+     - images/img_menu_coupon.png
+     - images/img_menu_hot.png
+     - images/img_menu_list.png
+     - images/img_menu_mall.png
+     - images/img_menu_member.png
+     - images/img_menu_message.png
+     - images/img_menu_music.png
+     - images/img_menu_new_product.png
+     - images/img_menu_notice.png
+     - images/img_menu_sign.png
+     - images/img_menu_video.png
+     - images/img_float_button.gif
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -221,6 +221,42 @@ class _NewsPage extends State<NewsPage> {
                   },
                 ),
               ),
+
+              Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: FlatButton(
+                  textColor: Colors.white,
+                  color: Colors.blue,
+                  highlightColor: Colors.blueAccent,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Text(
+                    "TabBarView2",
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/tabBarViewDemo2");
+                  },
+                ),
+              ),
+
+              Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: FlatButton(
+                  textColor: Colors.white,
+                  color: Colors.blue,
+                  highlightColor: Colors.blueAccent,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Text(
+                    "悬浮拖动按钮",
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/floatButtonDemo");
+                  },
+                ),
+              ),
             ],
           ),
         ),

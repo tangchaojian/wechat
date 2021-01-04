@@ -10,6 +10,8 @@ import 'package:wechat/mall/GoodsListPage.dart';
 import 'package:wechat/mall/OrderConfirmPage.dart';
 import 'package:wechat/net/http_helper.dart';
 
+import 'effect/float_button_demo.dart';
+import 'effect/tab_bar_demo2.dart';
 import 'mall/GoodsListPage2.dart';
 import 'model/CartModel.dart';
 
@@ -21,7 +23,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
-
   @override
   Widget build(BuildContext context) {
 
@@ -39,6 +40,8 @@ class MyApp extends StatelessWidget {
           '/goodsList2': (BuildContext context) => new GoodsListPage2(),
           '/sliverAppBarDemo': (BuildContext context) => new UISliverAppBarDemo(),
           '/tabBarViewDemo': (BuildContext context) => new UITabBarViewDemo(),
+          '/tabBarViewDemo2': (BuildContext context) => new UITabBarViewDemo2(),
+          '/floatButtonDemo': (BuildContext context) => new FloatButtonDemo(),
         },
         home: Loading(),
       ),
