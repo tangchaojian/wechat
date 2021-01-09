@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <paths>
-        <!-- Context.getFilesDir() + "/path/" -->
-        <files-path name="files" path="/data/user/0/com.tcj.sunshine.app/files"/>
-        <!-- Context.getCacheDir() + "/path/" -->
-        <cache-path name="cache" path="/data/user/0/com.tcj.sunshine.app/cache"/>
-        <cache-path name="internal_boxing" path="/data/user/0/com.tcj.sunshine.app/" />
-        <!-- Context.getExternalFilesDir(null) + "/path/" -->
-        <external-files-path name="external_files_path" path="sunshine/"/>
-        <!-- Context.getExternalCacheDir() + "/path/" -->
-        <external-cache-path name="external_cache" path="sunshine/" />
-        <!-- Environment.getExternalStorageDirectory() + "/path/" -->
-        <external-path name="external_path" path="sunshine/"/>
-        <!-- Environment.getExternalStorageDirectory() + "/path/" -->
-        <external-path name="files_root" path="Android/data/com.tcj.sunshine.app/"/>
-        <!-- path设置为'.'时代表整个存储卡 Environment.getExternalStorageDirectory() + "/path/"   -->
-        <external-path name="external_storage_root" path="."/>
-        <external-path name="external_boxing" path="DCIM/bili/boxing" />
-        <root-path name="root" path="." />
-        <files-path name="files" path="." />
-        <external-path name="external" path="." />
-        <external-cache-path name="external_cache" path="." />
-        <external-files-path name="external_file" path="." />
+<paths>
+    <root-path name="root" path="." />
+    <files-path name="files" path="." />
+    <!-- path设置为'.'时代表整个存储卡 Environment.getExternalStorageDirectory() + "/path/"   -->
+    <external-path name="external_storage_root" path="."/>
+    <files-path name="files-path" path="." />
+    <cache-path name="cache-path" path="." />
+    <!--/storage/emulated/0/Android/data/...-->
+    <external-files-path name="external_file_path" path="." />
+    <!--代表app 外部存储区域根目录下的文件 Context.getExternalCacheDir目录下的目录-->
+    <external-cache-path name="external_cache_path" path="." />
+    <!--配置root-path。这样子可以读取到sd卡和一些应用分身的目录，否则微信分身保存的图片，
+    就会导致 java.lang.IllegalArgumentException: Failed to find configured root that
+    contains /storage/emulated/999/tencent/MicroMsg/WeiXin/export1544062754693.jpg，
+    在小米6的手机上微信分身有这个crash，华为没-->
+    <root-path name="root-path" path="" />
 
-    </paths>
-</resources>
+    <!-- Context.getFilesDir() + "/path/" -->
+    <files-path name="files" path="/data/user/0/com.tcj.sunshine.app/files"/>
+    <!-- Context.getCacheDir() + "/path/" -->
+    <cache-path name="cache" path="/data/user/0/com.tcj.sunshine.app/cache"/>
+    <cache-path name="internal_boxing" path="/data/user/0/com.tcj.sunshine.app/" />
+    <!-- Context.getExternalFilesDir(null) + "/path/" -->
+    <external-files-path name="external_files_path" path="sunshine/"/>
+    <!-- Context.getExternalCacheDir() + "/path/" -->
+    <external-cache-path name="external_cache" path="sunshine/" />
+    <!-- Environment.getExternalStorageDirectory() + "/path/" -->
+    <external-path name="external_path" path="sunshine/"/>
+    <!-- Environment.getExternalStorageDirectory() + "/path/" -->
+    <external-path name="files_root" path="Android/data/com.tcj.sunshine.app/"/>
+
+    <external-path name="external_boxing" path="DCIM/bili/boxing" />
+
+</paths>

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:umeng_sdk/umeng_sdk.dart';
 import 'package:wechat/app.dart';
+import 'package:wechat/effect/dou_yin_demo.dart';
 import 'package:wechat/effect/sliver_app_bar_demo.dart';
 import 'package:wechat/effect/tab_bar_demo.dart';
 import 'package:wechat/loading.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
           '/tabBarViewDemo': (BuildContext context) => new UITabBarViewDemo(),
           '/tabBarViewDemo2': (BuildContext context) => new UITabBarViewDemo2(),
           '/floatButtonDemo': (BuildContext context) => new FloatButtonDemo(),
+          '/douYinDemo': (BuildContext context) => new DouYinDemo(),
         },
         home: Loading(),
       ),

@@ -60,19 +60,23 @@ dependencies {
     //=======================Android SDK===========================
     //androidx
     api rootProject.ext.androidx["appcompat"]
+    api rootProject.ext.androidx["legacy_support"]
     api rootProject.ext.androidx["annotation"]
     api rootProject.ext.androidx["constraint"]
     api rootProject.ext.androidx["multidex"]
     api rootProject.ext.androidx["recyclerview"]
-    api rootProject.ext.androidx["material"]
     api rootProject.ext.androidx["exifinterface"]
     api rootProject.ext.androidx["transition"]
+    api rootProject.ext.androidx["material"]
+
     //=======================框架retrofit2 + okhttp3 + rxjava + dragger3 + MVP=============================
     //retrofit2 + okhttp3 + dragger3 框架依赖库
     api rootProject.ext.framework["retrofit2"]
     api rootProject.ext.framework["converter_scalars"]
     api rootProject.ext.framework["converter_gson"]
     api rootProject.ext.framework["adapter_rxjava2"]
+    api rootProject.ext.framework["okhttp_log"]
+
     //rxjava2
     api rootProject.ext.framework["rxjava2"]
     api rootProject.ext.framework["rxandroid"]

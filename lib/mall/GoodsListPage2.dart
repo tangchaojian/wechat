@@ -69,6 +69,7 @@ class _GoodsListPage2 extends State<GoodsListPage2> {
           onRefresh: refresh,
           onLoad: hasMore ? loadMore : null,
           slivers: [
+            // SliverToBoxAdapter(child: Container(),),
             // SliverList(
             //   delegate: SliverChildBuilderDelegate((context, index) {
             //       return Container(

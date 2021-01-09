@@ -159,11 +159,11 @@ class _NewsPage extends State<NewsPage> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5)),
                   child: Text(
-                    "腾讯云视频录制",
+                    "腾讯云直播",
                     style: TextStyle(fontSize: 14),
                   ),
                   onPressed: () {
-                    InteractNative.startTencentRecord();
+                    InteractNative.startTencentLive();
                     // Log.i("TAG", "相册调用结果$result");
                   },
                 ),
@@ -254,6 +254,24 @@ class _NewsPage extends State<NewsPage> {
                   ),
                   onPressed: () {
                     Navigator.pushNamed(context, "/floatButtonDemo");
+                  },
+                ),
+              ),
+
+              Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: FlatButton(
+                  textColor: Colors.white,
+                  color: Colors.blue,
+                  highlightColor: Colors.blueAccent,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Text(
+                    "仿抖音",
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/douYinDemo");
                   },
                 ),
               ),

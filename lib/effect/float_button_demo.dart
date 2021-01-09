@@ -12,6 +12,7 @@ class _FloatButtonDemo extends State<FloatButtonDemo> with SingleTickerProviderS
   double right = 10.0;
   double bottom = 80.0;
   double maxY = 0.0;
+  bool isBegin = false;
 
   AnimationController controller;
   Animation<double> animation;
@@ -37,7 +38,7 @@ class _FloatButtonDemo extends State<FloatButtonDemo> with SingleTickerProviderS
     if(timer != null && timer.isActive){
       timer.cancel();
     }
-
+    isBegin = false;
     super.dispose();
   }
 
@@ -57,14 +58,18 @@ class _FloatButtonDemo extends State<FloatButtonDemo> with SingleTickerProviderS
             NotificationListener(
               onNotification: (Notification notification) {
                 if (notification is ScrollUpdateNotification) {
-                  controller.forward();
-                  print("正在滚动");
+                  if(!isBegin) {
+                    isBegin = true;
+                    controller.forward();
+                    print("正在滚动");
+                  }
                   timer?.cancel();
                 } else if (notification is ScrollEndNotification) {
                   print("结束滚动");
                   timer = Timer(Duration(milliseconds: 500), () {
                     print("执行完毕");
                     controller.reverse();
+                    isBegin = false;
                   });
                 }
                 return true;

@@ -128,8 +128,7 @@ flutter {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api(name: 'LiteAVSDK_UGC', ext: 'aar')
-    api(name: 'lib_tcsuperplayer', ext: 'aar')
+    api(name: 'LiteAVSDK_Smart_8.2.9809', ext: 'aar')
 
     api project(':framework:sunshine-album')
     api project(':framework:sunshine-base')
@@ -149,8 +148,6 @@ dependencies {
     api project(':short_video:AliyunSvideoMusic')
     api project(':short_video:AliyunVideoCommon')
 
-    api project(':tencent_short_video:lib_tccommon')
-    api project(':tencent_short_video:lib_tcvideoediter')
-    api project(':tencent_short_video:lib_tcvideojoiner')
-    api project(':tencent_short_video:lib_tcvideorecord')
+    //腾讯直播
+    api project(':lib_tencent:lib_tclive')
 }

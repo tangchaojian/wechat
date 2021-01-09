@@ -17,8 +17,15 @@ class _GoodsListPage extends State<GoodsListPage> {
   List<GoodsEntity> list = new List();
   var dio = Dio();
   int page = 1;
-  int limit = 3;
+  int limit = 20;
   var _refreshController = RefreshController(initialRefresh: false);
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    refresh();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +37,14 @@ class _GoodsListPage extends State<GoodsListPage> {
       body: SmartRefresher(
         enablePullDown: true,
         enablePullUp: true,
-        header: WaterDropHeader(),
+        header: 	ClassicHeader(),
         footer: CustomFooter(
           builder: (BuildContext context, LoadStatus mode) {
             Widget body;
             if(mode == LoadStatus.idle) {
               body = Text("上拉加载");
             }else if(mode == LoadStatus.loading) {
-              body = CupertinoActivityIndicator();
+              body = Text("正在加载...");
             }else if(mode == LoadStatus.canLoading) {
               body = Text("松手，加载更多!");
             }else {

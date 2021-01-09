@@ -55,7 +55,12 @@ class _UITabBarViewDemo extends State<UITabBarViewDemo>
   @override
   void initState() {
     super.initState();
-    _scrollController = ScrollController(initialScrollOffset: 0.0);
+    _scrollController = ScrollController(initialScrollOffset: 0.0)..addListener(() {
+      double offset = _scrollController.offset;
+      double max = _scrollController.position.maxScrollExtent;
+      print('offset->$offset');
+      print('max->$max');
+    });
     _tabController = TabController(vsync: this, length: 3);
   }
 

@@ -23,14 +23,14 @@
     <application>
         <!-- FileProvider配置访问路径，适配7.0及其以上 -->
         <provider
-            android:name="androidx.core.content.FileProvider"
+            android:name=".utils.AliyunFileProvider"
             android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true"
             android:banner="@string/alivc_common_cancel">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/file_provider"/>
         </provider>
     </application>
 </manifest>

@@ -12,10 +12,7 @@ import com.tcj.sunshine.boxing.model.config.BoxingConfig
 import com.tcj.sunshine.tools.PermissionUtils
 import com.tcj.sunshine.tools.PermissionUtils.PermissionsCallback
 import com.tcj.sunshine.view.activity.BoxingActivity
-import com.tencent.liteav.demo.common.utils.TCConstants
-import com.tencent.liteav.demo.videorecord.TCVideoRecordActivity
-import com.tencent.rtmp.TXLiveConstants
-import com.tencent.ugc.TXRecordCommon
+import com.tencent.live.main.splash.TCSplashActivity
 import io.flutter.app.FlutterActivity
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -78,16 +75,16 @@ class FlutterToAndroidPlugins : MethodChannel.MethodCallHandler {
                     })
                 }
 
-            }else if(call.method == "startTencentRecord") {
+            }else if(call.method == "startTencentLive") {
                 if(PermissionUtils.hasPermission(arrayOf(PermissionUtils.PERMISSION_CAMERA, PermissionUtils.PERMISSION_WRITE_EXTERNAL_STORAGE))) {
-                    startTencentRecord()
+                    startTencentLive()
                     result.success("ok");
                 }else {
                     PermissionUtils.checkSelfPermission(activity, arrayOf(PermissionUtils.PERMISSION_CAMERA, PermissionUtils.PERMISSION_WRITE_EXTERNAL_STORAGE), 101, PermissionsCallback {
                         requestCode, permissions, grantResults ->
 
                         if(requestCode == 101 && permissions.size == grantResults.size) {
-                            startTencentRecord()
+                            startTencentLive()
                             result.success("ok");
                         }
                     })
@@ -121,20 +118,9 @@ class FlutterToAndroidPlugins : MethodChannel.MethodCallHandler {
         AlivcSvideoRecordActivity.startRecord(activity, recordInputParam);
     }
 
-    fun startTencentRecord(){
+    fun startTencentLive(){
         var intent = Intent()
-        intent.setClass(activity, TCVideoRecordActivity::class.java)
-        intent.putExtra(TCConstants.RECORD_CONFIG_MIN_DURATION, 5 * 1000)
-        intent.putExtra(TCConstants.RECORD_CONFIG_MAX_DURATION, 60 * 1000)
-        intent.putExtra(TCConstants.RECORD_CONFIG_ASPECT_RATIO, TXRecordCommon.VIDEO_ASPECT_RATIO_9_16)
-
-        // 自定义设置
-        intent.putExtra(TCConstants.RECORD_CONFIG_RESOLUTION, TXRecordCommon.VIDEO_RESOLUTION_720_1280)
-
-        intent.putExtra(TCConstants.RECORD_CONFIG_HOME_ORIENTATION, TXLiveConstants.VIDEO_ANGLE_HOME_DOWN) // 竖屏录制
-
-        intent.putExtra(TCConstants.RECORD_CONFIG_TOUCH_FOCUS, false)
-        intent.putExtra(TCConstants.RECORD_CONFIG_NEED_EDITER, true)
+        intent.setClass(activity, TCSplashActivity::class.java)
         activity.startActivity(intent)
     }
 

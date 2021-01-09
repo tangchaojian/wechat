@@ -17,8 +17,8 @@ class InteractNative {
   }
 
   //腾讯云SDK,开始录制视频
-  static Future<String> startTencentRecord() async{
-    final String result = await _channel.invokeMethod("startTencentRecord");
+  static Future<String> startTencentLive() async{
+    final String result = await _channel.invokeMethod("startTencentLive");
     return result;
   }
 }
