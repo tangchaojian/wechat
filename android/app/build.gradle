@@ -42,21 +42,21 @@ android {
 
     signingConfigs {
         debug {
-//            storeFile file(rootProject.ext.configs.storeFile)
-//            storePassword rootProject.ext.configs.storePassword
-//            keyAlias rootProject.ext.configs.keyAlias
-//            keyPassword rootProject.ext.configs.keyPassword
-//            v1SigningEnabled true
-//            v2SigningEnabled true
+            storeFile file(rootProject.ext.configs.storeFile)
+            storePassword rootProject.ext.configs.storePassword
+            keyAlias rootProject.ext.configs.keyAlias
+            keyPassword rootProject.ext.configs.keyPassword
+            v1SigningEnabled true
+            v2SigningEnabled true
         }
 
         release {
-//            storeFile file(rootProject.ext.configs.storeFile)
-//            storePassword rootProject.ext.configs.storePassword
-//            keyAlias rootProject.ext.configs.keyAlias
-//            keyPassword rootProject.ext.configs.keyPassword
-//            v1SigningEnabled true
-//            v2SigningEnabled true
+            storeFile file(rootProject.ext.configs.storeFile)
+            storePassword rootProject.ext.configs.storePassword
+            keyAlias rootProject.ext.configs.keyAlias
+            keyPassword rootProject.ext.configs.keyPassword
+            v1SigningEnabled true
+            v2SigningEnabled true
 
         }
     }
@@ -128,7 +128,7 @@ flutter {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api(name: 'LiteAVSDK_Smart_8.2.9809', ext: 'aar')
+//    api(name: 'LiteAVSDK_Smart_8.2.9809', ext: 'aar')
 
     api project(':framework:sunshine-album')
     api project(':framework:sunshine-base')

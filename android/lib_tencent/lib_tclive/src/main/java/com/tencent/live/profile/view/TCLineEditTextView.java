@@ -2,8 +2,6 @@ package com.tencent.live.profile.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Handler;
-import android.os.Looper;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -18,12 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tencent.live.R;
-import com.tencent.live.common.net.TCHTTPMgr;
 import com.tencent.live.common.utils.TCConstants;
 import com.tencent.live.common.utils.TCUtils;
-import com.tencent.live.login.TCUserMgr;
-
-import org.json.JSONObject;
 
 
 /**
@@ -68,31 +62,6 @@ public class TCLineEditTextView extends LinearLayout {
                             imm.showSoftInputFromInputMethod(contentEditView.getWindowToken(), 0);
                             return true;
                          }
-                        TCUserMgr.getInstance().setNickName(getContent(), new TCHTTPMgr.Callback() {
-                                @Override
-                                public void onSuccess(JSONObject data) {
-                                    Handler handler = new Handler(Looper.getMainLooper());
-                                    handler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            contentEditView.clearFocus();
-                                            InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-                                            imm.hideSoftInputFromWindow(contentEditView.getWindowToken(), 0);
-                                        }
-                                    });
-                                }
-
-                                @Override
-                                public void onFailure(int code, final String msg) {
-                                    Handler handler = new Handler(Looper.getMainLooper());
-                                    handler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            contentEditView.setError("昵称不合法，请更换 : " + msg);
-                                        }
-                                    });
-                                }
-                        });
                         contentEditView.setError(null);
                         contentEditView.setCursorVisible(false);
                         return true;

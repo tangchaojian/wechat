@@ -2,22 +2,32 @@ package com.tencent.live.common.widget;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tcj.sunshine.tools.ScreenUtils;
+import com.tcj.sunshine.tools.ToastUtils;
 import com.tencent.live.R;
+
+import androidx.core.content.ContextCompat;
 
 
 /**
@@ -30,32 +40,47 @@ public class TCInputTextMsgDialog extends Dialog {
 
     public interface OnTextSendListener {
 
-       void onTextSend(String msg, boolean tanmuOpen);
+        void onTextSend(String msg, boolean tanmuOpen);
     }
-    private TextView confirmBtn;
+
+    private ImageView confirmBtn;
     private LinearLayout mBarrageArea;
     private EditText messageTextView;
     private static final String TAG = TCInputTextMsgDialog.class.getSimpleName();
     private Context mContext;
     private InputMethodManager imm;
-    private RelativeLayout rlDlg;
+    private View rlDlg;
     private int mLastDiff = 0;
     private LinearLayout mConfirmArea;
     private OnTextSendListener mOnTextSendListener;
     private boolean mDanmuOpen = false;
 
+    boolean isShowSoftKeyboard = false;
+
     public TCInputTextMsgDialog(Context context, int theme) {
         super(context, theme);
         mContext = context;
+
         setContentView(R.layout.dialog_input_text);
+        setCanceledOnTouchOutside(true);
+        setCancelable(true);
+
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.width = ScreenUtils.getScreenWidth();
+        params.horizontalMargin = 0f;
+        getWindow().setAttributes(params);
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        getWindow().getDecorView().setPadding(0, 0, 0, 0);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+//        getWindow().setGravity(Gravity.BOTTOM);
+
 
         messageTextView = (EditText) findViewById(R.id.et_input_message);
         messageTextView.setInputType(InputType.TYPE_CLASS_TEXT);
         //修改下划线颜色
-        messageTextView.getBackground().setColorFilter(context.getResources().getColor(R.color.transparent), PorterDuff.Mode.CLEAR);
+        messageTextView.getBackground().setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(context, R.color.transparent), PorterDuff.Mode.CLEAR));
 
-
-        confirmBtn = (TextView) findViewById(R.id.confrim_btn);
+        confirmBtn = (ImageView) findViewById(R.id.confrim_btn);
         imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +94,7 @@ public class TCInputTextMsgDialog extends Dialog {
                     messageTextView.setText("");
                     dismiss();
                 } else {
-                    Toast.makeText(mContext, "input can not be empty!", Toast.LENGTH_LONG).show();
+                    ToastUtils.show("内容不能为空");
                 }
                 messageTextView.setText(null);
             }
@@ -154,7 +179,7 @@ public class TCInputTextMsgDialog extends Dialog {
             }
         });
 
-        rlDlg = (RelativeLayout) findViewById(R.id.rl_outside_view);
+        rlDlg = findViewById(R.id.rl_outside_view);
         rlDlg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,16 +196,28 @@ public class TCInputTextMsgDialog extends Dialog {
                 Rect r = new Rect();
                 //获取当前界面可视部分
                 getWindow().getDecorView().getWindowVisibleDisplayFrame(r);
-                //获取屏幕的高度
-                int screenHeight =  getWindow().getDecorView().getRootView().getHeight();
-                //此处就是用来获取键盘的高度的， 在键盘没有弹出的时候 此高度为0 键盘弹出的时候为一个正数
-                int heightDifference = screenHeight - r.bottom;
+//                //获取屏幕的高度
+//                int screenHeight =  getWindow().getDecorView().getRootView().getHeight();
+//                //此处就是用来获取键盘的高度的， 在键盘没有弹出的时候 此高度为0 键盘弹出的时候为一个正数
+//                int heightDifference = screenHeight - r.bottom;
 
-                if (heightDifference <= 0 && mLastDiff > 0){
-                    //imm.hideSoftInputFromWindow(messageTextView.getWindowToken(), 0);
+                int heightDiff = ScreenUtils.getScreenHeight() - r.bottom;
+                if (heightDiff > ScreenUtils.getScreenHeight() / 4.0f) {
+                    Log.i("TCJ", "软件盘显示");
+                    isShowSoftKeyboard = true;
+
+                } else if(isShowSoftKeyboard){
+                    Log.i("TCJ", "软件盘隐藏");
+                    isShowSoftKeyboard = false;
                     dismiss();
                 }
-                mLastDiff = heightDifference;
+
+
+//                if (heightDifference <= 0 && mLastDiff > 0){
+//                    //imm.hideSoftInputFromWindow(messageTextView.getWindowToken(), 0);
+//                    dismiss();
+//                }
+//                mLastDiff = heightDifference;
             }
         });
         rldlgview.setOnClickListener(new View.OnClickListener() {
@@ -205,6 +242,7 @@ public class TCInputTextMsgDialog extends Dialog {
 
     @Override
     public void show() {
+        messageTextView.requestFocus();
         super.show();
     }
 }

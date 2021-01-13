@@ -44,7 +44,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.tencent.live.R;
-import com.tencent.live.login.TCLoginActivity;
 import com.tencent.live.login.TCUserMgr;
 
 import java.io.File;
@@ -498,9 +497,9 @@ public class TCUtils {
     public static void showKickOut(final Context context) {
         Toast.makeText(context, "您的账号已在其他地方登录，您被迫下线。", Toast.LENGTH_SHORT).show();
         TCUserMgr.getInstance().logout();
-        Intent intent = new Intent(context, TCLoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        context.startActivity(intent);
+//        Intent intent = new Intent(context, TCLoginActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        context.startActivity(intent);
     }
 
     /**

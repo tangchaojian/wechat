@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -161,14 +162,14 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         @Override
         public void onGlobalLayout() {
             Rect r = new Rect();
-
             mContentView.getWindowVisibleDisplayFrame(r);
-
             int heightDiff = ScreenUtils.getScreenHeight() - r.bottom;
             if (heightDiff > ScreenUtils.getScreenHeight() / 4.0f) {
+                Log.i("TCJ", "软件盘显示");
                 isShowSoftKeyboard = true;
                 onKeyboardChange(View.VISIBLE);
             } else if(isShowSoftKeyboard){
+                Log.i("TCJ", "软件盘隐藏");
                 isShowSoftKeyboard = false;
                 onKeyboardChange(View.GONE);
             }

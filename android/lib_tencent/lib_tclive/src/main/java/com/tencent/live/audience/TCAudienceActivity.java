@@ -25,8 +25,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tcj.sunshine.base.activity.BaseActivity;
 import com.tencent.liteav.demo.beauty.BeautyParams;
 import com.tencent.liteav.demo.beauty.view.BeautyPanel;
+import com.tencent.live.dialog.LiveRoomGiftDialog;
+import com.tencent.live.entity.LiveGiftEntity;
 import com.tencent.live.liveroom.IMLVBLiveRoomListener;
 import com.tencent.live.liveroom.MLVBLiveRoom;
 import com.tencent.live.liveroom.roomutil.commondef.AnchorInfo;
@@ -77,7 +80,7 @@ import master.flame.danmaku.controller.IDanmakuView;
  * 3. 房间消息、弹幕、点赞处理
  *
  **/
-public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListener, View.OnClickListener, TCInputTextMsgDialog.OnTextSendListener {
+public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomListener, View.OnClickListener, TCInputTextMsgDialog.OnTextSendListener {
     private static final String TAG = TCAudienceActivity.class.getSimpleName();
     //连麦间隔控制
     private static final long                   LINK_MIC_INTERVAL = 3 * 1000;
@@ -99,6 +102,7 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
     private Button                              mBtnSwitchCamera;       // 切换摄像头按钮
     private ImageView                           mIvAvatar;              // 主播头像控件
     private TextView                            mTvPusherName;          // 主播昵称控件
+    private TextView                            mTvPusherDesc;          // 昵称下面的描述
     private TextView                            mMemberCount;           // 当前观众数量控件
 
     private String                              mPusherAvatar;          // 主播头像连接地址
@@ -121,6 +125,7 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
 
     //点赞动画
     private TCHeartLayout                       mHeartLayout;
+    private View                                mGiftBtn;
 
     //点赞频率控制
     private TCFrequeControl                     mLikeFrequeControl;
@@ -133,6 +138,8 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
     private RelativeLayout                      mControlLayer;
     private TCSwipeAnimationController          mTCSwipeAnimationController;
     private ImageView                           mBgImageView;
+
+    protected GiftAnimation                     giftAnimation; // 礼物动画
 
     //分享相关
     private String                              mCoverUrl = "";
@@ -154,18 +161,24 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
 
     private long                                mLastLinkMicTime;   // 上次发起连麦的时间，用于频率控制
 
+    private List<LiveGiftEntity>                giftList;
+
+    LiveRoomGiftDialog mGiftDialog;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public int getLayoutResID() {
+        return R.layout.activity_audience;
+    }
+
+    @Override
+    public void initUI() {
         mStartPlayPts = System.currentTimeMillis();
         setTheme(R.style.BeautyTheme);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        setContentView(R.layout.activity_audience);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        setContentView(R.layout.activity_audience);
 
         Intent intent = getIntent();
         mPusherId = intent.getStringExtra(TCConstants.PUSHER_ID);
@@ -222,10 +235,12 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
         mListViewMsg = (ListView) findViewById(R.id.im_msg_listview);
         mListViewMsg.setVisibility(View.VISIBLE);
         mHeartLayout = (TCHeartLayout) findViewById(R.id.heart_layout);
-        mTvPusherName = (TextView) findViewById(R.id.anchor_tv_broadcasting_time);
+        mGiftBtn = findViewById(R.id.fl_gift);
+        mTvPusherName = (TextView) findViewById(R.id.tv_name);
         mTvPusherName.setText(TCUtils.getLimitString(mPusherNickname, 10));
+        mTvPusherDesc = (TextView) findViewById(R.id.tv_pusher_desc);
 
-        findViewById(R.id.anchor_iv_record_ball).setVisibility(View.GONE);
+//        findViewById(R.id.anchor_iv_record_ball).setVisibility(View.GONE);
 
         mUserAvatarList = (RecyclerView) findViewById(R.id.anchor_rv_avatar);
         mUserAvatarList.setVisibility(View.VISIBLE);
@@ -287,10 +302,44 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
             }
         });
 
+        mGiftBtn.setOnClickListener(this);
+
         //美颜功能
         mBeautyControl = (BeautyPanel) findViewById(R.id.beauty_panel);
 
         TCUtils.blurBgPic(this, mBgImageView, mCoverUrl, R.drawable.bg);
+
+        this.mGiftDialog = new LiveRoomGiftDialog(context);
+
+        this.giftList = new ArrayList<>();
+
+//        https://huyaimg.msstatic.com/cdnimage/actprop/20114_1__45_1609922333.jpg
+//        https://huyaimg.msstatic.com/cdnimage/actprop/4_4__45_1511423630.jpg
+//        https://huyaimg.msstatic.com/cdnimage/actprop/20487_1__45_1609935399.jpg
+//        https://huyaimg.msstatic.com/cdnimage/actprop/20491_1__45_1609938597.jpg
+//        https://huyaimg.msstatic.com/cdnimage/actprop/20369_1__45_1592404597.jpg
+//        https://huyaimg.msstatic.com/cdnimage/actprop/20269_1__45_1603683936.jpg
+//        https://huyaimg.msstatic.com/cdnimage/actprop/20391_1__45_1598281731.jpg
+//        https://huyaimg.msstatic.com/cdnimage/actprop/20206_5__45_1521193545.jpg
+//        https://huyaimg.msstatic.com/cdnimage/actprop/20427_1__45_1601194513.jpg
+//        https://huyaimg.msstatic.com/cdnimage/actprop/20277_1__45_1532948951.jpg
+//        https://huyaimg.msstatic.com/cdnimage/actprop/12_1__45_1532944022.jpg
+//        https://huyaimg.msstatic.com/cdnimage/actprop/20349_1__45_1589704061.jpg
+
+        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/20114_1__45_1609922333.jpg", "大宝剑", "10"));
+        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/4_4__45_1511423630.jpg", "小虎牙", "50"));
+        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/20487_1__45_1609935399.jpg", "VIP勋章", "100"));
+        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/20491_1__45_1609938597.jpg", "奖杯", "200"));
+        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/20369_1__45_1592404597.jpg", "520", "520"));
+        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/20269_1__45_1603683936.jpg", "火箭", "800"));
+        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/20391_1__45_1598281731.jpg", "热气球", "900"));
+        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/20206_5__45_1521193545.jpg", "导弹", "1000"));
+        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/20427_1__45_1601194513.jpg", "星星", "2000"));
+        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/20277_1__45_1532948951.jpg", "血瓶", "3000"));
+        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/12_1__45_1532944022.jpg", "宝箱", "5000"));
+        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/20349_1__45_1589704061.jpg", "荣耀爱心", "10000"));
+
+        this.mGiftDialog.setData(giftList);
     }
 
     /**
@@ -354,7 +403,7 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
             @Override
             public void onError(int errCode, String errInfo) {
                 showErrorAndQuit("加入房间失败，Error:" + errCode);
-                TCELKReportMgr.getInstance().reportELK(TCConstants.ELK_ACTION_LIVE_PLAY, TCUserMgr.getInstance().getUserId(), -10001, "进入LiveRoom失败", null);
+//                TCELKReportMgr.getInstance().reportELK(TCConstants.ELK_ACTION_LIVE_PLAY, TCUserMgr.getInstance().getUserId(), -10001, "进入LiveRoom失败", null);
             }
 
             @Override
@@ -834,21 +883,21 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
     private void showErrorAndQuit(String errorMsg) {
         stopPlay();
 
-        Intent rstData = new Intent();
-        rstData.putExtra(TCConstants.ACTIVITY_RESULT,errorMsg);
-        setResult(TCVideoListFragment.START_LIVE_PLAY,rstData);
-
-        if (!mErrDlgFragment.isAdded() && !this.isFinishing()) {
-            Bundle args = new Bundle();
-            args.putString("errorMsg", errorMsg);
-            mErrDlgFragment.setArguments(args);
-            mErrDlgFragment.setCancelable(false);
-
-            //此处不使用用.show(...)的方式加载dialogfragment，避免IllegalStateException
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.add(mErrDlgFragment, "loading");
-            transaction.commitAllowingStateLoss();
-        }
+//        Intent rstData = new Intent();
+//        rstData.putExtra(TCConstants.ACTIVITY_RESULT,errorMsg);
+//        setResult(TCVideoListFragment.START_LIVE_PLAY,rstData);
+//
+//        if (!mErrDlgFragment.isAdded() && !this.isFinishing()) {
+//            Bundle args = new Bundle();
+//            args.putString("errorMsg", errorMsg);
+//            mErrDlgFragment.setArguments(args);
+//            mErrDlgFragment.setCancelable(false);
+//
+//            //此处不使用用.show(...)的方式加载dialogfragment，避免IllegalStateException
+//            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//            transaction.add(mErrDlgFragment, "loading");
+//            transaction.commitAllowingStateLoss();
+//        }
     }
 
 
@@ -862,7 +911,7 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.btn_back) {
+        if (id == R.id.iv_close) {
             Intent rstData = new Intent();
             long memberCount = mCurrentAudienceCount - 1;
             rstData.putExtra(TCConstants.MEMBER_COUNT, memberCount >= 0 ? memberCount : 0);
@@ -871,7 +920,7 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
             setResult(0, rstData);
             stopPlay();
             finish();
-        } else if (id == R.id.btn_like) {
+        } else if (id == R.id.fl_like) {
             if (mHeartLayout != null) {
                 mHeartLayout.addFavor();
             }
@@ -887,30 +936,28 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
                 //向ChatRoom发送点赞消息
                 mLiveRoom.sendRoomCustomMsg(String.valueOf(TCConstants.IMCMD_PRAISE), "", null);
             }
-        } else if (id == R.id.btn_message_input) {
+        } else if (id == R.id.tv_send_message) {
             showInputMsgDialog();
-        } else if (id == R.id.btn_share) {
-        } else if (id == R.id.btn_log) {
-            showLog();
-        } else if (id == R.id.record) {
-        } else if (id == R.id.retry_record) {
-        } else if (id == R.id.close_record) {
+        }else if(id == R.id.fl_gift){
+            mGiftDialog.show();
+        }else {
+
         }
     }
 
     private void showLog() {
-        mShowLog = !mShowLog;
-        if (mTXCloudVideoView != null) {
-            mTXCloudVideoView.showLog(mShowLog);
-        }
-        ImageView liveLog = (ImageView) findViewById(R.id.btn_log);
-        if (mShowLog) {
-            if (liveLog != null) liveLog.setBackgroundResource(R.drawable.icon_log_on);
-        } else {
-            if (liveLog != null) liveLog.setBackgroundResource(R.drawable.icon_log_off);
-        }
-
-        mVideoViewMgr.showLog(mShowLog);
+//        mShowLog = !mShowLog;
+//        if (mTXCloudVideoView != null) {
+//            mTXCloudVideoView.showLog(mShowLog);
+//        }
+//        ImageView liveLog = (ImageView) findViewById(R.id.btn_log);
+//        if (mShowLog) {
+//            if (liveLog != null) liveLog.setBackgroundResource(R.drawable.icon_log_on);
+//        } else {
+//            if (liveLog != null) liveLog.setBackgroundResource(R.drawable.icon_log_off);
+//        }
+//
+//        mVideoViewMgr.showLog(mShowLog);
     }
 
 
@@ -926,14 +973,6 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
      * 发消息弹出框
      */
     private void showInputMsgDialog() {
-        WindowManager windowManager = getWindowManager();
-        Display display = windowManager.getDefaultDisplay();
-        WindowManager.LayoutParams lp = mInputTextMsgDialog.getWindow().getAttributes();
-
-        lp.width = (display.getWidth()); //设置宽度
-        mInputTextMsgDialog.getWindow().setAttributes(lp);
-        mInputTextMsgDialog.setCancelable(true);
-        mInputTextMsgDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         mInputTextMsgDialog.show();
     }
     /**

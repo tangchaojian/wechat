@@ -34,27 +34,11 @@
     <application>
 
         <activity
-            android:name="com.tencent.live.main.splash.TCSplashActivity"
+            android:name=".main.videolist.TCLiveListActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme"
-            android:launchMode="singleTask">
-        </activity>
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustNothing" />
 
-        <activity
-            android:name="com.tencent.live.login.TCLoginActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/LoginTheme" />
-        <activity
-            android:name="com.tencent.live.login.TCRegisterActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/RegisterTheme" />
-        <activity
-            android:name="com.tencent.live.main.TCMainActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask"/>
-        <activity
-            android:name="com.tencent.live.anchor.prepare.TCAnchorPrepareActivity"
-            android:screenOrientation="portrait" />
         <activity
             android:name="com.tencent.live.audience.TCAudienceActivity"
             android:screenOrientation="portrait"
@@ -68,7 +52,8 @@
         <activity
             android:name="com.tencent.live.anchor.TCAnchorActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="adjustNothing"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name="com.tencent.live.anchor.screen.TCScreenAnchorActivity"
             android:theme="@style/RecordActivityTheme"
@@ -86,9 +71,6 @@
             android:exported="false">
 
         </service>
-        <activity
-            android:name="com.tencent.live.profile.TCEditUseInfoActivity"
-            android:screenOrientation="portrait" />
 
         <activity android:name="com.tencent.rtmp.video.TXScreenCapture$TXScreenCaptureAssistantActivity" android:theme="@android:style/Theme.Translucent" />
 

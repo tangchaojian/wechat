@@ -21,4 +21,15 @@ class InteractNative {
     final String result = await _channel.invokeMethod("startTencentLive");
     return result;
   }
+
+  static Future<String> startLiveList() async{
+    final String result = await _channel.invokeMethod("startLiveList");
+    return result;
+  }
+
+  //腾讯云SDK,开始录制视频
+  static Future<String> startLookLive() async{
+    final String result = await _channel.invokeMethod("startLookLive");
+    return result;
+  }
 }

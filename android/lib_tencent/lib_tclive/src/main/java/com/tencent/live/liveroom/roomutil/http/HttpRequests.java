@@ -146,7 +146,11 @@ public class HttpRequests {
         if (roomID != null && roomID.length() > 0) {
             body = String.format("{\"userID\": \"%s\", \"roomID\": \"%s\"}", userID, roomID);
         }
-        Request request = new Request.Builder().url(getRequestUrl("/get_anchor_url"))
+
+        String pushUrl = getRequestUrl("/get_anchor_url");
+        Log.i("TCJ", "pushUrl->" + pushUrl);
+
+        Request request = new Request.Builder().url(pushUrl)
                 .post(RequestBody.create(MEDIA_JSON, body))
                 .build();
 
@@ -442,7 +446,11 @@ public class HttpRequests {
     public void login(long sdkAppID, String userID, String userSig, String platform, final OnResponseCallback<HttpResponse.LoginResponse> callback) {
         try {
             String body = "";
-            Request request = new Request.Builder().url(domain.concat("/login").concat(String.format("?sdkAppID=%s&userID=%s&userSig=%s&platform=%s", String.valueOf(sdkAppID), userID, userSig, platform)))
+
+            String url = domain.concat("/login").concat(String.format("?sdkAppID=%s&userID=%s&userSig=%s&platform=%s", String.valueOf(sdkAppID), userID, userSig, platform));
+            Log.i("TCJ", "登录url->" + url);
+
+            Request request = new Request.Builder().url(url)
                     .post(RequestBody.create(MEDIA_JSON, body))
                     .build();
 
@@ -451,6 +459,7 @@ public class HttpRequests {
                 public void onResponse(int retcode, String retmsg, HttpResponse.LoginResponse data) {
                     if (data != null) {
                         setUserID(data.userID);
+                        Log.i("TCJ", "token->" + data.token);
                         setToken(data.token);
                     }
                     if (callback != null) {

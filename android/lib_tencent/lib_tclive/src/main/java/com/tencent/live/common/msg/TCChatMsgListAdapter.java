@@ -422,7 +422,7 @@ public class TCChatMsgListAdapter extends BaseAdapter implements AbsListView.OnS
         super.notifyDataSetChanged();
 
         // 重置ListView高度
-        redrawListViewHeight();
+//        redrawListViewHeight();
 
 //        if (mBLiveAnimator && mList.size() >= MAXITEMCOUNT) {
 //            continueAllAnimator();

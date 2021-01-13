@@ -139,7 +139,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <com.tencent.live.common.widget.beauty.TCHorizontalScrollView
+        <com.tencent.liteav.demo.beauty.view.TCHorizontalScrollView
             android:id="@+id/filterPicker"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -155,9 +155,9 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center" />
-        </com.tencent.live.common.widget.beauty.TCHorizontalScrollView>
+        </com.tencent.liteav.demo.beauty.view.TCHorizontalScrollView>
 
-        <com.tencent.live.common.widget.beauty.TCHorizontalScrollView
+        <com.tencent.liteav.demo.beauty.view.TCHorizontalScrollView
             android:id="@+id/greenPicker"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -173,7 +173,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center" />
-        </com.tencent.live.common.widget.beauty.TCHorizontalScrollView>
+        </com.tencent.liteav.demo.beauty.view.TCHorizontalScrollView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/material_recycler_view"

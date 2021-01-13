@@ -1,6 +1,5 @@
 package com.tencent.live.anchor;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
@@ -14,12 +13,12 @@ import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.tcj.sunshine.base.activity.BaseActivity;
 import com.tencent.live.liveroom.IMLVBLiveRoomListener;
 import com.tencent.live.liveroom.MLVBLiveRoom;
 import com.tencent.live.liveroom.roomutil.commondef.AnchorInfo;
@@ -30,7 +29,6 @@ import com.tencent.live.TCGlobalConfig;
 import com.tencent.live.common.msg.TCChatEntity;
 import com.tencent.live.common.msg.TCChatMsgListAdapter;
 import com.tencent.live.common.msg.TCSimpleUserInfo;
-import com.tencent.live.common.net.TCHTTPMgr;
 import com.tencent.live.common.report.TCELKReportMgr;
 import com.tencent.live.common.ui.ErrorDialogFragment;
 import com.tencent.live.common.utils.TCConstants;
@@ -62,7 +60,7 @@ import master.flame.danmaku.controller.IDanmakuView;
  *
  * 2. 处理消息接收到的文本信息：{@link TCBaseAnchorActivity#onRecvRoomTextMsg(String, String, String, String, String)}
  */
-public class TCBaseAnchorActivity extends Activity implements IMLVBLiveRoomListener, View.OnClickListener, TCInputTextMsgDialog.OnTextSendListener {
+public abstract class TCBaseAnchorActivity extends BaseActivity implements IMLVBLiveRoomListener, View.OnClickListener, TCInputTextMsgDialog.OnTextSendListener {
     private static final String TAG = TCBaseAnchorActivity.class.getSimpleName();
 
     // 消息列表相关
@@ -100,12 +98,11 @@ public class TCBaseAnchorActivity extends Activity implements IMLVBLiveRoomListe
     private long                            mStartPushPts;          // 开始直播的时间，用于 ELK 上报统计。 您可以不关注
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void initUI() {
         mStartPushPts = System.currentTimeMillis();
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         Intent intent = getIntent();
         mUserId = intent.getStringExtra(TCConstants.USER_ID);
@@ -124,6 +121,7 @@ public class TCBaseAnchorActivity extends Activity implements IMLVBLiveRoomListe
             mNickName = mUserId;
         }
         mLiveRoom.setSelfProfile(mNickName, mAvatarPicUrl);
+
         startPublish();
     }
 
@@ -162,9 +160,9 @@ public class TCBaseAnchorActivity extends Activity implements IMLVBLiveRoomListe
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.btn_close) {
+        if (id == R.id.iv_close) {
             showExitInfoDialog("当前正在直播，是否退出直播？", false);
-        } else if (id == R.id.btn_message_input) {
+        } else if (id == R.id.tv_send_message) {
             showInputMsgDialog();
         }
     }
@@ -224,16 +222,8 @@ public class TCBaseAnchorActivity extends Activity implements IMLVBLiveRoomListe
     protected void startPublish() {
         mLiveRoom.setListener(this);
         mLiveRoom.setCameraMuteImage(BitmapFactory.decodeResource(getResources(), R.drawable.pause_publish));
+
         String roomInfo = mTitle;
-        try {
-            roomInfo = new JSONObject()
-                    .put("title", mTitle)
-                    .put("frontcover", mCoverPicUrl)
-                    .put("location", mLocation)
-                    .toString();
-        } catch (JSONException e) {
-            roomInfo = mTitle;
-        }
         mLiveRoom.createRoom("", roomInfo, new IMLVBLiveRoomListener.CreateRoomCallback() {
             @Override
             public void onSuccess(String roomId) {
@@ -254,18 +244,6 @@ public class TCBaseAnchorActivity extends Activity implements IMLVBLiveRoomListe
      */
     protected void onCreateRoomSuccess() {
         startTimer();
-        // 填写了后台服务器地址
-        if (!TextUtils.isEmpty(TCGlobalConfig.APP_SVR_URL)) {
-            try {
-                JSONObject body = new JSONObject().put("userId", mUserId)
-                        .put("title", mTitle)
-                        .put("frontCover", mCoverPicUrl)
-                        .put("location", mLocation);
-                TCHTTPMgr.getInstance().requestWithSign(TCGlobalConfig.APP_SVR_URL + "/upload_room", body, null);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     protected void stopPublish() {
@@ -493,16 +471,25 @@ public class TCBaseAnchorActivity extends Activity implements IMLVBLiveRoomListe
      * 发消息弹出框
      */
     private void showInputMsgDialog() {
-        WindowManager windowManager = getWindowManager();
-        Display display = windowManager.getDefaultDisplay();
-        WindowManager.LayoutParams lp = mInputTextMsgDialog.getWindow().getAttributes();
-        lp.width = (int) (display.getWidth()); //设置宽度
-        mInputTextMsgDialog.getWindow().setAttributes(lp);
-        mInputTextMsgDialog.setCancelable(true);
-        mInputTextMsgDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+//        WindowManager windowManager = getWindowManager();
+//        Display display = windowManager.getDefaultDisplay();
+//        WindowManager.LayoutParams lp = mInputTextMsgDialog.getWindow().getAttributes();
+//        lp.width = (int) (display.getWidth()); //设置宽度
+//        mInputTextMsgDialog.getWindow().setAttributes(lp);
+//        mInputTextMsgDialog.setCancelable(true);
+//        mInputTextMsgDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         mInputTextMsgDialog.show();
     }
 
+
+//    @Override
+//    public void onKeyboardChange(int visible) {
+//        super.onKeyboardChange(visible);
+//        Log.i("LIANGJ", "软件盘visible->" + visible);
+//        if(visible == View.GONE){
+//            mInputTextMsgDialog.cancel();
+//        }
+//    }
 
     @Override
     public void onTextSend(String msg, boolean danmuOpen) {
@@ -706,5 +693,4 @@ public class TCBaseAnchorActivity extends Activity implements IMLVBLiveRoomListe
             mBroadcastTimerTask.cancel();
         }
     }
-
 }

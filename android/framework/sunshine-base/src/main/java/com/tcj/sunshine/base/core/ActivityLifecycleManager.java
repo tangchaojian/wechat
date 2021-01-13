@@ -105,7 +105,7 @@ public class ActivityLifecycleManager implements Application.ActivityLifecycleCa
     public void onActivityDestroyed(@NonNull Activity activity) {
         activityList.remove(activity);
         //解决软键盘内存泄漏问题
-        this.fixInputMethodManagerLeaks(activity);
+//        this.fixInputMethodManagerLeaks(activity);
     }
 
 

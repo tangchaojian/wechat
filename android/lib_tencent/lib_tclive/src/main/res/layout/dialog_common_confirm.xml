@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.tcj.sunshine.ui.viewgroup.UIShapeLinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="30dp"
+        app:shape_normal_color="@color/white"
+        app:shape_radius="5dp">
+
+        <TextView
+            android:id="@+id/tv_dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="确定要退出评论？"
+            android:textColor="#323232"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_dialog_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="退出后编辑过的内容将不保存"
+            android:textColor="#FF999999"
+            android:textSize="12sp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.tcj.sunshine.ui.textview.UIShapeTextView
+                android:id="@+id/tv_dialog_cancel"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
+                android:layout_marginRight="16dp"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="#FF999999"
+                android:textSize="16sp"
+                app:shape_normal_color="@color/white"
+                app:shape_radius="5dp" />
+
+            <com.tcj.sunshine.ui.textview.UIShapeTextView
+                android:id="@+id/tv_dialog_confirm"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="16dp"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="#FFFFFFFF"
+                android:textSize="16sp"
+                app:shape_normal_color="#FF3E9DFF"
+                app:shape_radius="5dp" />
+
+        </LinearLayout>
+
+    </com.tcj.sunshine.ui.viewgroup.UIShapeLinearLayout>
+
+</LinearLayout>

@@ -3,9 +3,8 @@ package com.wechat.wechat
 import android.os.Bundle
 import android.util.Log
 import androidx.annotation.NonNull
-import com.example.umeng_sdk.UmengSdkPlugin
 import com.tcj.sunshine.tools.PermissionUtils
-import com.umeng.analytics.MobclickAgent
+import com.tencent.live.login.TCUserMgr
 import io.flutter.app.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugins.GeneratedPluginRegistrant
@@ -18,6 +17,11 @@ class MainActivity: FlutterActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FlutterToAndroidPlugins.registerWith(this);
+
+        TCUserMgr.getInstance().login("199096", object : TCUserMgr.Callback {
+            override fun onSuccess() {}
+            override fun onFailed(code: Int, msg: String) {}
+        })
     }
 
     fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine?) {

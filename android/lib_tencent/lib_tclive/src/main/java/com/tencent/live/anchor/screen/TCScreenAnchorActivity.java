@@ -43,9 +43,13 @@ public class TCScreenAnchorActivity extends TCBaseAnchorActivity {
     private long                    mStartPushPts;              // APP统计录屏推流，您可以忽略
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public int getLayoutResID() {
+        return R.layout.activity_screen_anchor;
+    }
 
+    @Override
+    public void initUI() {
+        super.initUI();
         //启动后台拉活进程（处理强制下线消息）
         serviceIntent = new Intent();
         serviceIntent.setClassName(this, TCScreenRecordService.class.getName());
@@ -57,9 +61,8 @@ public class TCScreenAnchorActivity extends TCBaseAnchorActivity {
         mStartPushPts = System.currentTimeMillis();
     }
 
-    protected void initView() {
 
-        setContentView(R.layout.activity_screen_anchor);
+    protected void initView() {
 
         super.initView();
 

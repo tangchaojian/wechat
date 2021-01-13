@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.tcj.sunshine.ui.viewgroup.UIShapeLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        app:shape_normal_color="@color/white"
+        app:shape_radius="5dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingTop="30dp"
+        android:paddingRight="20dp">
+
+        <TextView
+            android:id="@+id/tv_dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="温馨提示"
+            android:textStyle="bold"
+            android:textColor="#FF323232"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_dialog_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="由于你长时间未使用，为了保障您的账号安全，请重新登录"
+            android:textColor="#323232"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="28dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.tcj.sunshine.ui.textview.UIShapeTextView
+                android:id="@+id/tv_dialog_confirm"
+                android:layout_width="200dp"
+                android:layout_height="32dp"
+                app:shape_normal_color="#FF3E9DFF"
+                app:shape_radius="5dp"
+                android:gravity="center"
+                android:text="重新登录"
+                android:textColor="#FFFFFFFF"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </com.tcj.sunshine.ui.viewgroup.UIShapeLinearLayout>
+
+</LinearLayout>

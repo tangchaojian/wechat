@@ -1,6 +1,7 @@
 package com.wechat.wechat
 
 import android.content.Intent
+import android.text.TextUtils
 import android.util.Log
 import com.aliyun.svideo.recorder.activity.AlivcSvideoRecordActivity
 import com.aliyun.svideo.recorder.bean.AlivcRecordInputParam
@@ -12,7 +13,11 @@ import com.tcj.sunshine.boxing.model.config.BoxingConfig
 import com.tcj.sunshine.tools.PermissionUtils
 import com.tcj.sunshine.tools.PermissionUtils.PermissionsCallback
 import com.tcj.sunshine.view.activity.BoxingActivity
-import com.tencent.live.main.splash.TCSplashActivity
+import com.tencent.live.anchor.TCAnchorActivity
+import com.tencent.live.audience.TCAudienceActivity
+import com.tencent.live.common.utils.TCConstants
+import com.tencent.live.login.TCUserMgr
+import com.tencent.live.main.videolist.TCLiveListActivity
 import io.flutter.app.FlutterActivity
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -80,15 +85,34 @@ class FlutterToAndroidPlugins : MethodChannel.MethodCallHandler {
                     startTencentLive()
                     result.success("ok");
                 }else {
-                    PermissionUtils.checkSelfPermission(activity, arrayOf(PermissionUtils.PERMISSION_CAMERA, PermissionUtils.PERMISSION_WRITE_EXTERNAL_STORAGE), 101, PermissionsCallback {
+                    PermissionUtils.checkSelfPermission(activity, arrayOf(PermissionUtils.PERMISSION_CAMERA, PermissionUtils.PERMISSION_WRITE_EXTERNAL_STORAGE), 102, PermissionsCallback {
                         requestCode, permissions, grantResults ->
 
-                        if(requestCode == 101 && permissions.size == grantResults.size) {
+                        if(requestCode == 102 && permissions.size == grantResults.size) {
                             startTencentLive()
                             result.success("ok");
                         }
                     })
                 }
+
+            }else if(call.method == "startLiveList") {
+                if(PermissionUtils.hasPermission(arrayOf(PermissionUtils.PERMISSION_CAMERA, PermissionUtils.PERMISSION_WRITE_EXTERNAL_STORAGE))) {
+                    startLiveList()
+                    result.success("ok");
+                }else {
+                    PermissionUtils.checkSelfPermission(activity, arrayOf(PermissionUtils.PERMISSION_CAMERA, PermissionUtils.PERMISSION_WRITE_EXTERNAL_STORAGE), 103, PermissionsCallback {
+                        requestCode, permissions, grantResults ->
+
+                        if(requestCode == 103 && permissions.size == grantResults.size) {
+                            startLiveList()
+                            result.success("ok");
+                        }
+                    })
+                }
+
+            }else if(call.method == "startLookLive") {
+                startLookLive()
+                result.success("ok");
 
             }
         }catch (e : Exception) {
@@ -120,7 +144,33 @@ class FlutterToAndroidPlugins : MethodChannel.MethodCallHandler {
 
     fun startTencentLive(){
         var intent = Intent()
-        intent.setClass(activity, TCSplashActivity::class.java)
+        intent.setClass(activity, TCAnchorActivity::class.java)
+        intent.putExtra(TCConstants.ROOM_TITLE, "亮健直播测试");
+        intent.putExtra(TCConstants.USER_ID, TCUserMgr.getInstance().getUserId())
+        intent.putExtra(TCConstants.USER_NICK, TCUserMgr.getInstance().getNickname())
+        intent.putExtra(TCConstants.USER_HEADPIC, TCUserMgr.getInstance().getAvatar())
+        intent.putExtra(TCConstants.COVER_PIC, TCUserMgr.getInstance().getCoverPic())
+        intent.putExtra(TCConstants.USER_LOC,"广州")
+        activity.startActivity(intent)
+    }
+
+    fun startLiveList(){
+        var intent = Intent()
+        intent.setClass(activity, TCLiveListActivity::class.java)
+        activity.startActivity(intent)
+    }
+
+    fun startLookLive(){
+
+        var intent = Intent()
+        intent.setClass(activity, TCAudienceActivity::class.java)
+        intent.putExtra(TCConstants.PUSHER_ID, "199090")
+        intent.putExtra(TCConstants.GROUP_ID, "10010")
+        intent.putExtra(TCConstants.PUSHER_NAME, "唐小唐")
+        intent.putExtra(TCConstants.PUSHER_AVATAR, "https://huyaimg.msstatic.com/cdnimage/actprop/20114_1__45_1609922333.jpg")
+        intent.putExtra(TCConstants.HEART_COUNT, "100")
+        intent.putExtra(TCConstants.MEMBER_COUNT, "10")
+        intent.putExtra(TCConstants.ROOM_TITLE, "亮健直播测试")
         activity.startActivity(intent)
     }
 

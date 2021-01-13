@@ -9,69 +9,55 @@
         android:id="@+id/rl_inputdlg_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_input_dialog_background"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_input_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="说点什么..."
+            android:textSize="13sp"
+            android:imeOptions="actionSend"
+            android:inputType="text"
+            android:maxLength="32"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/black" />
 
         <LinearLayout
             android:id="@+id/barrage_area"
-            android:orientation="horizontal"
-            android:layout_weight="0.3"
-            android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
             <Button
                 android:id="@+id/barrage_btn"
                 android:layout_width="40dp"
-                android:layout_marginLeft="10dp"
                 android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/barrage_slider_off" />
         </LinearLayout>
 
-        <View android:layout_width="0.5dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="6dp"
-            android:layout_marginStart="6dp"
-            android:background="@color/colorTransparentBlack"/>
-
-        <EditText
-            android:id="@+id/et_input_message"
-            android:hint="@string/dialog_input_text_hint"
-            android:layout_width="match_parent"
-            android:layout_weight="4"
-            android:layout_height="wrap_content"
-            android:imeActionId="@+id/login"
-            android:imeOptions="actionUnspecified"
-            android:inputType="text"
-            android:maxLength="32"
-            android:textColor="@color/black"
-            android:maxLines="1"
-            android:singleLine="true" />
-
-        <View android:layout_width="0.5dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="6dp"
-            android:layout_marginStart="6dp"
-            android:background="@color/colorTransparentBlack"/>
-
         <LinearLayout
             android:id="@+id/confirm_area"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content">
-            <Button
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:gravity="center">
+
+            <ImageView
                 android:id="@+id/confrim_btn"
-                android:layout_width="50dp"
-                android:layout_height="30dp"
-                android:background="@drawable/btn_send_message"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:gravity="center"
-                android:textColor="@color/colorAccent"
-                android:text="@string/send" />
+                android:src="@drawable/icon_send_message" />
         </LinearLayout>
 
 

@@ -150,6 +150,7 @@ class _NewsPage extends State<NewsPage> {
                   },
                 ),
               ),
+
               Padding(
                 padding: EdgeInsets.only(top: 20),
                 child: FlatButton(
@@ -159,7 +160,45 @@ class _NewsPage extends State<NewsPage> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5)),
                   child: Text(
-                    "腾讯云直播",
+                    "直播列表",
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  onPressed: () {
+                    InteractNative.startLiveList();
+                    // Log.i("TAG", "相册调用结果$result");
+                  },
+                ),
+              ),
+
+              Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: FlatButton(
+                  textColor: Colors.white,
+                  color: Colors.blue,
+                  highlightColor: Colors.blueAccent,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Text(
+                    "看直播",
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  onPressed: () {
+                    InteractNative.startLookLive();
+                    // Log.i("TAG", "相册调用结果$result");
+                  },
+                ),
+              ),
+
+              Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: FlatButton(
+                  textColor: Colors.white,
+                  color: Colors.blue,
+                  highlightColor: Colors.blueAccent,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Text(
+                    "开直播",
                     style: TextStyle(fontSize: 14),
                   ),
                   onPressed: () {

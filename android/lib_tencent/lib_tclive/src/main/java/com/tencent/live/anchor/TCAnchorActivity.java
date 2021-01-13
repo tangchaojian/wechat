@@ -4,18 +4,19 @@ import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tcj.sunshine.tools.ScreenUtils;
+import com.tcj.sunshine.tools.ToastUtils;
 import com.tencent.liteav.audiosettingkit.AudioEffectPanel;
 import com.tencent.liteav.demo.beauty.BeautyParams;
 import com.tencent.liteav.demo.beauty.constant.BeautyConstants;
@@ -23,8 +24,6 @@ import com.tencent.liteav.demo.beauty.model.BeautyInfo;
 import com.tencent.liteav.demo.beauty.model.ItemInfo;
 import com.tencent.liteav.demo.beauty.model.TabInfo;
 import com.tencent.liteav.demo.beauty.view.BeautyPanel;
-import com.tencent.live.liveroom.IMLVBLiveRoomListener;
-import com.tencent.live.liveroom.roomutil.commondef.AnchorInfo;
 import com.tencent.live.R;
 import com.tencent.live.anchor.music.TCAudioControl;
 import com.tencent.live.common.msg.TCSimpleUserInfo;
@@ -34,6 +33,9 @@ import com.tencent.live.common.utils.TCUtils;
 import com.tencent.live.common.widget.TCUserAvatarListAdapter;
 import com.tencent.live.common.widget.video.TCVideoView;
 import com.tencent.live.common.widget.video.TCVideoViewMgr;
+import com.tencent.live.liveroom.IMLVBLiveRoomListener;
+import com.tencent.live.liveroom.MLVBLiveRoom;
+import com.tencent.live.liveroom.roomutil.commondef.AnchorInfo;
 import com.tencent.live.login.TCUserMgr;
 import com.tencent.rtmp.ui.TXCloudVideoView;
 
@@ -41,6 +43,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Module:   TCAnchorActivity
@@ -59,8 +65,15 @@ import java.util.Locale;
 public class TCAnchorActivity extends TCBaseAnchorActivity {
     private static final String TAG = TCAnchorActivity.class.getSimpleName();
 
+    private View                            mTopView;               //
     private TXCloudVideoView                mTXCloudVideoView;      // 主播本地预览的 View
-    private Button                          mFlashView;             // 闪光灯按钮
+    private View                            mSwitchCameraView;      //切换摄像头
+    private View                            mFilterView;            //滤镜
+    private View                            mBeautyView;            //美颜
+    private View                            mFlashView;             //闪光灯
+    private ImageView                       mIvFlash;               //闪光灯图片
+    private View                            mMusicView;            //变音
+    private View                            mGiftView;              //查看礼物打赏
 
     // 观众头像列表控件
     private RecyclerView                    mUserAvatarList;        // 用户头像的列表控件
@@ -68,15 +81,19 @@ public class TCAnchorActivity extends TCBaseAnchorActivity {
 
     // 主播信息
     private ImageView                       mHeadIcon;              // 主播头像
-    private ImageView                       mRecordBall;            // 表明正在录制的红点球
-    private TextView                        mBroadcastTime;         // 已经开播的时间
+//    private ImageView                       mRecordBall;            // 表明正在录制的红点球
+//    private TextView                        mBroadcastTime;         // 已经开播的时间
+    private TextView                        mTvPusherName;          //主播名称
+    private TextView                        mTvPusherDesc;          //主播名称
     private TextView                        mMemberCount;           // 观众数量
+
+
 
 
     private AudioEffectPanel                mPanelAudioControl;     // 音效面板
 
     private BeautyPanel                     mBeautyControl;          // 美颜设置的控制类
-    private LinearLayout                    mLinearToolBar;
+    private RelativeLayout                    mLinearToolBar;
 
     // log相关
     private boolean                         mShowLog;               // 是否打开 log 面板
@@ -89,11 +106,14 @@ public class TCAnchorActivity extends TCBaseAnchorActivity {
 
     private ObjectAnimator                  mObjAnim;               // 动画
 
+    @Override
+    public int getLayoutResID() {
+        return R.layout.activity_anchor;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.BeautyTheme);
-        super.onCreate(savedInstanceState);
+    public void initUI() {
+        super.initUI();
         TCELKReportMgr.getInstance().reportELK(TCConstants.ELK_ACTION_CAMERA_PUSH, TCUserMgr.getInstance().getUserId(), 0, "摄像头推流", null);
         mPusherList = new ArrayList<>();
 
@@ -105,8 +125,12 @@ public class TCAnchorActivity extends TCBaseAnchorActivity {
 
     @Override
     protected void initView() {
-        setContentView(R.layout.activity_anchor);
         super.initView();
+        mTopView = findViewById(R.id.top_view);
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)mTopView.getLayoutParams();
+        params.height = ScreenUtils.getStatusBarHeight();
+        mTopView.requestLayout();
+
         mTXCloudVideoView = (TXCloudVideoView) findViewById(R.id.anchor_video_view);
         mTXCloudVideoView.setLogMargin(10, 10, 45, 55);
 
@@ -117,18 +141,33 @@ public class TCAnchorActivity extends TCBaseAnchorActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mUserAvatarList.setLayoutManager(linearLayoutManager);
 
-        mFlashView = (Button) findViewById(R.id.anchor_btn_flash);
+        mSwitchCameraView = findViewById(R.id.ll_camera);
+        mFilterView = findViewById(R.id.ll_filter);
+        mBeautyView = findViewById(R.id.ll_beauty);
+        mFlashView = findViewById(R.id.ll_flash);
+        mIvFlash = (ImageView) findViewById(R.id.iv_flash);
+        mMusicView = findViewById(R.id.ll_mushic);
+        mGiftView = findViewById(R.id.ll_gift);
 
-        mBroadcastTime = (TextView) findViewById(R.id.anchor_tv_broadcasting_time);
-        mBroadcastTime.setText(String.format(Locale.US, "%s", "00:00:00"));
-        mRecordBall = (ImageView) findViewById(R.id.anchor_iv_record_ball);
+        mSwitchCameraView.setOnClickListener(this);
+        mFlashView.setOnClickListener(this);
+        mFilterView.setOnClickListener(this);
+        mBeautyView.setOnClickListener(this);
+        mFlashView.setOnClickListener(this);
+        mMusicView.setOnClickListener(this);
+        mGiftView.setOnClickListener(this);
+
+
+//        mBroadcastTime = (TextView) findViewById(R.id.anchor_tv_broadcasting_time);
+//        mBroadcastTime.setText(String.format(Locale.US, "%s", "00:00:00"));
+//        mRecordBall = (ImageView) findViewById(R.id.anchor_iv_record_ball);
 
         mHeadIcon = (ImageView) findViewById(R.id.anchor_iv_head_icon);
         showHeadIcon(mHeadIcon, TCUserMgr.getInstance().getAvatar());
         mMemberCount = (TextView) findViewById(R.id.anchor_tv_member_counts);
         mMemberCount.setText("0");
 
-        mLinearToolBar = (LinearLayout) findViewById(R.id.tool_bar);
+        mLinearToolBar = (RelativeLayout) findViewById(R.id.tool_bar);
 
         //AudioEffectPanel
         mPanelAudioControl = (AudioEffectPanel) findViewById(R.id.anchor_audio_control);
@@ -224,6 +263,7 @@ public class TCAnchorActivity extends TCBaseAnchorActivity {
 
         // 打开本地预览，传入预览的 View
         mLiveRoom.startLocalPreview(true, mTXCloudVideoView);
+
         // 设置美颜参数
         BeautyParams beautyParams = new BeautyParams();
         mLiveRoom.getBeautyManager().setBeautyStyle(beautyParams.mBeautyStyle);
@@ -234,9 +274,10 @@ public class TCAnchorActivity extends TCBaseAnchorActivity {
         mLiveRoom.getBeautyManager().setFaceSlimLevel(beautyParams.mFaceSlimLevel);
         // 设置大眼参数
         mLiveRoom.getBeautyManager().setEyeScaleLevel(beautyParams.mBigEyeLevel);
-//        if (TCUtils.checkRecordPermission(this)) {
-//            super.startPublish();
-//        }
+
+        if (TCUtils.checkRecordPermission(this)) {
+            super.startPublish();
+        }
     }
 
     @Override
@@ -410,10 +451,10 @@ public class TCAnchorActivity extends TCBaseAnchorActivity {
      * 开启红点与计时动画
      */
     private void startRecordAnimation() {
-        mObjAnim = ObjectAnimator.ofFloat(mRecordBall, "alpha", 1f, 0f, 1f);
-        mObjAnim.setDuration(1000);
-        mObjAnim.setRepeatCount(-1);
-        mObjAnim.start();
+//        mObjAnim = ObjectAnimator.ofFloat(mRecordBall, "alpha", 1f, 0f, 1f);
+//        mObjAnim.setDuration(1000);
+//        mObjAnim.setRepeatCount(-1);
+//        mObjAnim.start();
     }
 
     /**
@@ -427,9 +468,55 @@ public class TCAnchorActivity extends TCBaseAnchorActivity {
     @Override
     protected void onBroadcasterTimeUpdate(long second) {
         super.onBroadcasterTimeUpdate(second);
-        if (!mTCSwipeAnimationController.isMoving())
-            mBroadcastTime.setText(TCUtils.formattedTime(second));
+//        if (!mTCSwipeAnimationController.isMoving())
+//            mBroadcastTime.setText(TCUtils.formattedTime(second));
     }
+
+    /**
+     * 切换摄像头
+     */
+    private void switchCamera(){
+        if (mLiveRoom != null) {
+            mLiveRoom.switchCamera();
+        }
+    }
+
+    private void toogleFlash(){
+        if (mLiveRoom == null || !mLiveRoom.enableTorch(!mFlashOn)) {
+            Toast.makeText(getApplicationContext(), "打开闪光灯失败", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mFlashOn = !mFlashOn;
+    }
+
+    /**
+     * 设置美颜
+     */
+    private void setBeauty(){
+        if (mBeautyControl.isShown()) {
+            mBeautyControl.setVisibility(View.GONE);
+            mLinearToolBar.setVisibility(View.VISIBLE);
+        } else {
+            mBeautyControl.setVisibility(View.VISIBLE);
+            mLinearToolBar.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * 设置音频
+     */
+    private void setAudio(){
+        if (mPanelAudioControl.isShown()) {
+            mPanelAudioControl.setVisibility(View.GONE);
+            mPanelAudioControl.hideAudioPanel();
+            mLinearToolBar.setVisibility(View.VISIBLE);
+        } else {
+            mPanelAudioControl.setVisibility(View.VISIBLE);
+            mPanelAudioControl.showAudioPanel();
+            mLinearToolBar.setVisibility(View.GONE);
+        }
+    }
+
 
     /**
      * /////////////////////////////////////////////////////////////////////////////////
@@ -441,20 +528,19 @@ public class TCAnchorActivity extends TCBaseAnchorActivity {
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.switch_cam) {
+        if (id == R.id.ll_camera) {
             if (mLiveRoom != null) {
                 mLiveRoom.switchCamera();
             }
-        } else if (id == R.id.anchor_btn_flash) {
+        } else if (id == R.id.ll_flash) {
             if (mLiveRoom == null || !mLiveRoom.enableTorch(!mFlashOn)) {
                 Toast.makeText(getApplicationContext(), "打开闪光灯失败", Toast.LENGTH_SHORT).show();
                 return;
             }
             mFlashOn = !mFlashOn;
-            mFlashView.setBackgroundDrawable(mFlashOn ?
-                    getResources().getDrawable(R.drawable.flash_on) :
-                    getResources().getDrawable(R.drawable.flash_off));
-        } else if (id == R.id.beauty_btn) {
+            mIvFlash.setImageResource(mFlashOn ? R.drawable.flash_on : R.drawable.flash_off);
+
+        } else if (id == R.id.ll_beauty) {
             if (mBeautyControl.isShown()) {
                 mBeautyControl.setVisibility(View.GONE);
                 mLinearToolBar.setVisibility(View.VISIBLE);
@@ -464,7 +550,7 @@ public class TCAnchorActivity extends TCBaseAnchorActivity {
             }
         } else if (id == R.id.btn_close) {
             showExitInfoDialog("当前正在直播，是否退出直播？", false);
-        } else if (id == R.id.btn_audio_ctrl) {
+        } else if (id == R.id.ll_mushic) {
             if (mPanelAudioControl.isShown()) {
                 mPanelAudioControl.setVisibility(View.GONE);
                 mPanelAudioControl.hideAudioPanel();
@@ -474,9 +560,7 @@ public class TCAnchorActivity extends TCBaseAnchorActivity {
                 mPanelAudioControl.showAudioPanel();
                 mLinearToolBar.setVisibility(View.GONE);
             }
-        } else if (id == R.id.btn_log) {
-            showLog();
-        } else {
+        }else {
             super.onClick(v);
         }
     }
@@ -490,19 +574,19 @@ public class TCAnchorActivity extends TCBaseAnchorActivity {
 
 
     private void showLog() {
-        mShowLog = !mShowLog;
-        if (mTXCloudVideoView != null) {
-            mTXCloudVideoView.showLog(mShowLog);
-        }
-        ImageView liveLog = (ImageView) findViewById(R.id.btn_log);
-        if (mShowLog) {
-            if (liveLog != null) liveLog.setBackgroundResource(R.drawable.icon_log_on);
-
-        } else {
-            if (liveLog != null) liveLog.setBackgroundResource(R.drawable.icon_log_off);
-        }
-
-        mPlayerVideoViewList.showLog(mShowLog);
+//        mShowLog = !mShowLog;
+//        if (mTXCloudVideoView != null) {
+//            mTXCloudVideoView.showLog(mShowLog);
+//        }
+//        ImageView liveLog = (ImageView) findViewById(R.id.btn_log);
+//        if (mShowLog) {
+//            if (liveLog != null) liveLog.setBackgroundResource(R.drawable.icon_log_on);
+//
+//        } else {
+//            if (liveLog != null) liveLog.setBackgroundResource(R.drawable.icon_log_off);
+//        }
+//
+//        mPlayerVideoViewList.showLog(mShowLog);
     }
 
     /**

@@ -1,5 +1,6 @@
 ext {
 
+//    applicationId = "com.ljk.doctor.test.app"
     applicationId = "com.readchen.fx.rtmpdemo"
 
     android = [
@@ -10,12 +11,12 @@ ext {
     ]
 
     configs = [
-            apkName         : "miaoyin.apk",
+            apkName         : "ljk_doctor.apk",
             fileProviderName: "${applicationId}.file.provider",
-            storeFile       : "miaoyin_keys",
-            storePassword   : "123456",
-            keyAlias        : "miaoyin",
-            keyPassword     : "123456",
+            storeFile       : "debug.keystore",
+            storePassword   : "android",
+            keyAlias        : "androiddebugkey",
+            keyPassword     : "android",
     ]
 
     dependVersion = [

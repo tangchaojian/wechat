@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.tcj.sunshine.ui.viewgroup.UIShapeRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:orientation="vertical"
+        app:shape_normal_color="#80000000"
+        android:paddingBottom="20dp"
+        app:shape_left_top_radius="20dp"
+        app:shape_right_top_radius="20dp">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="14dp"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:text="更多"/>
+
+        <GridView
+            android:id="@+id/gv_tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tv_title"
+            android:horizontalSpacing="10dp"
+            android:verticalSpacing="10dp"
+            android:numColumns="5"
+            android:stretchMode="columnWidth"
+            android:scrollbars="none"/>
+
+    </com.tcj.sunshine.ui.viewgroup.UIShapeRelativeLayout>
+</LinearLayout>

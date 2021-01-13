@@ -19,8 +19,11 @@ public class TCGlobalConfig {
      *
      *  获取License，请参考官网指引 https://cloud.tencent.com/document/product/454/34750
      */
-    public static final String LICENCE_URL = "http://license.vod2.myqcloud.com/license/v1/f9597e80d06113364ea645c5bd6972b4/TXLiveSDK.licence";//#设置成您自己账号下直播License的url;
-    public static final String LICENCE_KEY = "b9fe87252b53913adfeb43d327ff81fd";//#设置成您自己账号下直播License的key;
+    public static final String LICENCE_URL = "http://license.vod2.myqcloud.com/license/v1/f9597e80d06113364ea645c5bd6972b4/TXLiveSDK.licence";
+    public static final String LICENCE_KEY = "b9fe87252b53913adfeb43d327ff81fd";
+
+//    public static final String LICENCE_URL = "http://license.vod2.myqcloud.com/license/v1/664e0a962d19628158f02b8ac513b5d3/TXLiveSDK.licence";
+//    public static final String LICENCE_KEY = "dc15d91e150c9450989eaa02c9e3ae53";
 
 
     /**
@@ -29,7 +32,8 @@ public class TCGlobalConfig {
      * 进入腾讯云直播[控制台-直播SDK-应用管理](https://console.cloud.tencent.com/live/license/appmanage) 创建应用，即可看到 SDKAppId，
      * 它是腾讯云用于区分客户的唯一标识。
      */
-    public static final int SDKAPPID = 1400471383;//#设置成您自己账号下的SDKAppId;
+    public static final int SDKAPPID = 1400471383;
+//    public static final int SDKAPPID = 1400472832;
 
     /**
      * 2.2 计算签名用的加密密钥，获取步骤如下：
@@ -42,13 +46,14 @@ public class TCGlobalConfig {
      * 注意：该方案仅适用于调试Demo，正式上线前请将 UserSig 计算代码和密钥迁移到您的后台服务器上，以避免加密密钥泄露导致的流量盗用。
      * 文档：https://cloud.tencent.com/document/product/647/17275#Server
      */
-    public static final String SECRETKEY = "f86794618369d42d46677cac204bb7508709d14a10e1c3063ed50cc72207ad7b";//#设置成您自己账号的加密密钥;
+    public static final String SECRETKEY = "f86794618369d42d46677cac204bb7508709d14a10e1c3063ed50cc72207ad7b";
+//    public static final String SECRETKEY = "9bb78ed4c9c0d1dd25bbe735996ee5c075e53b69011696e9605ee6dea425c832";
 
     /**
      * 2.3 签名过期时间，建议不要设置的过短
      * <p>
      * 时间单位：秒
-     * 默认时间：7 x 24 x 60 x 60 = 604800 = 7 天
+     * 默认时间：7 * 24 x 60 x 60 = 604800 = 7 天
      */
     public static final int EXPIRETIME = 604800;
 

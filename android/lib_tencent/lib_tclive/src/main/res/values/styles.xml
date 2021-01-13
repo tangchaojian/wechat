@@ -55,17 +55,25 @@
 
     <!-- Input dialog theme. -->
     <style name="InputDialog">
+        <!-- 边框 -->
         <item name="android:windowFrame">@null</item>
+        <!-- 是否浮现在activity之上 -->
         <item name="android:windowIsFloating">true</item>
-        <item name="android:windowIsTranslucent">false</item>
-        <item name="android:windowFullscreen">false</item>
+        <!-- 窗体透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 无标题 -->
         <item name="android:windowNoTitle">true</item>
-        <item name="android:background">#00000000</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:backgroundDimEnabled">false</item>
-        <item name="colorControlNormal">@color/colorAccent</item>
-        <item name="android:textColorHint">@color/c9</item>
-        <item name="colorControlActivated">@color/colorAccent</item>
+        <!-- 背景 -->
+        <item name="android:windowBackground">@drawable/transparent</item>
+        <!-- 背景透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
+        <item name="android:backgroundDimAmount">0</item>
+        <item name="android:windowFullscreen">true</item>
+
+        <item name="android:windowSoftInputMode">stateVisible|adjustResize</item>
+        <item name="android:windowEnterAnimation">@anim/dialog_bottom_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_bottom_exit</item>
     </style>
 
     <style name="NormalDialog" parent="Theme.AppCompat.Light.Dialog.Alert" >
@@ -121,4 +129,11 @@
     <style name="BeautyTheme" parent="BeautyPanelStyle">
         <item name="beautyPanelColorPrimary">@color/colorGreen</item>
     </style>
+
+    <!-- dialog动画 -->
+    <style name="common_animation_style" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_bottom_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_bottom_exit</item>
+    </style>
+
 </resources>

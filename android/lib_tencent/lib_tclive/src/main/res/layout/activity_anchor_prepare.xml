@@ -76,6 +76,7 @@
                 android:background="@color/colorPrimary"
                 android:gravity="top"
                 android:hint="@string/text_live_title_input"
+                android:text="亮健直播测试"
                 android:maxLength="32"
                 android:maxLines="1"
                 android:singleLine="true"

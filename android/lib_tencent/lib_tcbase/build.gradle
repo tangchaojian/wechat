@@ -37,5 +37,7 @@ dependencies {
     api project(':framework:sunshine-player')
     api project(':framework:sunshine-crop')
     api project(':framework:sunshine-net')
-    api(name: 'LiteAVSDK_Smart_8.2.9809', ext: 'aar')
+    api project(':framework:sunshine-base')
+//    api(name: 'LiteAVSDK_Smart_8.2.9809', ext: 'aar')
+    api "com.tencent.liteavsdk:LiteAVSDK_Smart:latest.release"
 }
