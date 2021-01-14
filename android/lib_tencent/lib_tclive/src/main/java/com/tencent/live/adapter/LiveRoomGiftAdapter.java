@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tcj.sunshine.tools.GlideUtils;
+import com.tcj.sunshine.ui.viewgroup.TapRelativeLayout;
 import com.tencent.live.R;
 import com.tencent.live.entity.LiveGiftEntity;
 import com.tencent.live.listener.OnItemClickListener;
@@ -54,27 +55,40 @@ public class LiveRoomGiftAdapter extends BaseAdapter {
             holder.mClickView = itemView.findViewById(R.id.rl_item_click);
             holder.mIvIcon = itemView.findViewById(R.id.iv_icon);
             holder.mTvName = itemView.findViewById(R.id.tv_name);
+            holder.mTvGiftPrice = itemView.findViewById(R.id.tv_gift_price);
             itemView.setTag(holder);
             convertView = itemView;
         }else {
             holder = (ViewHolder)convertView.getTag();
         }
 
-        GlideUtils.loadImage(item.getImgUrl(), holder.mIvIcon);
-        holder.mTvName.setText(item.getName());
-        holder.mClickView.setOnClickListener(v -> {
-            if(listener != null){
-                listener.onItemClick(v, position, item);
+        GlideUtils.loadImage(item.getGiftImgUrl(), holder.mIvIcon);
+        holder.mTvName.setText(item.getGiftName());
+        holder.mTvGiftPrice.setText(item.getGiftPrice());
+
+        holder.mClickView.setOnTapListener(new TapRelativeLayout.OnTapListener() {
+            @Override
+            public void onTap() {
+
+            }
+
+            @Override
+            public void onDoubleTap() {
+                if(listener != null) {
+                    listener.onItemClick(holder.mClickView, position, item);
+                }
             }
         });
+
 
         return convertView;
     }
 
     private static class ViewHolder {
-        View mClickView;
+        TapRelativeLayout mClickView;
         ImageView mIvIcon;
         TextView mTvName;
+        TextView mTvGiftPrice;
     }
 
 }

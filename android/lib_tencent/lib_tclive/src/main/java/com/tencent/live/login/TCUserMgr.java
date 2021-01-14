@@ -193,7 +193,7 @@ public class TCUserMgr {
         isLogin = true;
         this.mUserId = userId;
         this.mUserAvatar = getAvatarUrl(userId);
-        this.mNickName = "唐小糖";
+        this.mNickName = "一蓑烟雨任平生";
         this.mUserSig = GenerateTestUserSig.genTestUserSig(userId);
         loginMLVB(callback);
     }

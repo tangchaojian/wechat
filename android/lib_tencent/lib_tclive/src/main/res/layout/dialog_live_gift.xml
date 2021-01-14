@@ -8,20 +8,17 @@
 
     <com.tcj.sunshine.ui.viewgroup.UIShapeRelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="230dp"
         android:orientation="vertical"
-        app:shape_normal_color="#80000000"
-        android:paddingBottom="20dp"
-        app:shape_left_top_radius="20dp"
-        app:shape_right_top_radius="20dp">
+        app:shape_normal_color="#E6000000">
 
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="14dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:textSize="16sp"
             android:textColor="@color/white"
             android:text="礼物"/>
@@ -34,5 +31,14 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"/>
 
+        <com.tcj.sunshine.ui.viewgroup.IndexerView
+            android:id="@+id/indexr_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"/>
+
     </com.tcj.sunshine.ui.viewgroup.UIShapeRelativeLayout>
+
 </LinearLayout>

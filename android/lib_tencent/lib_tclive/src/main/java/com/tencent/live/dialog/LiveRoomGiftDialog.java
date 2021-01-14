@@ -9,6 +9,7 @@ import android.widget.GridView;
 
 import com.tcj.sunshine.tools.ScreenUtils;
 import com.tcj.sunshine.ui.dialog.UIDialog;
+import com.tcj.sunshine.ui.viewgroup.IndexerView;
 import com.tencent.live.R;
 import com.tencent.live.adapter.LiveRoomGiftAdapter;
 import com.tencent.live.entity.LiveGiftEntity;
@@ -33,10 +34,13 @@ public class LiveRoomGiftDialog {
     private LayoutInflater inflater;
 
     private ViewPager mVpGift;
+    private IndexerView mIndexrView;
     private GiftPagerAdapter adapter;
     private List<View> viewList = new ArrayList<>();
 
     private static final int PAGE_MAX_NUM = 8;//一页8个
+
+    public OnGiftItemDoubleClickListener mListener;
 
 
     public LiveRoomGiftDialog(Context context) {
@@ -45,12 +49,31 @@ public class LiveRoomGiftDialog {
         this.dialogView = inflater.inflate(R.layout.dialog_live_gift, null, false);
         this.dialog = new UIDialog.Builder(context)
                 .setContentView(dialogView)
+                .setStyleId(R.style.ThemeStyleUIDailog_Transparent)
                 .setWidth(ScreenUtils.getScreenWidth())
                 .setGravity(Gravity.BOTTOM)
                 .setWindowAnimations(R.style.common_animation_style)
                 .build();
 
         this.mVpGift = this.dialogView.findViewById(R.id.vp_gift);
+        this.mIndexrView = this.dialogView.findViewById(R.id.indexr_view);
+
+        this.mVpGift.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                mIndexrView.updateIndex(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     public void setData(List<LiveGiftEntity> data){
@@ -70,15 +93,31 @@ public class LiveRoomGiftDialog {
             viewList.add(itemView);
         }
 
+        this.mIndexrView.setNoramlIndexLayoutId(R.layout.view_index_gray_normal)
+                .setCheckedIndexLayoutId(R.layout.view_index_orange_checked)
+                .setIndexSize(page)
+                .build();
+
         this.adapter = new GiftPagerAdapter(viewList, context);
         this.mVpGift.setAdapter(adapter);
         this.adapter.notifyDataSetChanged();
     }
 
+    public void setOnGiftItemDoubleClickListener(OnGiftItemDoubleClickListener mListener) {
+        this.mListener = mListener;
+    }
+
     private View getItemView(int page, List<LiveGiftEntity> childData) {
         View itemView = inflater.inflate(R.layout.adapter_live_gift_item, null);
         GridView mGvGift = itemView.findViewById(R.id.gv_gift);
-        LiveRoomGiftAdapter adapter = new LiveRoomGiftAdapter(context, childData, null);
+        LiveRoomGiftAdapter adapter = new LiveRoomGiftAdapter(context, childData, new OnItemClickListener<LiveGiftEntity>() {
+            @Override
+            public void onItemClick(View view, int position, LiveGiftEntity entity) {
+                if(mListener != null) {
+                    mListener.onDoubleClick(view, position, entity);
+                }
+            }
+        });
         mGvGift.setAdapter(adapter);
         return  itemView;
     }
@@ -130,5 +169,10 @@ public class LiveRoomGiftDialog {
             container.addView(itemView);
             return itemView;
         }
+    }
+
+    public interface OnGiftItemDoubleClickListener {
+
+        void onDoubleClick(View v, int position, LiveGiftEntity item);
     }
 }

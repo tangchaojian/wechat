@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -26,8 +27,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tcj.sunshine.base.activity.BaseActivity;
+import com.tcj.sunshine.tools.ScreenUtils;
+import com.tcj.sunshine.tools.ToastUtils;
+import com.tencent.imsdk.TIMMessage;
 import com.tencent.liteav.demo.beauty.BeautyParams;
 import com.tencent.liteav.demo.beauty.view.BeautyPanel;
+import com.tencent.live.anim.GiftAnimation;
+import com.tencent.live.anim.UserEnterAnimation;
+import com.tencent.live.common.msg.TCGiftRewardEntity;
+import com.tencent.live.common.msg.TCUserEnterEntity;
 import com.tencent.live.dialog.LiveRoomGiftDialog;
 import com.tencent.live.entity.LiveGiftEntity;
 import com.tencent.live.liveroom.IMLVBLiveRoomListener;
@@ -53,6 +61,7 @@ import com.tencent.live.common.widget.video.TCVideoView;
 import com.tencent.live.common.widget.video.TCVideoViewMgr;
 import com.tencent.live.login.TCUserMgr;
 import com.tencent.live.main.videolist.ui.TCVideoListFragment;
+import com.tencent.live.widget.LiveUserEnterAnimView;
 import com.tencent.rtmp.TXLiveConstants;
 import com.tencent.rtmp.TXLog;
 import com.tencent.rtmp.ui.TXCloudVideoView;
@@ -66,6 +75,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import master.flame.danmaku.controller.IDanmakuView;
+
+/**
+ * 标识
+ * #房间用户监听#
+ * #开始拉流#
+ * #自定义消息#
+ */
 
 /**
  * Module:   TCAudienceActivity
@@ -87,7 +103,7 @@ public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomLis
 
     private Handler                             mHandler = new Handler(Looper.getMainLooper());
 
-
+    private View                                mTopView;               //
     private TXCloudVideoView                    mTXCloudVideoView;      // 观看大主播的 View
     private MLVBLiveRoom                        mLiveRoom;              // MLVB 组件
 
@@ -139,7 +155,12 @@ public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomLis
     private TCSwipeAnimationController          mTCSwipeAnimationController;
     private ImageView                           mBgImageView;
 
-    protected GiftAnimation                     giftAnimation; // 礼物动画
+    private GiftAnimation                       mGiftAnimation; // 礼物动画
+    private ViewGroup                           mGiftAnimUpView;//上面这个动画
+    private ViewGroup                           mGiftAnimDownView;//下面这个动画
+
+    private UserEnterAnimation                  mUserEnterAnim;//用户进入动画
+    private ViewGroup                           mUserEnterAnimView;//用户进入动画view
 
     //分享相关
     private String                              mCoverUrl = "";
@@ -230,8 +251,14 @@ public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomLis
         mTCSwipeAnimationController = new TCSwipeAnimationController(this);
         mTCSwipeAnimationController.setAnimationView(mControlLayer);
 
+        mTopView = findViewById(R.id.top_view);
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)mTopView.getLayoutParams();
+        params.height = ScreenUtils.getStatusBarHeight();
+        mTopView.requestLayout();
+
         mTXCloudVideoView = (TXCloudVideoView) findViewById(R.id.anchor_video_view);
         mTXCloudVideoView.setLogMargin(10, 10, 45, 55);
+
         mListViewMsg = (ListView) findViewById(R.id.im_msg_listview);
         mListViewMsg.setVisibility(View.VISIBLE);
         mHeartLayout = (TCHeartLayout) findViewById(R.id.heart_layout);
@@ -302,6 +329,19 @@ public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomLis
             }
         });
 
+        this.mGiftAnimUpView = this.findViewById(R.id.view_gift_anim_up);
+        this.mGiftAnimDownView = this.findViewById(R.id.view_gift_anim_down);
+
+        this.mGiftAnimUpView.setVisibility(View.INVISIBLE);
+        this.mGiftAnimDownView.setVisibility(View.INVISIBLE);
+
+        this.mGiftAnimation = new GiftAnimation(this.mGiftAnimUpView, this.mGiftAnimDownView);
+
+        this.mUserEnterAnimView = this.findViewById(R.id.view_user_enter_anim);
+        this.mUserEnterAnimView.setVisibility(View.INVISIBLE);
+
+        this.mUserEnterAnim = new UserEnterAnimation(mUserEnterAnimView);
+
         mGiftBtn.setOnClickListener(this);
 
         //美颜功能
@@ -313,33 +353,45 @@ public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomLis
 
         this.giftList = new ArrayList<>();
 
-//        https://huyaimg.msstatic.com/cdnimage/actprop/20114_1__45_1609922333.jpg
-//        https://huyaimg.msstatic.com/cdnimage/actprop/4_4__45_1511423630.jpg
-//        https://huyaimg.msstatic.com/cdnimage/actprop/20487_1__45_1609935399.jpg
-//        https://huyaimg.msstatic.com/cdnimage/actprop/20491_1__45_1609938597.jpg
-//        https://huyaimg.msstatic.com/cdnimage/actprop/20369_1__45_1592404597.jpg
-//        https://huyaimg.msstatic.com/cdnimage/actprop/20269_1__45_1603683936.jpg
-//        https://huyaimg.msstatic.com/cdnimage/actprop/20391_1__45_1598281731.jpg
-//        https://huyaimg.msstatic.com/cdnimage/actprop/20206_5__45_1521193545.jpg
-//        https://huyaimg.msstatic.com/cdnimage/actprop/20427_1__45_1601194513.jpg
-//        https://huyaimg.msstatic.com/cdnimage/actprop/20277_1__45_1532948951.jpg
-//        https://huyaimg.msstatic.com/cdnimage/actprop/12_1__45_1532944022.jpg
-//        https://huyaimg.msstatic.com/cdnimage/actprop/20349_1__45_1589704061.jpg
-
-        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/20114_1__45_1609922333.jpg", "大宝剑", "10"));
-        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/4_4__45_1511423630.jpg", "小虎牙", "50"));
-        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/20487_1__45_1609935399.jpg", "VIP勋章", "100"));
-        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/20491_1__45_1609938597.jpg", "奖杯", "200"));
-        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/20369_1__45_1592404597.jpg", "520", "520"));
-        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/20269_1__45_1603683936.jpg", "火箭", "800"));
-        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/20391_1__45_1598281731.jpg", "热气球", "900"));
-        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/20206_5__45_1521193545.jpg", "导弹", "1000"));
-        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/20427_1__45_1601194513.jpg", "星星", "2000"));
-        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/20277_1__45_1532948951.jpg", "血瓶", "3000"));
-        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/12_1__45_1532944022.jpg", "宝箱", "5000"));
-        giftList.add(new LiveGiftEntity("https://huyaimg.msstatic.com/cdnimage/actprop/20349_1__45_1589704061.jpg", "荣耀爱心", "10000"));
+        giftList.add(new LiveGiftEntity("0", "宝剑", "https://huyaimg.msstatic.com/cdnimage/actprop/20114_1__45_1609922333.jpg", "10"));
+        giftList.add(new LiveGiftEntity("1", "小虎牙", "https://huyaimg.msstatic.com/cdnimage/actprop/4_4__45_1511423630.jpg", "50"));
+        giftList.add(new LiveGiftEntity("2", "VIP勋章", "https://huyaimg.msstatic.com/cdnimage/actprop/20487_1__45_1609935399.jpg", "100"));
+        giftList.add(new LiveGiftEntity("3", "奖杯", "https://huyaimg.msstatic.com/cdnimage/actprop/20491_1__45_1609938597.jpg", "200"));
+        giftList.add(new LiveGiftEntity("4", "告白气球", "https://huyaimg.msstatic.com/cdnimage/actprop/20369_1__45_1592404597.jpg", "520"));
+        giftList.add(new LiveGiftEntity("5", "虎牙一号", "https://huyaimg.msstatic.com/cdnimage/actprop/20269_1__45_1603683936.jpg", "800"));
+        giftList.add(new LiveGiftEntity("6", "浪漫气球", "https://huyaimg.msstatic.com/cdnimage/actprop/20391_1__45_1598281731.jpg", "900"));
+        giftList.add(new LiveGiftEntity("7", "小星星", "https://huyaimg.msstatic.com/cdnimage/actprop/20427_1__45_1601194513.jpg", "1000"));
+        giftList.add(new LiveGiftEntity("8", "血瓶", "https://huyaimg.msstatic.com/cdnimage/actprop/20277_1__45_1532948951.jpg", "5000"));
+        giftList.add(new LiveGiftEntity("9", "鲁班火箭", "https://huyaimg.msstatic.com/cdnimage/actprop/20206_5__45_1521193545.jpg", "10000"));
+        giftList.add(new LiveGiftEntity("10", "藏宝图", "https://huyaimg.msstatic.com/cdnimage/actprop/12_1__45_1532944022.jpg", "500000"));
+        giftList.add(new LiveGiftEntity("11", "荣耀爱心", "https://huyaimg.msstatic.com/cdnimage/actprop/20349_1__45_1589704061.jpg", "1000000"));
 
         this.mGiftDialog.setData(giftList);
+        this.mGiftDialog.setOnGiftItemDoubleClickListener(new LiveRoomGiftDialog.OnGiftItemDoubleClickListener() {
+            @Override
+            public void onDoubleClick(View v, int position, LiveGiftEntity item) {
+                TCGiftRewardEntity entity = new TCGiftRewardEntity();
+                entity.setGiftId(item.getGiftId());
+                entity.setGiftName(item.getGiftName());
+                entity.setGiftImgUrl(item.getGiftImgUrl());
+                entity.setGiftPrice(item.getGiftPrice());
+                entity.setGiftNum(1);
+                entity.setType(item.getType());
+                mLiveRoom.sendRoomCustomMsg(String.valueOf(TCConstants.IMCMD_IM_GIFT_REWARD), entity.toJson(), new IMLVBLiveRoomListener.SendRoomCustomMsgCallback(){
+
+                    @Override
+                    public void onError(int errCode, String errInfo) {
+                        Log.i("TCJ", "礼物发送失败，错误码[" + errCode + "] 原因[" + errInfo + "]" );
+                        ToastUtils.show("礼物发送失败");
+                    }
+
+                    @Override
+                    public void onSuccess() {
+                        mGiftAnimation.showGiftAnimation(entity);
+                    }
+                } );
+            }
+        });
     }
 
     /**
@@ -411,6 +463,16 @@ public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomLis
                 mBgImageView.setVisibility(View.GONE);
                 mLiveRoom.sendRoomCustomMsg(String.valueOf(TCConstants.IMCMD_ENTER_LIVE), "", null);
                 TCELKReportMgr.getInstance().reportELK(TCConstants.ELK_ACTION_LIVE_PLAY, TCUserMgr.getInstance().getUserId(), 10000, "进入LiveRoom成功", null);
+
+                mUserEnterAnimView.postDelayed(() -> {
+                    if(mUserEnterAnimView != null) {
+                        TCUserEnterEntity item = new TCUserEnterEntity();
+                        item.setSenderName(TCUserMgr.getInstance().getNickname());
+                        item.setUserid(TCUserMgr.getInstance().getUserId());
+                        //        item.setMobile();
+                        mUserEnterAnim.showUserEnterAnimation(item);
+                    }
+                }, 500);
             }
         });
         mPlaying = true;
@@ -572,8 +634,10 @@ public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomLis
      *     /////////////////////////////////////////////////////////////////////////////////
      */
 
+    //#房间用户监听#
     @Override
     public void onAnchorEnter(final AnchorInfo pusherInfo) {
+        //观众进入直播间消息
         if (pusherInfo == null || pusherInfo.userID == null) {
             return;
         }
@@ -591,12 +655,17 @@ public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomLis
                     break;
                 }
             }
-            if (exist == false) {
+            if (!exist) {
+                //如果不存在
                 mPusherList.add(pusherInfo);
             }
         }
 
         videoView.startLoading();
+        /**
+         * #开始拉流#
+         * 用户进入房间，开始拉流
+         */
         mLiveRoom.startRemoteView(pusherInfo, videoView.videoView, new IMLVBLiveRoomListener.PlayCallback() {
             @Override
             public void onBegin() {
@@ -635,6 +704,8 @@ public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomLis
 
         mLiveRoom.stopRemoteView(pusherInfo);//关闭远端视频渲染
         mVideoViewMgr.recycleVideoView(pusherInfo.userID);
+
+
     }
 
     /**
@@ -684,6 +755,7 @@ public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomLis
         handleTextMsg(userInfo, message);
     }
 
+    //#自定义消息#
     @Override
     public void onRecvRoomCustomMsg(String roomID, String userID, String userName, String userAvatar, String cmd, String message) {
         TCSimpleUserInfo userInfo = new TCSimpleUserInfo(userID, userName, userAvatar);
@@ -703,6 +775,10 @@ public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomLis
                 break;
             case TCConstants.IMCMD_DANMU:
                 handleDanmuMsg(userInfo, message);
+                break;
+            case TCConstants.IMCMD_IM_GIFT_REWARD:
+                //礼物打赏
+                handleGiftReward(userInfo, message);
                 break;
             default:
                 break;
@@ -774,6 +850,13 @@ public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomLis
             entity.setContent(userInfo.nickname + "加入直播");
         entity.setType(TCConstants.MEMBER_ENTER);
         notifyMsg(entity);
+
+        TCUserEnterEntity item = new TCUserEnterEntity();
+        item.setSenderName(userInfo.nickname);
+        item.setUserid(userInfo.userid);
+//        item.setMobile();
+        mUserEnterAnim.showUserEnterAnimation(item);
+
     }
 
     /**
@@ -851,6 +934,20 @@ public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomLis
         notifyMsg(entity);
     }
 
+    /**
+     * 处理礼物打赏消息
+     */
+    public void handleGiftReward(TCSimpleUserInfo userInfo, String text){
+        TCGiftRewardEntity entity = new TCGiftRewardEntity();
+        entity.setUserid(userInfo.userid);
+        entity.setSenderName(userInfo.nickname);
+        entity.setAvatar(userInfo.avatar);
+        entity.fromJson(text);
+
+        mGiftAnimation.showGiftAnimation(entity);
+
+    }
+
 
     /**
      * 更新消息列表控件
@@ -911,7 +1008,7 @@ public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomLis
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.iv_close) {
+        if (id == R.id.fl_close) {
             Intent rstData = new Intent();
             long memberCount = mCurrentAudienceCount - 1;
             rstData.putExtra(TCConstants.MEMBER_COUNT, memberCount >= 0 ? memberCount : 0);
@@ -920,6 +1017,8 @@ public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomLis
             setResult(0, rstData);
             stopPlay();
             finish();
+        } else if(id == R.id.fl_share){
+            ToastUtils.show("分享直播间");
         } else if (id == R.id.fl_like) {
             if (mHeartLayout != null) {
                 mHeartLayout.addFavor();

@@ -1,7 +1,7 @@
 package com.wechat.wechat
 
+import android.R.attr.path
 import android.content.Intent
-import android.text.TextUtils
 import android.util.Log
 import com.aliyun.svideo.recorder.activity.AlivcSvideoRecordActivity
 import com.aliyun.svideo.recorder.bean.AlivcRecordInputParam
@@ -18,6 +18,8 @@ import com.tencent.live.audience.TCAudienceActivity
 import com.tencent.live.common.utils.TCConstants
 import com.tencent.live.login.TCUserMgr
 import com.tencent.live.main.videolist.TCLiveListActivity
+import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram
+import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import io.flutter.app.FlutterActivity
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -114,6 +116,11 @@ class FlutterToAndroidPlugins : MethodChannel.MethodCallHandler {
                 startLookLive()
                 result.success("ok");
 
+            }else if(call.method == "openWxMinProgram") {
+                //打开微信小程序
+                openWxMinProgram()
+                result.success("ok");
+
             }
         }catch (e : Exception) {
             e.printStackTrace();
@@ -172,6 +179,16 @@ class FlutterToAndroidPlugins : MethodChannel.MethodCallHandler {
         intent.putExtra(TCConstants.MEMBER_COUNT, "10")
         intent.putExtra(TCConstants.ROOM_TITLE, "亮健直播测试")
         activity.startActivity(intent)
+    }
+
+    fun openWxMinProgram() {
+        val appId = "wx40b4515d55481c9c" // 填移动应用(App)的 AppId，非小程序的 AppID
+        val api = WXAPIFactory.createWXAPI(activity, appId)
+        val req = WXLaunchMiniProgram.Req()
+        req.userName = "gh_abf16c2d6b2b" // 填小程序原始id
+//        req.path = "/" ////拉起小程序页面的可带参路径，不填默认拉起小程序首页，对于小游戏，可以只传入 query 部分，来实现传参效果，如：传入 "?foo=bar"。
+        req.miniprogramType = WXLaunchMiniProgram.Req.MINIPTOGRAM_TYPE_RELEASE // 可选打开 开发版，体验版和正式版
+        api.sendReq(req)
     }
 
 

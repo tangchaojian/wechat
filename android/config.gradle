@@ -1,7 +1,7 @@
 ext {
 
-//    applicationId = "com.ljk.doctor.test.app"
-    applicationId = "com.readchen.fx.rtmpdemo"
+    applicationId = "com.ljk.doctor.test.app"
+//    applicationId = "com.ewhale.liangjian"
 
     android = [
             compileSdkVersion: 29,
@@ -11,12 +11,12 @@ ext {
     ]
 
     configs = [
-            apkName         : "ljk_doctor.apk",
+            apkName         : "ljk_user.apk",
             fileProviderName: "${applicationId}.file.provider",
-            storeFile       : "debug.keystore",
-            storePassword   : "android",
-            keyAlias        : "androiddebugkey",
-            keyPassword     : "android",
+            storeFile       : "liangjianyun.jks",
+            storePassword   : "ewhale123",
+            keyAlias        : "key",
+            keyPassword     : "ewhale123",
     ]
 
     dependVersion = [
@@ -81,6 +81,7 @@ ext {
             greendao            : "org.greenrobot:greendao:3.2.2",    //geendao
             butterknife         : "com.jakewharton:butterknife:10.2.1",   //butterknife
             butterknife_compiler: "com.jakewharton:butterknife-compiler:10.2.1",
+            weixin              : "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+",
 
     ]
 

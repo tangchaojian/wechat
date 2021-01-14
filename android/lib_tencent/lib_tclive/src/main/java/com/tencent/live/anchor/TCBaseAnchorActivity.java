@@ -13,12 +13,18 @@ import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.tcj.sunshine.base.activity.BaseActivity;
+import com.tcj.sunshine.tools.ToastUtils;
+import com.tencent.live.anim.GiftAnimation;
+import com.tencent.live.anim.UserEnterAnimation;
+import com.tencent.live.common.msg.TCGiftRewardEntity;
+import com.tencent.live.common.msg.TCUserEnterEntity;
 import com.tencent.live.liveroom.IMLVBLiveRoomListener;
 import com.tencent.live.liveroom.MLVBLiveRoom;
 import com.tencent.live.liveroom.roomutil.commondef.AnchorInfo;
@@ -50,6 +56,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import master.flame.danmaku.controller.IDanmakuView;
+
+
+/**
+ * 标识
+ * #自定义消息#
+ */
 
 /**
  * Module:   TCBaseAnchorActivity
@@ -85,6 +97,14 @@ public abstract class TCBaseAnchorActivity extends BaseActivity implements IMLVB
     protected long                      mHeartCount = 0;        // 点赞数量
 
     private TCDanmuMgr                  mDanmuMgr;              // 弹幕管理类
+
+    private GiftAnimation               mGiftAnimation; // 礼物动画
+    private ViewGroup                   mGiftAnimUpView;//上面这个动画
+    private ViewGroup                   mGiftAnimDownView;//下面这个动画
+
+
+    private UserEnterAnimation          mUserEnterAnim;//用户进入动画
+    private ViewGroup                   mUserEnterAnimView;//用户进入动画view
 
     protected MLVBLiveRoom              mLiveRoom;              // MLVB 组件类
 
@@ -155,13 +175,28 @@ public abstract class TCBaseAnchorActivity extends BaseActivity implements IMLVB
         IDanmakuView danmakuView = (IDanmakuView) findViewById(R.id.anchor_danmaku_view);
         mDanmuMgr = new TCDanmuMgr(this);
         mDanmuMgr.setDanmakuView(danmakuView);
+
+        this.mGiftAnimUpView = this.findViewById(R.id.view_gift_anim_up);
+        this.mGiftAnimDownView = this.findViewById(R.id.view_gift_anim_down);
+
+        this.mGiftAnimUpView.setVisibility(View.INVISIBLE);
+        this.mGiftAnimDownView.setVisibility(View.INVISIBLE);
+
+        mGiftAnimation = new GiftAnimation(this.mGiftAnimUpView, this.mGiftAnimDownView);
+
+        this.mUserEnterAnimView = this.findViewById(R.id.view_user_enter_anim);
+        this.mUserEnterAnimView.setVisibility(View.INVISIBLE);
+
+        this.mUserEnterAnim = new UserEnterAnimation(mUserEnterAnimView);
     }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.iv_close) {
+        if (id == R.id.fl_close) {
             showExitInfoDialog("当前正在直播，是否退出直播？", false);
+        } else if (id == R.id.fl_share) {
+            ToastUtils.show("分享直播间");
         } else if (id == R.id.tv_send_message) {
             showInputMsgDialog();
         }
@@ -315,6 +350,7 @@ public abstract class TCBaseAnchorActivity extends BaseActivity implements IMLVB
         handleTextMsg(userInfo, message);
     }
 
+    //#自定义消息#
     @Override
     public void onRecvRoomCustomMsg(String roomID, String userID, String userName, String userAvatar, String cmd, String message) {
         TCSimpleUserInfo userInfo = new TCSimpleUserInfo(userID, userName, userAvatar);
@@ -334,6 +370,10 @@ public abstract class TCBaseAnchorActivity extends BaseActivity implements IMLVB
                 break;
             case TCConstants.IMCMD_DANMU:
                 handleDanmuMsg(userInfo, message);
+                break;
+            case TCConstants.IMCMD_IM_GIFT_REWARD:
+                //礼物打赏
+                handleGiftReward(userInfo, message);
                 break;
             default:
                 break;
@@ -397,6 +437,12 @@ public abstract class TCBaseAnchorActivity extends BaseActivity implements IMLVB
             entity.setContent(userInfo.nickname + "加入直播");
         entity.setType(TCConstants.MEMBER_ENTER);
         notifyMsg(entity);
+
+        TCUserEnterEntity item = new TCUserEnterEntity();
+        item.setSenderName(userInfo.nickname);
+        item.setUserid(userInfo.userid);
+//        item.setMobile();
+        mUserEnterAnim.showUserEnterAnimation(item);
     }
 
     /**
@@ -459,6 +505,19 @@ public abstract class TCBaseAnchorActivity extends BaseActivity implements IMLVB
         }
     }
 
+    /**
+     * 处理礼物打赏消息
+     */
+    public void handleGiftReward(TCSimpleUserInfo userInfo, String text){
+        TCGiftRewardEntity entity = new TCGiftRewardEntity();
+        entity.setUserid(userInfo.userid);
+        entity.setSenderName(userInfo.nickname);
+        entity.setAvatar(userInfo.avatar);
+        entity.fromJson(text);
+
+        mGiftAnimation.showGiftAnimation(entity);
+
+    }
 
     /**
      *     /////////////////////////////////////////////////////////////////////////////////

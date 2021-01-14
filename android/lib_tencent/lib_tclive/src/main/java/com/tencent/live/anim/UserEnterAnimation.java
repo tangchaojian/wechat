@@ -6,15 +6,10 @@ import android.animation.ObjectAnimator;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.tcj.sunshine.ui.imageview.attacher.AlbumViewAttacher;
-import com.tencent.imsdk.TIMMessage;
-import com.tencent.live.R;
-import com.tencent.live.common.msg.TCGiftRewardEntity;
+import com.tencent.live.common.msg.TCUserEnterEntity;
 import com.tencent.live.widget.LiveGiftAnimView;
+import com.tencent.live.widget.LiveUserEnterAnimView;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -23,48 +18,42 @@ import java.util.Queue;
  * 礼物动画
  * 查看 {@link LiveGiftAnimView}
  */
-public class GiftAnimation {
+public class UserEnterAnimation {
     private final int SHOW_HIDE_ANIMATOR_DURATION = 500;
     private final int ANIMATION_STAY_DURATION = 1000;
 
-    private boolean upFree = true;
-    private boolean downFree = true;
+    private boolean isFree = true;
 
-    private ViewGroup upView;
-    private ViewGroup downView;
-    private AnimatorSet upAnimatorSet;
-    private AnimatorSet downAnimatorSet;
+    private ViewGroup mAnimView;
 
-    private Queue<TCGiftRewardEntity> cache = new LinkedList<>();
+    private AnimatorSet mAnimatorSet;
 
-    public GiftAnimation(ViewGroup upView, ViewGroup downView) {
-        this.upView = upView;
-        this.downView = downView;
-        this.upAnimatorSet = buildAnimationSet(upView);
-        this.downAnimatorSet = buildAnimationSet(downView);
+    private Queue<TCUserEnterEntity> cache = new LinkedList<>();
+
+    public UserEnterAnimation(ViewGroup mAnimView) {
+        this.mAnimView = mAnimView;
+        this.mAnimatorSet = buildAnimationSet(mAnimView);
     }
 
-    // 收到礼物，等待显示动画
-    public void showGiftAnimation(final TCGiftRewardEntity message) {
+    // 用户进入直播间，等待显示动画
+    public void showUserEnterAnimation(final TCUserEnterEntity message) {
         cache.add(message);
         checkAndStart();
     }
 
     private void checkAndStart() {
-        if(!upFree && !downFree) {
+        if(!isFree) {
             return;
         }
 
-        if(downFree) {
-            startAnimation(downView, downAnimatorSet);
-        } else {
-            startAnimation(upView, upAnimatorSet);
+        if(isFree) {
+            startAnimation(mAnimView, mAnimatorSet);
         }
     }
 
     // 开始礼物动画
     private void startAnimation(ViewGroup target, AnimatorSet set) {
-        TCGiftRewardEntity message = cache.poll();
+        TCUserEnterEntity message = cache.poll();
         if(message == null) {
             return;
         }
@@ -82,19 +71,11 @@ public class GiftAnimation {
     }
 
     private void onAnimationStart(final ViewGroup target) {
-        if(target == upView) {
-            upFree = false;
-        } else if(target == downView) {
-            downFree = false;
-        }
+        isFree = false;
     }
 
     private void onAnimationCompleted(final ViewGroup target) {
-        if(target == upView) {
-            upFree = true;
-        } else if(target == downView) {
-            downFree = true;
-        }
+        isFree = true;
 
         checkAndStart();
     }
@@ -137,23 +118,26 @@ public class GiftAnimation {
     }
 
     private ObjectAnimator buildShowAnimator(final View target, long duration) {
-        ObjectAnimator translationX = ObjectAnimator.ofFloat(target, "translationX", -500.0F, 0.0F).setDuration(duration);
+        ObjectAnimator translationX = ObjectAnimator.ofFloat(target, "translationX", -600.0F, 100.0F).setDuration(duration);
         translationX.setInterpolator(new OvershootInterpolator());
 
         return translationX;
     }
 
     private ObjectAnimator buildHideAnimator(final View target, long duration) {
-        return ObjectAnimator.ofFloat(target, View.ALPHA, 1f, 0.0f)
-                .setDuration(duration);
+//        return ObjectAnimator.ofFloat(target, View.ALPHA, 1f, 0.0f).setDuration(duration);
+
+        ObjectAnimator translationX = ObjectAnimator.ofFloat(target, "translationX", 100.0F, -600.0F).setDuration(duration);
+        translationX.setInterpolator(new OvershootInterpolator());
+        return translationX;
     }
 
     /**
      * ********************* 更新礼物信息 *********************
      */
 
-    private void updateView(final TCGiftRewardEntity message, ViewGroup root) {
-        LiveGiftAnimView mAnimView = (LiveGiftAnimView)root;
+    private void updateView(final TCUserEnterEntity message, ViewGroup root) {
+        LiveUserEnterAnimView mAnimView = (LiveUserEnterAnimView)root;
         mAnimView.updateView(message);
     }
 }

@@ -18,7 +18,7 @@ class MainActivity: FlutterActivity() {
         super.onCreate(savedInstanceState)
         FlutterToAndroidPlugins.registerWith(this);
 
-        TCUserMgr.getInstance().login("199096", object : TCUserMgr.Callback {
+        TCUserMgr.getInstance().login("199097", object : TCUserMgr.Callback {
             override fun onSuccess() {}
             override fun onFailed(code: Int, msg: String) {}
         })

@@ -27,9 +27,14 @@ class InteractNative {
     return result;
   }
 
-  //腾讯云SDK,开始录制视频
+  //看直播
   static Future<String> startLookLive() async{
     final String result = await _channel.invokeMethod("startLookLive");
+    return result;
+  }
+
+  static Future<String> openWxMinProgram() async{
+    final String result = await _channel.invokeMethod("openWxMinProgram");
     return result;
   }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:ui="http://schemas.android.com/apk/res-auto"
@@ -8,33 +8,59 @@
     android:orientation="vertical"
     tools:background="#000000">
 
-    <RelativeLayout
+    <com.tcj.sunshine.ui.viewgroup.TapRelativeLayout
         android:id="@+id/rl_item_click"
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="80dp">
 
         <ImageView
             android:id="@+id/iv_icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/icon_switch_camera_on"/>
+            android:layout_marginTop="8dp"
+            android:src="@drawable/icon_live_gift_baojian" />
 
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/iv_icon"
-            android:layout_marginTop="3dp"
             android:layout_centerHorizontal="true"
-            android:textSize="14sp"
+            android:layout_marginTop="3dp"
+            android:maxWidth="80dp"
+            android:text="宝剑"
             android:textColor="@color/white"
-            android:text="摄像头"/>
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_name"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_gift_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginLeft="3dp"
+                android:src="@drawable/icon_live_gift_dou"/>
+
+        </LinearLayout>
 
 
-    </RelativeLayout>
 
 
+    </com.tcj.sunshine.ui.viewgroup.TapRelativeLayout>
 
-</LinearLayout>
+
+</FrameLayout>

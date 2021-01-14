@@ -93,7 +93,7 @@ public class TCAnchorActivity extends TCBaseAnchorActivity {
     private AudioEffectPanel                mPanelAudioControl;     // 音效面板
 
     private BeautyPanel                     mBeautyControl;          // 美颜设置的控制类
-    private RelativeLayout                    mLinearToolBar;
+    private RelativeLayout                  mLinearToolBar;
 
     // log相关
     private boolean                         mShowLog;               // 是否打开 log 面板
@@ -164,6 +164,10 @@ public class TCAnchorActivity extends TCBaseAnchorActivity {
 
         mHeadIcon = (ImageView) findViewById(R.id.anchor_iv_head_icon);
         showHeadIcon(mHeadIcon, TCUserMgr.getInstance().getAvatar());
+
+        mTvPusherName = (TextView) findViewById(R.id.tv_name);
+        mTvPusherName.setText(TCUtils.getLimitString(TCUserMgr.getInstance().getNickname(), 10));
+
         mMemberCount = (TextView) findViewById(R.id.anchor_tv_member_counts);
         mMemberCount.setText("0");
 

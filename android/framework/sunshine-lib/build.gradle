@@ -107,6 +107,8 @@ dependencies {
     api rootProject.ext.dependencies["butterknife"]
     annotationProcessor rootProject.ext.dependencies["butterknife_compiler"]
 
+    api rootProject.ext.dependencies["weixin"]
+
 
     //implementation 'com.blankj:utilcode:1.23.7'
     //    implementation 'me.jessyan:autosize:0.9.1'
