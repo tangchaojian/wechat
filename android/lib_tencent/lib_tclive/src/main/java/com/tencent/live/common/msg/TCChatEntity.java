@@ -8,6 +8,7 @@ package com.tencent.live.common.msg;
  */
 public class TCChatEntity {
     private String grpSendName;    // 发送者的名字
+    private String userid;          //用户id
     private String content;        // 消息内容
     private int type;            // 消息类型
 
@@ -19,6 +20,13 @@ public class TCChatEntity {
         this.grpSendName = grpSendName;
     }
 
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
 
     public String getContent() {
         return content;

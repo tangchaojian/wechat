@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:background="@color/black">
 
     <RelativeLayout
         android:id="@+id/beauty_rl_title"
@@ -109,18 +111,32 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <com.tencent.liteav.demo.beauty.view.TCHorizontalScrollView
-            android:id="@+id/beauty_horizontal_picker_view_first"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tv_beauty"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none">
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:text="美颜"/>
 
-            <LinearLayout
-                android:id="@android:id/content"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal" />
-        </com.tencent.liteav.demo.beauty.view.TCHorizontalScrollView>
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="#D1D1D1"/>
+
+        <TextView
+            android:id="@+id/tv_filter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="#797979"
+            android:text="滤镜"/>
+
     </LinearLayout>
 </RelativeLayout>

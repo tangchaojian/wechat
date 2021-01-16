@@ -415,6 +415,7 @@ public abstract class TCBaseAnchorActivity extends BaseActivity implements IMLVB
      */
     protected void handleTextMsg(TCSimpleUserInfo userInfo, String text) {
         TCChatEntity entity = new TCChatEntity();
+        entity.setUserid(userInfo.userid);
         entity.setSenderName(userInfo.nickname);
         entity.setContent(text);
         entity.setType(TCConstants.TEXT_TYPE);
@@ -430,11 +431,9 @@ public abstract class TCBaseAnchorActivity extends BaseActivity implements IMLVB
         mTotalMemberCount++;
         mCurrentMemberCount++;
         TCChatEntity entity = new TCChatEntity();
-        entity.setSenderName("通知");
-        if (TextUtils.isEmpty(userInfo.nickname))
-            entity.setContent(userInfo.userid + "加入直播");
-        else
-            entity.setContent(userInfo.nickname + "加入直播");
+        entity.setUserid(userInfo.userid);
+        entity.setSenderName(userInfo.nickname);
+        entity.setContent("加入直播");
         entity.setType(TCConstants.MEMBER_ENTER);
         notifyMsg(entity);
 
@@ -456,14 +455,14 @@ public abstract class TCBaseAnchorActivity extends BaseActivity implements IMLVB
         else
             Log.d(TAG, "接受多次退出请求，目前人数为负数");
 
-        TCChatEntity entity = new TCChatEntity();
-        entity.setSenderName("通知");
-        if (TextUtils.isEmpty(userInfo.nickname))
-            entity.setContent(userInfo.userid + "退出直播");
-        else
-            entity.setContent(userInfo.nickname + "退出直播");
-        entity.setType(TCConstants.MEMBER_EXIT);
-        notifyMsg(entity);
+//        TCChatEntity entity = new TCChatEntity();
+//        entity.setSenderName("通知");
+//        if (TextUtils.isEmpty(userInfo.nickname))
+//            entity.setContent(userInfo.userid + "退出直播");
+//        else
+//            entity.setContent(userInfo.nickname + "退出直播");
+//        entity.setType(TCConstants.MEMBER_EXIT);
+//        notifyMsg(entity);
     }
 
     /**
@@ -473,11 +472,9 @@ public abstract class TCBaseAnchorActivity extends BaseActivity implements IMLVB
      */
     protected void handlePraiseMsg(TCSimpleUserInfo userInfo) {
         TCChatEntity entity = new TCChatEntity();
-        entity.setSenderName("通知");
-        if (TextUtils.isEmpty(userInfo.nickname))
-            entity.setContent(userInfo.userid + "点了个赞");
-        else
-            entity.setContent(userInfo.nickname + "点了个赞");
+        entity.setUserid(userInfo.userid);
+        entity.setSenderName(userInfo.nickname);
+        entity.setContent("点了个赞");
 
         mHeartLayout.addFavor();
         mHeartCount++;
@@ -495,6 +492,7 @@ public abstract class TCBaseAnchorActivity extends BaseActivity implements IMLVB
      */
     protected void handleDanmuMsg(TCSimpleUserInfo userInfo, String text) {
         TCChatEntity entity = new TCChatEntity();
+        entity.setUserid(userInfo.userid);
         entity.setSenderName(userInfo.nickname);
         entity.setContent(text);
         entity.setType(TCConstants.TEXT_TYPE);
@@ -566,7 +564,8 @@ public abstract class TCBaseAnchorActivity extends BaseActivity implements IMLVB
         }
 
         TCChatEntity entity = new TCChatEntity();
-        entity.setSenderName("我:");
+        entity.setUserid(TCUserMgr.getInstance().getUserId());
+        entity.setSenderName(TCUserMgr.getInstance().getNickname());
         entity.setContent(msg);
         entity.setType(TCConstants.TEXT_TYPE);
         notifyMsg(entity);

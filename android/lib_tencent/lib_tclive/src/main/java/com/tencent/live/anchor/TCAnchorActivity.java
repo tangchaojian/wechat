@@ -549,6 +549,16 @@ public class TCAnchorActivity extends TCBaseAnchorActivity {
                 mBeautyControl.setVisibility(View.GONE);
                 mLinearToolBar.setVisibility(View.VISIBLE);
             } else {
+                mBeautyControl.switchTab(0);
+                mBeautyControl.setVisibility(View.VISIBLE);
+                mLinearToolBar.setVisibility(View.GONE);
+            }
+        } else if(id == R.id.ll_filter){
+            if (mBeautyControl.isShown()) {
+                mBeautyControl.setVisibility(View.GONE);
+                mLinearToolBar.setVisibility(View.VISIBLE);
+            } else {
+                mBeautyControl.switchTab(1);
                 mBeautyControl.setVisibility(View.VISIBLE);
                 mLinearToolBar.setVisibility(View.GONE);
             }

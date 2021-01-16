@@ -16,4 +16,6 @@ public class TCSimpleUserInfo {
         this.nickname = nickname;
         this.avatar = avatar;
     }
+
+
 }

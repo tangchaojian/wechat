@@ -19,7 +19,7 @@ import java.util.Objects;
  */
 public class TCGiftRewardEntity {
     private String userid;      //用户id
-    private String senderName;    // 发送者的名字
+    private String senderName;  // 发送者的名字
     private String avatar;      //头像url
     private String giftId;      //礼物ID
     private String giftName;    //礼物名称

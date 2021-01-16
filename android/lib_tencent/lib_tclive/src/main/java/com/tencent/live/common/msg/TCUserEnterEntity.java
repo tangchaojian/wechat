@@ -1,6 +1,8 @@
 package com.tencent.live.common.msg;
 
 
+import android.text.TextUtils;
+
 /**
  * Module:   TCChatEntity
  * <p>
@@ -9,11 +11,16 @@ package com.tencent.live.common.msg;
 public class TCUserEnterEntity {
     private String userid;          //用户id
     private String grpSendName;    // 发送者的名字
-    private String mobile;          //用户手机号
     private int type;            // 消息类型
 
     public String getSenderName() {
-        return grpSendName != null ? grpSendName : "";
+        String senderName = grpSendName;
+
+        if(TextUtils.isEmpty(senderName)) {
+            senderName = userid;
+        }
+
+        return senderName != null ? senderName : "";
     }
 
     public void setSenderName(String grpSendName) {
@@ -27,14 +34,6 @@ public class TCUserEnterEntity {
 
     public void setUserid(String userid) {
         this.userid = userid;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
     }
 
     public int getType() {

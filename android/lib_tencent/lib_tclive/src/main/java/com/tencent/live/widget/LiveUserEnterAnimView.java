@@ -58,15 +58,6 @@ public class LiveUserEnterAnimView extends RelativeLayout {
     public void updateView(TCUserEnterEntity item){
         if(item == null)return;
 
-        String nickname = item.getSenderName();
-        if(TextUtils.isEmpty(nickname)) {
-            nickname = item.getMobile();
-        }
-
-        if(TextUtils.isEmpty(nickname)) {
-            nickname = item.getUserid();
-        }
-
-        this.mTvNickName.setText(nickname);
+        this.mTvNickName.setText(item.getSenderName());
     }
 }

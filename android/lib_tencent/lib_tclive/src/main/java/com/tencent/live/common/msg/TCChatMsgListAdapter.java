@@ -18,6 +18,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.tcj.sunshine.tools.ColorUtils;
 import com.tencent.live.R;
 import com.tencent.live.common.utils.TCConstants;
 
@@ -33,11 +34,11 @@ import java.util.List;
  */
 public class TCChatMsgListAdapter extends BaseAdapter implements AbsListView.OnScrollListener {
     private static String TAG = TCChatMsgListAdapter.class.getSimpleName();
-    private static final int        ITEM_COUNT = 7;
-    private List<TCChatEntity>      mList;
-    private int                     mTotalHeight;
-    private Context                 mContext;
-    private ListView                mListView;
+    private static final int ITEM_COUNT = 7;
+    private List<TCChatEntity> mList;
+    private int mTotalHeight;
+    private Context mContext;
+    private ListView mListView;
     private ArrayList<TCChatEntity> mArray = new ArrayList<>();
 
     class AnimatorInfo {
@@ -145,17 +146,28 @@ public class TCChatMsgListAdapter extends BaseAdapter implements AbsListView.OnS
 //        }
 
         spanString = new SpannableString(item.getSenderName() + "  " + item.getContent());
-        if (item.getType() != TCConstants.TEXT_TYPE) {
-            // 设置名称为粗体
-            StyleSpan boldStyle = new StyleSpan(Typeface.BOLD_ITALIC);
-            spanString.setSpan(boldStyle, 0, item.getSenderName().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            holder.sendContext.setTextColor(mContext.getResources().getColor(R.color.colorSendName1));
-        } else {
-            // 根据名称计算颜色
-            spanString.setSpan(new ForegroundColorSpan(calcNameColor(item.getSenderName())),
-                    0, item.getSenderName().length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-            holder.sendContext.setTextColor(mContext.getResources().getColor(R.color.colorTextWhite));
-        }
+
+        int length = item.getSenderName().length();
+
+//        if (item.getType() != TCConstants.TEXT_TYPE) {
+//            // 设置名称为粗体
+//            StyleSpan boldStyle = new StyleSpan(Typeface.BOLD);
+//            spanString.setSpan(boldStyle, 0, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//            holder.sendContext.setTextColor(mContext.getResources().getColor(R.color.white));
+//        } else {
+//            // 根据名称计算颜色
+//            spanString.setSpan(new ForegroundColorSpan(calcNameColor(item.getSenderName())),
+//                    0, item.getSenderName().length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+//            holder.sendContext.setTextColor(mContext.getResources().getColor(R.color.white));
+//        }
+
+        // 设置名称为粗体
+        StyleSpan boldStyle = new StyleSpan(Typeface.BOLD);
+        ForegroundColorSpan colorSpan = new ForegroundColorSpan(ColorUtils.getColor(R.color.colorSendName8));
+        spanString.setSpan(boldStyle, 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spanString.setSpan(colorSpan, 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        holder.sendContext.setTextColor(mContext.getResources().getColor(R.color.white));
         holder.sendContext.setText(spanString);
         // 设置控件实际宽度以便计算列表项实际高度
         //holder.sendContext.fixViewWidth(mListView.getWidth());
@@ -201,7 +213,7 @@ public class TCChatMsgListAdapter extends BaseAdapter implements AbsListView.OnS
     /**
      * 播放渐消动画
      *
-     * @param pos 位置
+     * @param pos  位置
      * @param view 执行动画View
      */
     public void playDisappearAnimator(int pos, View view) {
@@ -342,16 +354,15 @@ public class TCChatMsgListAdapter extends BaseAdapter implements AbsListView.OnS
             View listItem = getView(i, null, mListView);
 
             listItem.measure(View.MeasureSpec.makeMeasureSpec(MAXLISTVIEWHEIGHT, View.MeasureSpec.AT_MOST)
-                    ,View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+                    , View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
             // add item height
             totalHeight += listItem.getMeasuredHeight();
-            if(totalHeight > MAXLISTVIEWHEIGHT) {
+            if (totalHeight > MAXLISTVIEWHEIGHT) {
                 totalHeight = MAXLISTVIEWHEIGHT;
                 break;
             }
         }
 //        mCreateAnimator = true;
-
 
 
         mTotalHeight = totalHeight;
@@ -435,6 +446,7 @@ public class TCChatMsgListAdapter extends BaseAdapter implements AbsListView.OnS
                 mListView.setSelection(mListView.getCount() - 1);
             }
         });
+
     }
 
     @Override

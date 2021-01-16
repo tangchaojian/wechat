@@ -36,6 +36,7 @@ public class TCUserMgr {
     private String mUserSig = "";          // 用于登录到 MLVB 的userSign
     private String mAccountType;
     private String mNickName = "";         // 昵称
+    private String phone;                   //手机号码
     private String mUserAvatar = "";       // 头像连接地址
     private int mSex = -1;//0:male,1:female,-1:unknown  // 性别
     private String mCoverPic;             //  直播用的封面图
@@ -91,6 +92,19 @@ public class TCUserMgr {
 
     public String getNickname() {
         return mNickName;
+    }
+
+    public String getSenderName() {
+        String senderName = mNickName;
+        if(TextUtils.isEmpty(mNickName)) {
+            senderName = phone;
+        }
+
+        if(TextUtils.isEmpty(senderName)) {
+            senderName = mUserId;
+        }
+
+        return senderName != null ? senderName : "";
     }
 
     public String getUserAvatar() {
@@ -189,11 +203,11 @@ public class TCUserMgr {
      *     /////////////////////////////////////////////////////////////////////////////////
      */
 
-    public void login(String userId, Callback callback) {
+    public void login(String userId, String mNickName, Callback callback) {
         isLogin = true;
         this.mUserId = userId;
-        this.mUserAvatar = getAvatarUrl(userId);
-        this.mNickName = "一蓑烟雨任平生";
+        this.mUserAvatar = "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=476673844,2773269439&fm=26&gp=0.jpg";
+        this.mNickName = mNickName;
         this.mUserSig = GenerateTestUserSig.genTestUserSig(userId);
         loginMLVB(callback);
     }

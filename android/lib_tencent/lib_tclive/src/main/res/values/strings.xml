@@ -103,4 +103,6 @@
     <string name="product_introduction"><a href='https://cloud.tencent.com/product/mlvb'>产品介绍</a></string>
 
     <string name="follow_and_send_msg_to_public_number">关注公众号“腾讯云视频”\n给公众号发送“小直播”</string>
+
+    <string name="live_room_warning">欢迎来到直播间！亮健康严禁未成年人进行直播或打赏，请大家共同遵守、监督。直播间内严禁出现违法违规、低俗色情、吸烟酗酒等内容，若有违规行为请及时举报。如主播在直播过程中以陪玩、送礼等方式进行诱导打赏、私下交易，请谨慎判断，以防人身或财产损失。请大家注意财产安全，谨防网络咋骗。</string>
 </resources>

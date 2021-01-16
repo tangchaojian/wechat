@@ -25,6 +25,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
 
+import com.tcj.sunshine.tools.ScreenUtils;
 import com.tencent.live.R;
 
 import java.util.Random;
@@ -79,7 +80,7 @@ public class TCHeartLayout extends RelativeLayout {
                 attrs, R.styleable.HeartLayout, defStyleAttr, 0);
 
         //todo:获取确切值
-        initX = 30;
+        initX = ScreenUtils.dip2px(60);
         if (pointx <= initX && pointx >= 0) {
             pointx -= 10;
         } else if (pointx >= -initX && pointx <= 0) {

@@ -176,7 +176,8 @@
                 app:shape_normal_color="#66000000"
                 app:shape_radius="25dp"
                 android:layout_marginRight="10dp"
-                android:layout_alignParentRight="true">
+                android:layout_alignParentRight="true"
+                android:onClick="onClick">
 
                 <ImageView
                     android:layout_width="25dp"
@@ -434,8 +435,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="15dp"
-            android:layout_marginBottom="10dp"
-            tools:visibility="gone">
+            android:layout_marginBottom="10dp">
 
             <com.tencent.live.common.widget.like.TCHeartLayout
                 android:id="@+id/heart_layout"

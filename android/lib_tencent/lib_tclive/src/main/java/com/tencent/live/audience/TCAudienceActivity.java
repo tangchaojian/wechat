@@ -371,6 +371,9 @@ public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomLis
             @Override
             public void onDoubleClick(View v, int position, LiveGiftEntity item) {
                 TCGiftRewardEntity entity = new TCGiftRewardEntity();
+                entity.setUserid(TCUserMgr.getInstance().getUserId());
+                entity.setSenderName(TCUserMgr.getInstance().getSenderName());
+                entity.setAvatar(TCUserMgr.getInstance().getAvatar());
                 entity.setGiftId(item.getGiftId());
                 entity.setGiftName(item.getGiftName());
                 entity.setGiftImgUrl(item.getGiftImgUrl());
@@ -843,11 +846,9 @@ public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomLis
 
         //左下角显示用户加入消息
         TCChatEntity entity = new TCChatEntity();
-        entity.setSenderName("通知");
-        if (TextUtils.isEmpty(userInfo.nickname))
-            entity.setContent(userInfo.userid + "加入直播");
-        else
-            entity.setContent(userInfo.nickname + "加入直播");
+        entity.setUserid(userInfo.userid);
+        entity.setSenderName(userInfo.nickname);
+        entity.setContent("来了");
         entity.setType(TCConstants.MEMBER_ENTER);
         notifyMsg(entity);
 
@@ -874,14 +875,15 @@ public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomLis
 
         mAvatarListAdapter.removeItem(userInfo.userid);
 
-        TCChatEntity entity = new TCChatEntity();
-        entity.setSenderName("通知");
-        if (TextUtils.isEmpty(userInfo.nickname))
-            entity.setContent(userInfo.userid + "退出直播");
-        else
-            entity.setContent(userInfo.nickname + "退出直播");
-        entity.setType(TCConstants.MEMBER_EXIT);
-        notifyMsg(entity);
+        //观众离开直播间不要显示
+//        TCChatEntity entity = new TCChatEntity();
+//        entity.setSenderName("通知");
+//        if (TextUtils.isEmpty(userInfo.nickname))
+//            entity.setContent(userInfo.userid + "退出直播");
+//        else
+//            entity.setContent(userInfo.nickname + "退出直播");
+//        entity.setType(TCConstants.MEMBER_EXIT);
+//        notifyMsg(entity);
     }
 
     /**
@@ -891,12 +893,10 @@ public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomLis
      */
     public void handlePraiseMsg(TCSimpleUserInfo userInfo) {
         TCChatEntity entity = new TCChatEntity();
+        entity.setUserid(userInfo.userid);
+        entity.setSenderName(userInfo.nickname);
+        entity.setContent("点了个赞");
 
-        entity.setSenderName("通知");
-        if (TextUtils.isEmpty(userInfo.nickname))
-            entity.setContent(userInfo.userid + "点了个赞");
-        else
-            entity.setContent(userInfo.nickname + "点了个赞");
         if (mHeartLayout != null) {
             mHeartLayout.addFavor();
         }
@@ -927,6 +927,7 @@ public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomLis
      */
     public void handleTextMsg(TCSimpleUserInfo userInfo, String text) {
         TCChatEntity entity = new TCChatEntity();
+        entity.setUserid(userInfo.userid);
         entity.setSenderName(userInfo.nickname);
         entity.setContent(text);
         entity.setType(TCConstants.TEXT_TYPE);
@@ -1096,7 +1097,8 @@ public class TCAudienceActivity extends BaseActivity implements IMLVBLiveRoomLis
 
         //消息回显
         TCChatEntity entity = new TCChatEntity();
-        entity.setSenderName("我:");
+        entity.setUserid(TCUserMgr.getInstance().getUserId());
+        entity.setSenderName(String.format("%s", TCUserMgr.getInstance().getSenderName()));
         entity.setContent(msg);
         entity.setType(TCConstants.TEXT_TYPE);
         notifyMsg(entity);
